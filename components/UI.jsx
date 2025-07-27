@@ -73,6 +73,7 @@ const Tooltip = ({
 			opacity-0 group-hover:opacity-100
 			invisible group-hover:visible
 			duration-200 ease-out
+			select-none
 		">
 			<div className="
 				whitespace-nowrap

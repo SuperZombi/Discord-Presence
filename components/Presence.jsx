@@ -15,7 +15,7 @@ const Presence = ({
 	buttons=[]
 }) => {
 	return (
-		<Card>
+		<Card className="select-none">
 			<Header actType={actType} appName={appName} details={details}/>
 			<Body
 				large_image={large_image} small_image={small_image}
@@ -86,7 +86,8 @@ const LeftBody = ({
 		<div className="relative shrink-0">
 			<div className="relative group">
 				{large_text ? <Tooltip>{large_text}</Tooltip> : null}
-				<img className="rounded-xl"
+				<img className="rounded-xl select-none"
+					draggable={false}
 					src={large_image} height="100px" width="100px"
 				/>
 			</div>
@@ -94,7 +95,8 @@ const LeftBody = ({
 			{small_image ? (
 				<div className="absolute group -bottom-1 -right-1">
 					{small_text ? <Tooltip>{small_text}</Tooltip> : null}
-					<img className="rounded-full outline-4 outline-[#3f4048]"
+					<img className="rounded-full outline-4 outline-[#3f4048] select-none"
+						draggable={false}
 						src={small_image} height="32px" width="32px"
 					/>
 				</div>
