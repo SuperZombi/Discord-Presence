@@ -1,7 +1,14 @@
-const Input = ({ children, ...props }) => {
+const Input = ({ children, type="text", min=0, onChange=null, ...props }) => {
+	const [value, setValue] = React.useState(children || '')
+
+	const handleChange = (e) => {
+		const val = e.target.value;
+		setValue(val)
+		onChange ? onChange(val) : null
+	}
 	return (
 		<div>
-			<input type="text" className="
+			<input type={type} className="
 				focus:outline-none focus:border-[#5865f2]
 				bg-[#2b2c32]
 				border-2 border-[#42434a]
@@ -9,7 +16,17 @@ const Input = ({ children, ...props }) => {
 				duration-200 ease-out
 				hover:border-[#646570]
 				text-[#dcdddf] placeholder:text-[#82838a]
-			" defaultValue={children} {...props}/>
+				appearance-none 
+				[&::-webkit-outer-spin-button]:appearance-none 
+				[&::-webkit-inner-spin-button]:appearance-none 
+				[-moz-appearance:textfield]
+			"
+				value={value}
+				placeholder={type === "number" ? 0 : null}
+				min={type === "number" ? min : null}
+				{...props}
+				onChange={handleChange}
+			/>
 		</div>
 	)
 }

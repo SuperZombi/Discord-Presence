@@ -3,7 +3,7 @@ const App = () => {
 	React.useEffect(() => {
 		setTimeout(_=>{
 			setShowLoader(false)
-		}, 3000)
+		}, 1000)
 	}, [])
 
 	return (
@@ -25,6 +25,7 @@ const App = () => {
 			/>
 			<Card>
 				<Input placeholder="Type some text">Hello</Input>
+				<Input type="number" min={4}></Input>
 				<Button>Some button</Button>
 				<Button disabled={true}>Disabled button</Button>
 				<Select options={[
