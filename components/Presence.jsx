@@ -3,6 +3,8 @@ const Presence = ({
 	appName = "AppName",
 	state="",
 	details="",
+	state_url="",
+	details_url="",
 	large_image="https://cdn.discordapp.com/embed/avatars/1.png",
 	small_image="",
 	ts_start=Math.floor(Date.now() / 1000),
@@ -21,6 +23,7 @@ const Presence = ({
 				large_image={large_image} small_image={small_image}
 				actType={actType} appName={appName}
 				state={state} details={details}
+				state_url={state_url} details_url={details_url}
 				ts_start={ts_start} ts_end={ts_end}
 			/>
 			<Bottom buttons={buttons}/>
@@ -53,6 +56,7 @@ const Body = ({
 	actType,
 	large_image, small_image,
 	appName, state, details,
+	state_url, details_url,
 	ts_start, ts_end
 }) => {
 	return (
@@ -61,6 +65,7 @@ const Body = ({
 			<RightBody
 				actType={actType} appName={appName}
 				state={state} details={details}
+				state_url={state_url} details_url={details_url}
 				ts_start={ts_start} ts_end={ts_end}
 			/>
 		</div>
@@ -93,12 +98,14 @@ const LeftBody = ({
 const RightBody = ({
 	actType, appName,
 	state, details,
+	state_url, details_url,
 	ts_start, ts_end
 }) => {
 	return (
 		<div className="w-full flex flex-col gap-1">
 			<ActivityInfo actType={actType} appName={appName}
 				state={state} details={details}
+				state_url={state_url} details_url={details_url}
 			/>
 			{(["listening", "watching"].includes(actType) && ts_end) ? (
 				<Progressbar ts_start={ts_start} ts_end={ts_end}/>
@@ -110,21 +117,39 @@ const RightBody = ({
 }
 
 const ActivityInfo = ({
-	actType, appName, state, details
+	actType, appName, state, details,
+	state_url, details_url
 }) => {
+	const openUrl = (url) => {
+		window.open(url, '_blank')
+	}
 	return (
 		<div className="flex flex-col">
 			{(["listening", "watching"].includes(actType) && details) ? null : (
 				<div className="font-bold">{appName}</div>
 			)}
+
 			{(details && ["listening", "watching"].includes(actType)) ? 
 			(
-				<div className="font-bold">{details}</div>
+				<div className={`font-bold ${details_url ? "hover:underline cursor-pointer" : ""}`}
+					onClick={details_url ? _=>openUrl(details_url) : null}
+				>
+					{details}
+				</div>
 			) : (
-				<div className="text-sm">{details}</div>
+				<div className={`text-sm ${details_url ? "hover:underline cursor-pointer" : ""}`}
+					onClick={details_url ? _=>openUrl(details_url) : null}
+				>
+					{details}
+				</div>
 			)}
+
 			{state ? (
-				<div className="text-sm">{state}</div>
+				<div className={`text-sm ${state_url ? "hover:underline cursor-pointer" : ""}`}
+					onClick={state_url ? _=>openUrl(state_url) : null}
+				>
+					{state}
+				</div>
 			) : null}
 		</div>
 	)
