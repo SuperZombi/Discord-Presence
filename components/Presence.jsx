@@ -7,13 +7,15 @@ const Presence = ({
 	details_url="",
 	large_image="https://cdn.discordapp.com/embed/avatars/1.png",
 	small_image="",
+	large_text="",
+	small_text="",
 	ts_start=Math.floor(Date.now() / 1000),
 	ts_end="",
 	buttons=[]
 }) => {
 	return (
 		<div className="
-			flex flex-col gap-2
+			flex flex-col gap-3
 			w-[400px] p-3
 			rounded-xl
 			bg-[#3f4048] text-[#dfe0e2]
@@ -25,6 +27,7 @@ const Presence = ({
 				state={state} details={details}
 				state_url={state_url} details_url={details_url}
 				ts_start={ts_start} ts_end={ts_end}
+				large_text={large_text} small_text={small_text}
 			/>
 			<Bottom buttons={buttons}/>
 		</div>
@@ -57,15 +60,18 @@ const Body = ({
 	large_image, small_image,
 	appName, state, details,
 	state_url, details_url,
+	large_text, small_text,
 	ts_start, ts_end
 }) => {
 	return (
 		<div className="flex items-center gap-3">
-			<LeftBody large_image={large_image} small_image={small_image}/>
+			<LeftBody
+				large_image={large_image} small_image={small_image}
+				large_text={large_text} small_text={small_text}
+			/>
 			<RightBody
 				actType={actType} appName={appName}
 				state={state} details={details}
-				state_url={state_url} details_url={details_url}
 				ts_start={ts_start} ts_end={ts_end}
 			/>
 		</div>
@@ -74,23 +80,25 @@ const Body = ({
 
 const LeftBody = ({
 	large_image, small_image,
+	large_text, small_text
 }) => {
 	return (
 		<div className="relative shrink-0">
-			<div>
+			<div className="relative group">
+				{large_text ? <Tooltip>{large_text}</Tooltip> : null}
 				<img className="rounded-xl"
 					src={large_image} height="100px" width="100px"
 				/>
 			</div>
 
 			{small_image ? (
-				<div className="absolute -bottom-1 -right-1">
+				<div className="absolute group -bottom-1 -right-1">
+					{small_text ? <Tooltip>{small_text}</Tooltip> : null}
 					<img className="rounded-full outline-4 outline-[#3f4048]"
 						src={small_image} height="32px" width="32px"
 					/>
 				</div>
 			) : null}
-
 		</div>
 	)
 }
@@ -259,6 +267,41 @@ const Timer = ({
 			<span className="font-mono font-bold text-xs text-[#75c383]">
 				{formatTime(seconds)}
 			</span>
+		</div>
+	)
+}
+
+const Tooltip = ({
+	children
+}) => {
+	return (
+		<div className="
+			left-1/2 top-0
+			-translate-x-1/2
+			absolute -translate-y-full
+			opacity-0 group-hover:opacity-100
+			invisible group-hover:visible
+			duration-200 ease-out
+		">
+			<div className="
+				whitespace-nowrap
+				rounded-lg bg-[#393a41]
+				border-2 border-[#555]
+				py-1.5 px-3
+				text-sm text-white
+			">
+				{children}
+			</div>
+			<div className="
+				absolute bg-[#393a41]
+				border-2 border-[#555]
+				border-l-0 border-t-0
+				w-[10px] h-[10px]
+				bottom-0 left-1/2
+				translate-y-[calc(50%-1px)]
+				-translate-x-1/2
+				rotate-45
+			"/>
 		</div>
 	)
 }

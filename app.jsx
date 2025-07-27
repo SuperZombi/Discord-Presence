@@ -4,6 +4,7 @@ const App = () => {
 			<Presence actType="listening" state="State" details="Details"
 				large_image = "https://cdn.discordapp.com/embed/avatars/1.png"
 				small_image = "https://cdn.discordapp.com/app-assets/383226320970055681/1359299466493956258.png"
+				large_text="Hello world" small_text="Small text"
 				ts_start = {Math.floor(Date.now() / 1000) - 100}
 				ts_end = {Math.floor(Date.now() / 1000) + 100}
 				buttons = {[
