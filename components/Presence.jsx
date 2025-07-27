@@ -15,12 +15,7 @@ const Presence = ({
 	buttons=[]
 }) => {
 	return (
-		<div className="
-			flex flex-col gap-3
-			w-[400px] p-3
-			rounded-xl
-			bg-[#3f4048] text-[#dfe0e2]
-		">
+		<Card>
 			<Header actType={actType} appName={appName} details={details}/>
 			<Body
 				large_image={large_image} small_image={small_image}
@@ -32,7 +27,7 @@ const Presence = ({
 				party_size={party_size}
 			/>
 			<Bottom buttons={buttons}/>
-		</div>
+		</Card>
 	)
 }
 
@@ -52,7 +47,7 @@ const Header = ({
 	}
 	return (
 		<div>
-			<span className="text-sm">{renderAction()}</span>
+			<span className="text-sm font-semibold">{renderAction()}</span>
 		</div>
 	)
 }
@@ -179,32 +174,10 @@ const Bottom = ({
 	return (
 		<div className="flex gap-2.5">
 			{buttons.slice(0, 2).map((item, index) => (
-				<Button key={index} label={item.label} url={item.url}/>
+				<Button key={index} className="w-full" url={item.url}>
+					{item.label}
+				</Button>
 			))}
-		</div>
-	)
-}
-const Button = ({
-	label, url
-}) => {
-	const onClick = _=>{
-		window.open(url, '_blank')
-	}
-	return (
-		<div
-			className="
-				bg-[#5865f2]
-				hover:bg-[#4752c4]
-				duration-200 ease-out
-				text-white text-center
-				w-full px-4 py-2
-				rounded-xl
-				select-none
-				cursor-pointer
-			"
-			onClick={onClick}
-		>
-			{label}
 		</div>
 	)
 }
@@ -290,42 +263,6 @@ const Timer = ({
 		</div>
 	)
 }
-
-const Tooltip = ({
-	children
-}) => {
-	return (
-		<div className="
-			left-1/2 top-0
-			-translate-x-1/2
-			absolute -translate-y-full
-			opacity-0 group-hover:opacity-100
-			invisible group-hover:visible
-			duration-200 ease-out
-		">
-			<div className="
-				whitespace-nowrap
-				rounded-lg bg-[#393a41]
-				border-2 border-[#555]
-				py-1.5 px-3
-				text-sm text-white
-			">
-				{children}
-			</div>
-			<div className="
-				absolute bg-[#393a41]
-				border-2 border-[#555]
-				border-l-0 border-t-0
-				w-[10px] h-[10px]
-				bottom-0 left-1/2
-				translate-y-[calc(50%-1px)]
-				-translate-x-1/2
-				rotate-45
-			"/>
-		</div>
-	)
-}
-
 
 function formatTime(totalSeconds){
 	const hrs = Math.floor(totalSeconds / 3600);

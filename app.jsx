@@ -15,6 +15,16 @@ const App = () => {
 					{"label": "Ask to join", "url": "https://www.google.com/"},
 				]}
 			/>
+			<Card>
+				<Input placeholder="Type some text">Hello</Input>
+				<Button>Some button</Button>
+				<Button disabled={true}>Disabled button</Button>
+				<Select options={[
+					{ value: "apple", label: "Apple" },
+					{ value: "banana", label: "Banana" },
+					{ value: "orange", label: "Orange" },
+				]} onChange={e=>console.log(e)}/>
+			</Card>
 		</div>
 	)
 }

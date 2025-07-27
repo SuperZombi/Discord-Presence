@@ -1,0 +1,171 @@
+const Input = ({ children, ...props }) => {
+	return (
+		<div>
+			<input type="text" className="
+				focus:outline-none focus:border-[#5865f2]
+				bg-[#2b2c32]
+				border-2 border-[#42434a]
+				p-3 py-2 rounded-xl
+				duration-200 ease-out
+				hover:border-[#646570]
+				text-[#dcdddf] placeholder:text-[#82838a]
+			" defaultValue={children} {...props}/>
+		</div>
+	)
+}
+
+const Button = ({
+	children, className="", url="",
+	disabled=false,
+	onClick=null, ...props
+}) => {
+	const clickHandle = _=>{
+		url ? window.open(url, '_blank') : (onClick && !disabled) ? onClick() : null
+	}
+	return (
+		<button
+			{...props}
+			onClick={clickHandle}
+			className={`
+				${disabled ? (
+					"bg-[#323339] cursor-not-allowed"
+				) : (
+					"bg-[#5865f2] hover:bg-[#4752c4] cursor-pointer"
+				)}
+				duration-200 ease-out
+				text-white text-center
+				w-fit
+				px-6 py-2
+				rounded-xl
+				select-none
+				${className}
+			`}
+		>
+			{children}
+		</button>
+	)
+}
+
+const Card = ({ children, className="" }) => {
+	return (
+		<div className={`
+			flex flex-col gap-3
+			w-[400px] p-3
+			rounded-xl
+			bg-[#3f4048] text-[#dfe0e2]
+			${className}
+		`}>
+			{children}
+		</div>
+	)
+}
+
+const Tooltip = ({
+	children
+}) => {
+	// Need parent element with className="relative group"
+	return (
+		<div className="
+			z-10
+			left-1/2 top-0
+			-translate-x-1/2
+			absolute -translate-y-full
+			opacity-0 group-hover:opacity-100
+			invisible group-hover:visible
+			duration-200 ease-out
+		">
+			<div className="
+				whitespace-nowrap
+				rounded-lg bg-[#393a41]
+				border-2 border-[#555]
+				py-1.5 px-3
+				text-sm text-white
+			">
+				{children}
+			</div>
+			<div className="
+				absolute bg-[#393a41]
+				border-2 border-[#555]
+				border-l-0 border-t-0
+				w-[10px] h-[10px]
+				bottom-0 left-1/2
+				translate-y-[calc(50%-1px)]
+				-translate-x-1/2
+				rotate-45
+			"/>
+		</div>
+	)
+}
+
+const Select = ({
+	options, onChange, selected=null, placeholder="Select"
+}) => {
+	const [isOpen, setIsOpen] = React.useState(false)
+	const [selectedOption, setSelectedOption] = React.useState(selected)
+	const selectRef = React.useRef(null)
+
+	const handleClickOutside = (e) => {
+		if (selectRef.current && !selectRef.current.contains(e.target)) {
+			setIsOpen(false)
+		}
+	}
+
+	React.useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside)
+		return () => document.removeEventListener("mousedown", handleClickOutside)
+	}, [])
+
+	return (
+		<div className="relative w-64" ref={selectRef}>
+			<div
+				onClick={() => setIsOpen(!isOpen)}
+				className="
+					border-2 border-[#42434a]
+					bg-[#2b2c32]
+					hover:border-[#646570]
+					rounded-lg p-3 py-2
+					cursor-pointer
+					flex justify-between items-center
+					duration-200 ease-out
+					select-none
+				"
+			>
+				<span>{selectedOption ? selectedOption.label : placeholder}</span>
+				<svg
+					className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/>
+				</svg>
+			</div>
+
+			{isOpen && (
+				<div className="
+					absolute z-10 mt-1 w-full
+					bg-[#2b2c32] border-2 border-[#42434a]
+					rounded-lg shadow-lg
+					max-h-60 overflow-y-auto
+					select-none
+				">
+					{options.map((option) => (
+						<div
+							key={option.value}
+							onClick={() => {
+								setSelectedOption(option)
+								onChange(option)
+								setIsOpen(false)
+							}}
+							className={`p-3 py-2 cursor-pointer hover:bg-[#4b4d58] ${
+								selectedOption?.value === option.value ? "bg-[#6b6e7e] font-semibold" : ""
+							}`}
+						>
+							{option.label}
+						</div>
+					))}
+				</div>
+			)}
+		</div>
+	)
+}
