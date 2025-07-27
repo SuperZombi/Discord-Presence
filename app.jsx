@@ -1,12 +1,15 @@
 const App = () => {
 	return (
 		<div>
-			<Presence actType="listening" state="State" details="Details"
+			<Presence actType="playing" state="State" details="Details"
 				large_image = "https://cdn.discordapp.com/embed/avatars/1.png"
 				small_image = "https://cdn.discordapp.com/app-assets/383226320970055681/1359299466493956258.png"
 				large_text="Hello world" small_text="Small text"
+				state_url="https://github.com/"
+				details_url = "https://github.com/"
 				ts_start = {Math.floor(Date.now() / 1000) - 100}
 				ts_end = {Math.floor(Date.now() / 1000) + 100}
+				party_size = {[2, 6]}
 				buttons = {[
 					{"label": "Ask to join", "url": "https://www.google.com/"},
 					{"label": "Ask to join", "url": "https://www.google.com/"},
