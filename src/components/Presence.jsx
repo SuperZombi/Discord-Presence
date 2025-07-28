@@ -214,10 +214,10 @@ const Progressbar = ({
 					return prev;
 				}
 				return prev + 1;
-			});
-		}, 1000);
+			})
+		}, 1000)
 		return () => clearInterval(interval);
-	}, [total]);
+	}, [total])
 
 	const percent = (current / total) * 100;
 
