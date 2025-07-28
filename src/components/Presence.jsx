@@ -222,8 +222,12 @@ const Progressbar = ({
 const Timer = ({
 	ts_start, actType, party_size, state
 }) => {
-	const unixTime = Math.floor(Date.now() / 1000);
-	const [seconds, setSeconds] = React.useState(unixTime - ts_start);
+	const [seconds, setSeconds] = React.useState()
+
+	React.useEffect(() => {
+		const unixTime = Math.floor(Date.now() / 1000);
+		setSeconds(unixTime - ts_start);
+	}, [ts_start]);
 
 	React.useEffect(() => {
 		const interval = setInterval(() => {
@@ -233,7 +237,7 @@ const Timer = ({
 	}, []);
 
 	return (
-		<div className="flex items-center gap-1">
+		<div className="flex items-center gap-1.5">
 			{
 				actType === "listening" ? (
 					<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24">

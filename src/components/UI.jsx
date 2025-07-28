@@ -1,4 +1,8 @@
-const Input = ({ children, type="text", min=0, onChange=null, ...props }) => {
+const Input = ({
+	children, type="text", min=0,
+	label="",
+	onChange=null, ...props
+}) => {
 	const [value, setValue] = React.useState(children || '')
 
 	const handleChange = (e) => {
@@ -7,8 +11,14 @@ const Input = ({ children, type="text", min=0, onChange=null, ...props }) => {
 		onChange ? onChange(val) : null
 	}
 	return (
-		<div>
+		<div className="w-full">
+			{label ? (
+				<h4 className="
+					ms-1 mb-1 font-medium
+				">{label}</h4>
+			) : null}
 			<input type={type} className="
+				w-full
 				focus:outline-none focus:border-[#5865f2]
 				bg-[#2b2c32]
 				border-2 border-[#42434a]
@@ -63,20 +73,6 @@ const Button = ({
 	)
 }
 
-const Card = ({ children, className="" }) => {
-	return (
-		<div className={`
-			flex flex-col gap-3
-			w-[400px] p-3
-			rounded-xl
-			bg-[#3f4048] text-[#dfe0e2]
-			${className}
-		`}>
-			{children}
-		</div>
-	)
-}
-
 const Tooltip = ({
 	children
 }) => {
@@ -116,10 +112,13 @@ const Tooltip = ({
 }
 
 const Select = ({
-	options, onChange, selected=null, placeholder="Select"
+	options, onChange, selected=null,
+	placeholder="", label=null
 }) => {
 	const [isOpen, setIsOpen] = React.useState(false)
-	const [selectedOption, setSelectedOption] = React.useState(selected)
+	const [selectedOption, setSelectedOption] = React.useState(
+		options.find(obj => obj.value === selected)
+	)
 	const selectRef = React.useRef(null)
 
 	const handleClickOutside = (e) => {
@@ -134,7 +133,12 @@ const Select = ({
 	}, [])
 
 	return (
-		<div className="relative w-64" ref={selectRef}>
+		<div className="relative w-full" ref={selectRef}>
+			{label ? (
+				<h4 className="
+					ms-1 mb-1 font-medium
+				">{label}</h4>
+			) : null}
 			<div
 				onClick={() => setIsOpen(!isOpen)}
 				className="
@@ -172,7 +176,7 @@ const Select = ({
 							key={option.value}
 							onClick={() => {
 								setSelectedOption(option)
-								onChange(option)
+								onChange ? onChange(option.value) : null
 								setIsOpen(false)
 							}}
 							className={`p-3 py-2 cursor-pointer hover:bg-[#4b4d58] ${
@@ -184,6 +188,31 @@ const Select = ({
 					))}
 				</div>
 			)}
+		</div>
+	)
+}
+
+const Card = ({ children, className="" }) => {
+	return (
+		<div className={`
+			flex flex-col gap-3
+			w-96 h-fit p-4
+			rounded-xl
+			bg-[#3f4048] text-[#dfe0e2]
+			${className}
+		`}>
+			{children}
+		</div>
+	)
+}
+
+const Container = ({children}) => {
+	return (
+		<div className="
+			flex flex-wrap flex-row-reverse
+			justify-center gap-5 p-3
+		">
+			{children}
 		</div>
 	)
 }
