@@ -2,6 +2,13 @@ const App = () => {
 	const [showLoader, setShowLoader] = React.useState(true)
 	const [loaded, setLoaded] = React.useState(false)
 
+	const test_init = {
+		act_type: "listening",
+		details: "My details",
+		state: "My state",
+		timestamp: "local_time",
+	}
+
 	React.useEffect(() => {
 		init_lang().then(_=>{
 			setLoaded(true)
@@ -9,12 +16,16 @@ const App = () => {
 		})
 	}, [])
 
+	const main_apply = (data) => {
+		console.log(data)
+	}
+
 	if (!loaded) {
 		return <Loader show={showLoader}/>
 	}
 	return (
 		<div>
-			<MainForm/>
+			<MainForm values={test_init} onApply={main_apply}/>
 			<Loader show={showLoader}/>
 		</div>
 	)

@@ -1,11 +1,15 @@
-const MainForm = () => {
+const MainForm = ({
+	values, onApply
+}) => {
 	const currentTimestamp = () => Math.floor(Date.now() / 1000)
-	const [actType, setActType] = React.useState("playing")
-	const [details, setDetails] = React.useState()
-	const [state, setState] = React.useState()
+	const [actType, setActType] = React.useState(values.act_type || "playing")
+	const [details, setDetails] = React.useState(values.details)
+	const [state, setState] = React.useState(values.state)
+	const [state_url, set_state_url] = React.useState(values.state_url)
+	const [details_url, set_details_url] = React.useState(values.details_url)
 
-	const [timestamp, setTimestamp] = React.useState("normal")
-	const [ts_start, set_ts_start] = React.useState()
+	const [timestamp, setTimestamp] = React.useState(values.timestamp || "normal")
+	const [ts_start, set_ts_start] = React.useState(values.ts_start)
 	const [ts_end, set_ts_end] = React.useState()
 
 	const handleTimestamp = val=>{
@@ -27,9 +31,14 @@ const MainForm = () => {
 	React.useEffect(() => {
 		handleTimestamp(timestamp)
 	}, [timestamp])
+	React.useEffect(() => {
+		if (timestamp === "normal"){
+			set_ts_start(ts_start)
+		}
+	}, [ts_start])
 
-	const [media_current, set_media_current] = React.useState(0)
-	const [media_duration, set_media_duration] = React.useState(0)
+	const [media_current, set_media_current] = React.useState(values.media_current || 0)
+	const [media_duration, set_media_duration] = React.useState(values.media_duration || 0)
 
 	React.useEffect(() => {
 		if (media_current === 0 && media_duration === 0) return
@@ -39,19 +48,22 @@ const MainForm = () => {
 		set_ts_end(t_end)
 	}, [media_current, media_duration])
 
-	const [large_image, set_large_image] = React.useState()
-	const [small_image, set_small_image] = React.useState()
+	const [large_image, set_large_image] = React.useState(values.large_image)
+	const [small_image, set_small_image] = React.useState(values.small_image)
 
-	const [large_text, set_large_text] = React.useState()
-	const [small_text, set_small_text] = React.useState()
-
-	const [state_url, set_state_url] = React.useState()
-	const [details_url, set_details_url] = React.useState()
+	const [large_text, set_large_text] = React.useState(values.large_text)
+	const [small_text, set_small_text] = React.useState(values.small_text)
 
 	const [party_current, set_party_current] = React.useState(0)
 	const [party_total, set_party_total] = React.useState(0)
-	const [party_size, set_party_size] = React.useState([])
+	const [party_size, set_party_size] = React.useState(values.party_size || [])
 
+	React.useEffect(() => {
+		if (party_size.length > 0){
+			set_party_current(party_size[0])
+			set_party_total(party_size[1])
+		}
+	}, [party_size])
 	React.useEffect(() => {
 		if (party_total === 0){
 			set_party_size([])
@@ -64,7 +76,7 @@ const MainForm = () => {
 	const [button_1_url, set_button_1_url] = React.useState()
 	const [button_2_text, set_button_2_text] = React.useState()
 	const [button_2_url, set_button_2_url] = React.useState()
-	const [buttons, set_buttons] = React.useState([])
+	const [buttons, set_buttons] = React.useState(values.buttons || [])
 	const [buttons_preview, set_buttons_preview] = React.useState([])
 
 	React.useEffect(() => {
@@ -117,7 +129,7 @@ const MainForm = () => {
 			party_size: party_size,
 			buttons: buttons,
 		}
-		console.log(cleanObject(obj))
+		onApply(cleanObject(obj))
 	}
 
 	return (
