@@ -3,6 +3,7 @@ const App = () => {
 	const [loaded, setLoaded] = React.useState(false)
 	const [presenceData, setPresenceData] = React.useState({})
 	const [app_id, set_app_id] = React.useState()
+	const [login_errors, set_login_errors] = React.useState([])
 
 	React.useEffect(() => {
 		init_lang().then(async _=>{
@@ -16,6 +17,16 @@ const App = () => {
 		})
 	}, [])
 
+	const connectRPC = async (app_id) => {
+		console.log(app_id)
+		setShowLoader(true)
+		setTimeout(_=>{
+			set_app_id(app_id)
+			// set_login_errors([{"text": "Failed to Connect RPC"}])
+			setTimeout(_=>{setShowLoader(false)}, 1000)
+		}, 1000)
+	}
+
 	const main_apply = (data) => {
 		console.log(data)
 	}
@@ -25,7 +36,9 @@ const App = () => {
 	}
 	return (
 		<div>
-			{app_id ? <MainForm values={presenceData} onApply={main_apply}/> : <Login/>}
+			{app_id ? <MainForm values={presenceData} onApply={main_apply}/> : (
+				<Login tryConnect={connectRPC} errors={login_errors}/>
+			)}
 			<Loader show={showLoader}/>
 		</div>
 	)

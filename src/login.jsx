@@ -1,4 +1,6 @@
-const Login = () => {
+const Login = ({
+	tryConnect, errors
+}) => {
 	const [buttonActive, setButtonActive] = React.useState(false)
 	const [appId, setAppId] = React.useState("")
 	const inputHandler = (e)=>{
@@ -6,7 +8,7 @@ const Login = () => {
 		setButtonActive(e.length > 10)
 	}
 	const handleSubmit = (value)=>{
-		console.log(value)
+		tryConnect(value)
 	}
 	return (
 		<Container className="h-dvh items-center">
@@ -56,12 +58,20 @@ const Login = () => {
 						</T>
 					</p>
 				</div>
+				
 				<Button className="w-full mt-3"
 					disabled={!buttonActive}
 					onClick={_=>handleSubmit(appId)}
 				>
 					<T>login_action_button</T>
 				</Button>
+				{(errors && errors.length > 0) ? errors.map((item, index) => (
+					<div key={index}
+						className="text-red-500 font-semibold text-center text-sm"
+					>
+						{item.text}
+					</div>
+				)) : null}
 			</Card>
 		</Container>
 	)
