@@ -51,6 +51,9 @@ const MainForm = () => {
 	const [large_image, set_large_image] = React.useState("assets/avatar.png")
 	const [small_image, set_small_image] = React.useState()
 
+	const [large_text, set_large_text] = React.useState()
+	const [small_text, set_small_text] = React.useState()
+
 	const handleTimestamp = val=>{
 
 		if (val === "local_time"){
@@ -68,23 +71,23 @@ const MainForm = () => {
 
 	return (
 		<Container>
-			<div className="w-96">
+			<Sticky className="w-96" classNameChild="top-3">
 				<Presence actType={actType} state={state} details={details}
-						ts_start={ts_start} ts_end={ts_end}
-						large_image={large_image} small_image={small_image}
-						// large_text="Hello world" small_text="Small text"
-						// state_url="https://github.com/"
-						// details_url = "https://github.com/"
-						// ts_start = {Math.floor(Date.now() / 1000) - 100}
-						// ts_end = {Math.floor(Date.now() / 1000) + 100}
-						// party_size = {[2, 6]}
-						// buttons = {[
-						// 	{"label": "Ask to join", "url": "https://www.google.com/"},
-						// 	{"label": "Ask to join", "url": "https://www.google.com/"},
-						// ]}
-					/>
+					ts_start={ts_start} ts_end={ts_end}
+					large_image={large_image} small_image={small_image}
+					large_text={large_text} small_text={small_text}
+					// state_url="https://github.com/"
+					// details_url = "https://github.com/"
+					// ts_start = {Math.floor(Date.now() / 1000) - 100}
+					// ts_end = {Math.floor(Date.now() / 1000) + 100}
+					// party_size = {[2, 6]}
+					// buttons = {[
+					// 	{"label": "Ask to join", "url": "https://www.google.com/"},
+					// 	{"label": "Ask to join", "url": "https://www.google.com/"},
+					// ]}
+				/>
 				<Button className="w-full mt-3">Apply</Button>
-			</div>
+			</Sticky>
 			
 			<Card className="items-center w-96">
 
@@ -109,13 +112,24 @@ const MainForm = () => {
 
 				<Hr/>
 
-				<Input placeholder="https://image.png" label="Large image"
+				<Input placeholder="https://image.png" label="Large Image"
 					name="large_image" onChange={val => set_large_image(val) }
 				/>
 
-				<Input placeholder="https://image.png" label="Small image"
+				<Input placeholder="https://image.png" label="Small Image"
 					name="small_image" onChange={val => set_small_image(val) }
 				/>
+
+				<Input placeholder="Large Image Tooltip" label="Large Image Tooltip"
+					name="large_text" onChange={val => set_large_text(val) }
+				/>
+
+				<Input placeholder="Small Image Tooltip" label="Small Image Tooltip"
+					name="small_text" onChange={val => set_small_text(val) }
+				/>
+
+				<Hr/>
+
 			</Card>
 		</Container>
 	)

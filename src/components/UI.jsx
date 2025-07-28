@@ -221,6 +221,16 @@ const Container = ({children}) => {
 	)
 }
 
+const Sticky = ({children, className="", classNameChild=""}) => {
+	return (
+		<div className={`relative ${className}`}>
+			<div className={`sticky ${classNameChild}`}>
+				{children}
+			</div>
+		</div>
+	)
+}
+
 const Hr = () => {
 	return (
 		<hr className="text-gray-500 m-2 w-full"/>
