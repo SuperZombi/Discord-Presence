@@ -207,9 +207,14 @@ const Bottom = ({
 const Progressbar = ({
 	ts_start, ts_end
 }) => {
-	const total = ts_end - ts_start;
-	const unixTime = Math.floor(Date.now() / 1000);
-	const [current, setCurrent] = React.useState(unixTime - ts_start);
+	const [current, setCurrent] = React.useState(0)
+	const [total, setTotal] = React.useState(0)
+
+	React.useEffect(() => {
+		const unixTime = Math.floor(Date.now() / 1000)
+		setCurrent(unixTime - ts_start)
+		setTotal(unixTime - ts_end)
+	}, [ts_start, ts_end])
 
 	React.useEffect(() => {
 		const interval = setInterval(() => {
@@ -222,7 +227,7 @@ const Progressbar = ({
 			})
 		}, 1000)
 		return () => clearInterval(interval);
-	}, [total])
+	}, [current, total])
 
 	const percent = (current / total) * 100;
 
@@ -230,7 +235,7 @@ const Progressbar = ({
 		<div className="flex items-center gap-2.5">
 			<span className="font-mono text-sm">{formatTime(current)}</span>
 			<div className="bg-[gray] w-full h-0.5 rounded-xl">
-				<div className="bg-[lightgrey] h-full rounded-xl"
+				<div className="bg-[lightgrey] h-full rounded-xl duration-200 ease-out"
 					style={{ width: `${percent}%` }}
 				/>
 			</div>
@@ -245,16 +250,16 @@ const Timer = ({
 	const [seconds, setSeconds] = React.useState()
 
 	React.useEffect(() => {
-		const unixTime = Math.floor(Date.now() / 1000);
-		ts_start ? setSeconds(unixTime - ts_start) : setSeconds(0);
+		const unixTime = Math.floor(Date.now() / 1000)
+		ts_start ? setSeconds(unixTime - ts_start) : setSeconds(0)
 	}, [ts_start])
 
 	React.useEffect(() => {
 		const interval = setInterval(() => {
-			setSeconds((prev) => prev + 1);
-		}, 1000);
-		return () => clearInterval(interval);
-	}, []);
+			setSeconds((prev) => prev + 1)
+		}, 1000)
+		return () => clearInterval(interval)
+	}, [])
 
 	return (
 		<div className="flex items-center gap-1.5">

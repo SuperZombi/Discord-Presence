@@ -43,9 +43,10 @@ const Input = ({
 	return (
 		<div className="w-full">
 			{label ? (
-				<h4 className="
-					ms-1 mb-1 font-medium select-none
-				">{label}</h4>
+				<h4 className={`
+					${type === "number" ? "text-center" : "ms-1"}
+					mb-1 font-medium select-none
+				`}>{label}</h4>
 			) : null}
 			<div className="
 				flex items-center relative 

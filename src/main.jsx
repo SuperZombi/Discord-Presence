@@ -1,5 +1,5 @@
 const MainForm = () => {
-	const currentTimestamp = () => Math.floor(Date.now() / 1000);
+	const currentTimestamp = () => Math.floor(Date.now() / 1000)
 	const [actType, setActType] = React.useState("playing")
 	const [details, setDetails] = React.useState()
 	const [state, setState] = React.useState()
@@ -7,6 +7,37 @@ const MainForm = () => {
 	const [timestamp, setTimestamp] = React.useState("normal")
 	const [ts_start, set_ts_start] = React.useState()
 	const [ts_end, set_ts_end] = React.useState()
+
+	const handleTimestamp = val=>{
+		setTimestamp(val)
+		if (val === "local_time"){
+			const now = new Date()
+			const secondsSinceMidnight = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+			const calculated = currentTimestamp() - secondsSinceMidnight
+			set_ts_start(calculated)
+			set_ts_end(null)
+			set_media_current(0)
+			set_media_duration(0)
+		}
+		else {
+			set_ts_start(null)
+			set_ts_end(null)
+		}
+	}
+	React.useEffect(() => {
+		handleTimestamp(timestamp)
+	}, [timestamp])
+
+	const [media_current, set_media_current] = React.useState(0)
+	const [media_duration, set_media_duration] = React.useState(0)
+
+	React.useEffect(() => {
+		if (media_current === 0 && media_duration === 0) return
+		const t_start = currentTimestamp() - Number(media_current)
+		const t_end = t_start - Number(media_duration)
+		set_ts_start(t_start)
+		set_ts_end(t_end)
+	}, [media_current, media_duration])
 
 	const [large_image, set_large_image] = React.useState()
 	const [small_image, set_small_image] = React.useState()
@@ -67,23 +98,6 @@ const MainForm = () => {
 		set_buttons(new_buttons)
 	}, [button_1_text, button_1_url, button_2_text, button_2_url])
 
-	const handleTimestamp = val=>{
-		if (val === "local_time"){
-			const now = new Date();
-			const secondsSinceMidnight = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-			const calculated = currentTimestamp() - secondsSinceMidnight
-			set_ts_start(calculated)
-			set_ts_end(null)
-		}
-		else {
-			set_ts_start(null)
-			set_ts_end(null)
-		}
-	}
-	React.useEffect(() => {
-		handleTimestamp(timestamp)
-	}, [timestamp])
-
 	const handleMainClick = () => {
 		const obj = {
 			act_type: actType,
@@ -94,6 +108,8 @@ const MainForm = () => {
 			timestamp: timestamp,
 			ts_start: ts_start,
 			ts_end: ts_end,
+			media_current: media_current,
+			media_duration: media_duration,
 			large_image: large_image,
 			large_text: large_text,
 			small_image: small_image,
@@ -132,6 +148,24 @@ const MainForm = () => {
 				]} onChange={handleTimestamp}/>
 
 				<Hr/>
+
+				{
+					(["listening", "watching"].includes(actType) && timestamp === "normal") ? (
+						<React.Fragment>
+							<InputGroup>
+								<Input label="Media current" type="number"
+									name="media_current" value={media_current}
+									onChange={set_media_current}
+								/>
+								<Input label="Media duration" type="number"
+									name="media_total" value={media_duration}
+									onChange={set_media_duration}
+								/>
+							</InputGroup>
+							<Hr/>
+						</React.Fragment>
+					) : null
+				}
 
 				<Input placeholder="Details" label="Details"
 					value={details} name="details"
