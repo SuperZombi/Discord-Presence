@@ -1,15 +1,45 @@
 const Input = ({
-	children, type="text", min=0,
-	label="",
+	value="", type="text", min=0,
+	label="", step=1, max=Infinity,
 	onChange=null, ...props
 }) => {
-	const [value, setValue] = React.useState(children || '')
-
 	const handleChange = (e) => {
 		const val = e.target.value;
-		setValue(val)
-		onChange ? onChange(val) : null
+		if (type === "number"){
+			if (val){
+				if ((Number(val) > min) && (Number(val) < max)){
+					return onChange?.(Number(val))
+				}
+				else if (Number(val) > min){
+					return onChange?.(max)
+				}
+				else if (Number(val) < max){
+					return onChange?.(min)
+				}
+			}
+			return onChange?.(min)
+		}
+		onChange?.(val)
 	}
+	const handleMinus = (e) => {
+		if ((Number(value) - Number(step)) < Number(min)) return
+		onChange?.(Number(value) - Number(step))
+	}
+	const handlePlus = (e) => {
+		if ((Number(value) + Number(step)) > Number(max)) return
+		onChange?.(Number(value) + Number(step))
+	}
+	
+	React.useEffect(() => {
+		if (type !== "number") return;
+		if (Number(value) > Number(max)) {
+			onChange?.(Number(max))
+		}
+		else if (Number(value) < Number(min)) {
+			onChange?.(Number(min))
+		}
+	}, [min, max]);
+
 	return (
 		<div className="w-full">
 			{label ? (
@@ -17,27 +47,58 @@ const Input = ({
 					ms-1 mb-1 font-medium select-none
 				">{label}</h4>
 			) : null}
-			<input type={type} className="
-				w-full select-none
-				focus:outline-none focus:border-[#5865f2]
-				bg-[#2b2c32]
-				border-2 border-[#42434a]
-				p-3 py-2 rounded-xl
-				duration-200 ease-out
-				hover:border-[#646570]
-				text-[#dcdddf] placeholder:text-[#82838a]
-				appearance-none 
-				[&::-webkit-outer-spin-button]:appearance-none 
-				[&::-webkit-inner-spin-button]:appearance-none 
-				[-moz-appearance:textfield]
-			"
-				value={value}
-				placeholder={type === "number" ? 0 : null}
-				min={type === "number" ? min : null}
-				{...props}
-				onChange={handleChange}
-			/>
+			<div className="
+				flex items-center relative 
+			">
+
+				{type === "number" ? (<InputButton className="
+					left-0 rounded-s-xl
+				" onClick={handleMinus}>−</InputButton>) : null}
+
+				<input type={type} className={`
+					w-full select-none
+					focus:outline-none focus:border-[#5865f2]
+					bg-[#2b2c32]
+					border-2 border-[#42434a]
+					p-3 py-2 rounded-xl
+					duration-200 ease-out
+					hover:border-[#646570]
+					text-[#dcdddf] placeholder:text-[#82838a]
+					appearance-none 
+					[&::-webkit-outer-spin-button]:appearance-none 
+					[&::-webkit-inner-spin-button]:appearance-none 
+					[-moz-appearance:textfield]
+					${type === "number" ? "text-center" : null}
+				`}
+					value={value}
+					placeholder={type === "number" ? 0 : null}
+					min={type === "number" ? min : null}
+					max={type === "number" ? max : null}
+					step={type === "number" ? step : null}
+					{...props}
+					onChange={handleChange}
+				/>
+				{type === "number" ? (<InputButton className="
+					right-0 rounded-e-xl
+				" onClick={handlePlus}>+</InputButton>) : null}
+			</div>
 		</div>
+	)
+}
+
+const InputButton = ({children, className="", onClick}) => {
+	return (
+		<span className={`
+			absolute top-0 bottom-0
+			flex justify-center items-center
+			w-10 bg-[#60626e]
+			hover:bg-[#545561]
+			active:bg-[#4a4b57]
+			duration-200 ease-out
+			cursor-pointer
+			select-none
+			${className}
+		`} onClick={onClick}>{children}</span>
 	)
 }
 
@@ -192,6 +253,21 @@ const Select = ({
 					))}
 				</div>
 			)}
+		</div>
+	)
+}
+
+const InputGroup = ({children, label=""}) => {
+	return (
+		<div className="w-full">
+			{label ? (
+				<h4 className="
+					mb-2 font-medium select-none
+				">{label}</h4>
+			) : null}
+			<div className="flex gap-2">
+				{children}
+			</div>
 		</div>
 	)
 }

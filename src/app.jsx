@@ -10,31 +10,6 @@ const App = () => {
 		<div>
 			<MainForm/>
 			<Loader show={showLoader}/>
-			{/*<Presence actType="playing" state="State" details="Details"
-				large_image = "https://cdn.discordapp.com/embed/avatars/1.png"
-				small_image = "https://cdn.discordapp.com/app-assets/383226320970055681/1359299466493956258.png"
-				large_text="Hello world" small_text="Small text"
-				state_url="https://github.com/"
-				details_url = "https://github.com/"
-				ts_start = {Math.floor(Date.now() / 1000) - 100}
-				ts_end = {Math.floor(Date.now() / 1000) + 100}
-				party_size = {[2, 6]}
-				buttons = {[
-					{"label": "Ask to join", "url": "https://www.google.com/"},
-					{"label": "Ask to join", "url": "https://www.google.com/"},
-				]}
-			/>
-			<Card>
-				<Input placeholder="Type some text">Hello</Input>
-				<Input type="number" min={4}></Input>
-				<Button>Some button</Button>
-				<Button disabled={true}>Disabled button</Button>
-				<Select options={[
-					{ value: "apple", label: "Apple" },
-					{ value: "banana", label: "Banana" },
-					{ value: "orange", label: "Orange" },
-				]} onChange={e=>console.log(e)}/>
-			</Card>*/}
 		</div>
 	)
 }
@@ -57,6 +32,17 @@ const MainForm = () => {
 
 	const [state_url, set_state_url] = React.useState()
 	const [details_url, set_details_url] = React.useState()
+
+	const [party_current, set_party_current] = React.useState(0)
+	const [party_total, set_party_total] = React.useState(0)
+	const [party_size, set_party_size] = React.useState([])
+	React.useEffect(() => {
+		if (party_total === 0){
+			set_party_size([])
+		} else {
+			set_party_size([party_current, party_total])
+		}
+	}, [party_current, party_total])
 
 	const handleTimestamp = val=>{
 		if (val === "local_time"){
@@ -87,8 +73,7 @@ const MainForm = () => {
 					large_image={large_image} small_image={small_image}
 					large_text={large_text} small_text={small_text}
 					state_url={state_url} details_url={details_url}
-
-					// party_size = {[2, 6]}
+					party_size={party_size}
 					// buttons = {[
 					// 	{"label": "Ask to join", "url": "https://www.google.com/"},
 					// 	{"label": "Ask to join", "url": "https://www.google.com/"},
@@ -105,7 +90,13 @@ const MainForm = () => {
 					{ value: "watching", label: "Watching" },
 				]} onChange={val => setActType(val)}/>
 
+				<Select label="Timestamp" selected={timestamp} options={[
+					{ value: "normal", label: "Normal" },
+					{ value: "local_time", label: "Local time" },
+				]} onChange={handleTimestamp}/>
+
 				<Input placeholder="Details" label="Details"
+					value={details}
 					name="details"
 					onChange={val => {
 						setDetails(val)
@@ -113,75 +104,90 @@ const MainForm = () => {
 							set_details_url("")
 						}
 					}}
-				>{details}</Input>
+				/>
 
 				{details ? (
 					<React.Fragment>
 						<Input placeholder="Details URL" label="Details URL"
+							value={details_url}
 							name="details_url" onChange={val => set_details_url(val) }
-						>{details_url}</Input>
+						/>
 						<Hr/>
 					</React.Fragment>
 				) : null}
 
 				<Input placeholder="State" label="State"
-					name="state"
+					name="state" value={state}
 					onChange={val => {
 						setState(val)
 						if (val === ""){
 							set_state_url("")
 						}
 					}}
-				>{state}</Input>
+				/>
 
-				{state ? (
+				{(state && party_size.length === 0) ? (
 					<React.Fragment>
 						<Input placeholder="State URL" label="State URL"
+							value={state_url}
 							name="state_url" onChange={val => set_state_url(val) }
-						>{state_url}</Input>
+						/>
 						<Hr/>
 					</React.Fragment>
 				) : null}
 
-				<Select label="Timestamp" selected={timestamp} options={[
-					{ value: "normal", label: "Normal" },
-					{ value: "local_time", label: "Local time" },
-				]} onChange={handleTimestamp}/>
+				<InputGroup label="Party">
+					<Input type="number" name="party_current" max={party_total}
+						onChange={val => set_party_current(val)}
+						value={party_current}
+					/>
+					<Input type="number" name="party_total"
+						onChange={val => {
+							set_party_total(val)
+							if (val > 0){
+								set_state_url("")
+							}
+						}}
+						value={party_total}
+					/>
+				</InputGroup>
 
 				<Hr/>
 
 				<Input placeholder="https://image.png" label="Large Image"
-					name="large_image"
+					name="large_image" value={large_image}
 					onChange={val => {
 						set_large_image(val)
 						if (val === ""){
 							set_large_text("")
 						}
 					}}
-				>{large_image}</Input>
+				/>
 				{large_image ? (
 					<React.Fragment>
 						<Input placeholder="Large Image Tooltip" label="Large Image Tooltip"
+							value={large_text}
 							name="large_text" onChange={val => set_large_text(val) }
-						>{large_text}</Input>
+						/>
 						<Hr/>
 					</React.Fragment>
 				) : null}
 
 				<Input placeholder="https://image.png" label="Small Image"
-					name="small_image"
+					name="small_image" value={small_image}
 					onChange={val => {
 						set_small_image(val)
 						if (val === ""){
 							set_small_text("")
 						}
 					}}
-				>{small_image}</Input>
+				/>
 				{small_image ? (
 					<React.Fragment>
 						<Input placeholder="Small Image Tooltip" label="Small Image Tooltip"
+							value={small_text}
 							name="small_text" onChange={val => set_small_text(val) }
-						>{small_text}</Input>
+						/>
 					</React.Fragment>
 				) : null}
 
