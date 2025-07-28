@@ -14,6 +14,12 @@ const Login = () => {
 				<h3 className="text-xl font-bold text-center">
 					<T>login_wellcome_header</T>
 				</h3>
+				<img className="
+					h-32 w-32 object-cover rounded-full
+					m-auto my-2
+				"   draggable={false}
+					src="assets/avatar-blue.png"
+				/>
 				<p className="text-center">
 					<T vars={{
 						highlight_text: (<b><T>login_wellcome_paragraph_highlight_text</T></b>),
