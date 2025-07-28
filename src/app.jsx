@@ -48,6 +48,9 @@ const MainForm = () => {
 	const [ts_start, set_ts_start] = React.useState(currentTimestamp())
 	const [ts_end, set_ts_end] = React.useState()
 
+	const [large_image, set_large_image] = React.useState("assets/avatar.png")
+	const [small_image, set_small_image] = React.useState()
+
 	const handleTimestamp = val=>{
 
 		if (val === "local_time"){
@@ -65,22 +68,25 @@ const MainForm = () => {
 
 	return (
 		<Container>
-			<Presence actType={actType} state={state} details={details}
-				ts_start={ts_start} ts_end={ts_end}
-				// large_image = "https://cdn.discordapp.com/embed/avatars/1.png"
-				// small_image = "https://cdn.discordapp.com/app-assets/383226320970055681/1359299466493956258.png"
-				// large_text="Hello world" small_text="Small text"
-				// state_url="https://github.com/"
-				// details_url = "https://github.com/"
-				// ts_start = {Math.floor(Date.now() / 1000) - 100}
-				// ts_end = {Math.floor(Date.now() / 1000) + 100}
-				// party_size = {[2, 6]}
-				// buttons = {[
-				// 	{"label": "Ask to join", "url": "https://www.google.com/"},
-				// 	{"label": "Ask to join", "url": "https://www.google.com/"},
-				// ]}
-			/>
-			<Card className="items-center">
+			<div className="w-96">
+				<Presence actType={actType} state={state} details={details}
+						ts_start={ts_start} ts_end={ts_end}
+						large_image={large_image} small_image={small_image}
+						// large_text="Hello world" small_text="Small text"
+						// state_url="https://github.com/"
+						// details_url = "https://github.com/"
+						// ts_start = {Math.floor(Date.now() / 1000) - 100}
+						// ts_end = {Math.floor(Date.now() / 1000) + 100}
+						// party_size = {[2, 6]}
+						// buttons = {[
+						// 	{"label": "Ask to join", "url": "https://www.google.com/"},
+						// 	{"label": "Ask to join", "url": "https://www.google.com/"},
+						// ]}
+					/>
+				<Button className="w-full mt-3">Apply</Button>
+			</div>
+			
+			<Card className="items-center w-96">
 
 				<Select label="Activity" selected="playing" options={[
 					{ value: "playing", label: "Playing" },
@@ -100,6 +106,16 @@ const MainForm = () => {
 					{ value: "normal", label: "Normal" },
 					{ value: "local_time", label: "Local time" },
 				]} onChange={handleTimestamp}/>
+
+				<Hr/>
+
+				<Input placeholder="https://image.png" label="Large image"
+					name="large_image" onChange={val => set_large_image(val) }
+				/>
+
+				<Input placeholder="https://image.png" label="Small image"
+					name="small_image" onChange={val => set_small_image(val) }
+				/>
 			</Card>
 		</Container>
 	)

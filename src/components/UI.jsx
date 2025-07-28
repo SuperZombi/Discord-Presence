@@ -14,11 +14,11 @@ const Input = ({
 		<div className="w-full">
 			{label ? (
 				<h4 className="
-					ms-1 mb-1 font-medium
+					ms-1 mb-1 font-medium select-none
 				">{label}</h4>
 			) : null}
 			<input type={type} className="
-				w-full
+				w-full select-none
 				focus:outline-none focus:border-[#5865f2]
 				bg-[#2b2c32]
 				border-2 border-[#42434a]
@@ -57,7 +57,11 @@ const Button = ({
 				${disabled ? (
 					"bg-[#323339] cursor-not-allowed"
 				) : (
-					"bg-[#5865f2] hover:bg-[#4752c4] cursor-pointer"
+					`
+						bg-[#5865f2] hover:bg-[#4752c4]
+						active:bg-[#3a48a3]
+						cursor-pointer
+					`
 				)}
 				duration-200 ease-out
 				text-white text-center
@@ -136,7 +140,7 @@ const Select = ({
 		<div className="relative w-full" ref={selectRef}>
 			{label ? (
 				<h4 className="
-					ms-1 mb-1 font-medium
+					ms-1 mb-1 font-medium select-none
 				">{label}</h4>
 			) : null}
 			<div
@@ -196,7 +200,7 @@ const Card = ({ children, className="" }) => {
 	return (
 		<div className={`
 			flex flex-col gap-3
-			w-96 h-fit p-4
+			h-fit p-4
 			rounded-xl
 			bg-[#3f4048] text-[#dfe0e2]
 			${className}
@@ -210,9 +214,15 @@ const Container = ({children}) => {
 	return (
 		<div className="
 			flex flex-wrap flex-row-reverse
-			justify-center gap-5 p-3
+			justify-center gap-x-5 gap-y-3 p-3
 		">
 			{children}
 		</div>
+	)
+}
+
+const Hr = () => {
+	return (
+		<hr className="text-gray-500 m-2 w-full"/>
 	)
 }

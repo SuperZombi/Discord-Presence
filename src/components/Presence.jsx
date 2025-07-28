@@ -5,7 +5,7 @@ const Presence = ({
 	details="",
 	state_url="",
 	details_url="",
-	large_image="https://cdn.discordapp.com/embed/avatars/1.png",
+	large_image="assets/avatar.png",
 	small_image="",
 	large_text="",
 	small_text="",
@@ -84,20 +84,35 @@ const LeftBody = ({
 }) => {
 	return (
 		<div className="relative shrink-0">
-			<div className="relative group">
+			<div className="relative group h-[100px] w-[100px]">
 				{large_text ? <Tooltip>{large_text}</Tooltip> : null}
-				<img className="rounded-xl select-none"
+				<img className="
+					rounded-xl select-none
+					w-full h-full
+					object-cover
+				"
 					draggable={false}
-					src={large_image} height="100px" width="100px"
+					src={large_image}
+					onError={({ currentTarget }) => {
+						currentTarget.src = "assets/avatar.png";
+					}}
 				/>
 			</div>
 
 			{small_image ? (
-				<div className="absolute group -bottom-1 -right-1">
+				<div className="
+					absolute group -bottom-1 -right-1
+					h-[32px] w-[32px]
+				">
 					{small_text ? <Tooltip>{small_text}</Tooltip> : null}
-					<img className="rounded-full outline-4 outline-[#3f4048] select-none"
+					<img className="
+						rounded-full outline-4 outline-[#3f4048] select-none
+						w-full h-full object-cover
+					"
 						draggable={false}
-						src={small_image} height="32px" width="32px"
+						src={small_image} onError={({ currentTarget }) => {
+							currentTarget.src = "assets/avatar.png";
+						}}
 					/>
 				</div>
 			) : null}
