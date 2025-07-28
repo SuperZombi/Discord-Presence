@@ -132,7 +132,9 @@ const MainForm = () => {
 					party_size={party_size}
 					buttons={buttons_preview}
 				/>
-				<Button className="w-full mt-3" onClick={handleMainClick}>Apply</Button>
+				<Button className="w-full mt-3 font-bold" onClick={handleMainClick}>
+					<T>main_apply_button</T>
+				</Button>
 			</Sticky>
 			
 			<Card className="items-center w-96">
@@ -154,11 +156,11 @@ const MainForm = () => {
 					(["listening", "watching"].includes(actType) && timestamp === "normal") ? (
 						<React.Fragment>
 							<InputGroup>
-								<Input label="Media current" type="number"
+								<Input label={<T>media_current_input_label</T>} type="number"
 									name="media_current" value={media_current}
 									onChange={set_media_current}
 								/>
-								<Input label="Media duration" type="number"
+								<Input label={<T>media_duration_input_label</T>} type="number"
 									name="media_total" value={media_duration}
 									onChange={set_media_duration}
 								/>
@@ -168,7 +170,8 @@ const MainForm = () => {
 					) : null
 				}
 
-				<Input placeholder="Details" label="Details"
+				<Input placeholder={Tt("details_input_placeholder")}
+					label={<T>details_input_label</T>}
 					value={details} name="details"
 					onChange={val => {
 						setDetails(val)
@@ -180,7 +183,8 @@ const MainForm = () => {
 
 				{details ? (
 					<React.Fragment>
-						<Input placeholder="Details URL" label="Details URL"
+						<Input placeholder={Tt("details_url_input_placeholder")}
+							label={<T>details_url_input_label</T>}
 							value={details_url} name="details_url"
 							onChange={set_details_url}
 						/>
@@ -188,7 +192,8 @@ const MainForm = () => {
 					</React.Fragment>
 				) : null}
 
-				<Input placeholder="State" label="State"
+				<Input placeholder={Tt("state_input_placeholder")}
+					label={<T>state_input_label</T>}
 					name="state" value={state}
 					onChange={val => {
 						setState(val)
@@ -200,7 +205,8 @@ const MainForm = () => {
 
 				{(state && party_size.length === 0) ? (
 					<React.Fragment>
-						<Input placeholder="State URL" label="State URL"
+						<Input placeholder={Tt("state_url_input_placeholder")}
+							label={<T>state_url_input_label</T>}
 							value={state_url} name="state_url"
 							onChange={set_state_url}
 						/>
@@ -208,7 +214,7 @@ const MainForm = () => {
 					</React.Fragment>
 				) : null}
 
-				<InputGroup label="Party">
+				<InputGroup label={<T>party_input_label</T>}>
 					<Input type="number" name="party_current" max={party_total}
 						onChange={set_party_current}
 						value={party_current}
@@ -226,7 +232,8 @@ const MainForm = () => {
 
 				<Hr/>
 
-				<Input placeholder="https://image.png" label="Large Image"
+				<Input placeholder={Tt("large_image_input_placeholder")}
+					label={<T>large_image_input_label</T>}
 					name="large_image" value={large_image}
 					onChange={val => {
 						set_large_image(val)
@@ -237,7 +244,8 @@ const MainForm = () => {
 				/>
 				{large_image ? (
 					<React.Fragment>
-						<Input placeholder="Large Image Tooltip" label="Large Image Tooltip"
+						<Input placeholder={Tt("large_image_tooltip_input_placeholder")}
+							label={<T>large_image_tooltip_input_label</T>}
 							value={large_text} name="large_text"
 							onChange={set_large_text}
 						/>
@@ -245,7 +253,8 @@ const MainForm = () => {
 					</React.Fragment>
 				) : null}
 
-				<Input placeholder="https://image.png" label="Small Image"
+				<Input placeholder={Tt("small_image_input_placeholder")}
+					label={<T>small_image_input_label</T>}
 					name="small_image" value={small_image}
 					onChange={val => {
 						set_small_image(val)
@@ -255,7 +264,8 @@ const MainForm = () => {
 					}}
 				/>
 				{small_image ? (
-					<Input placeholder="Small Image Tooltip" label="Small Image Tooltip"
+					<Input placeholder={Tt("small_image_tooltip_input_placeholder")}
+						label={<T>small_image_tooltip_input_label</T>}
 						value={small_text} name="small_text"
 						onChange={set_small_text}
 					/>
@@ -263,7 +273,8 @@ const MainForm = () => {
 
 				<Hr/>
 
-				<Input placeholder="Button text" label="Button text"
+				<Input placeholder={Tt("bottom_button_input_placeholder")}
+					label={<T>bottom_button_input_label</T>}
 					name="button_1_text" value={button_1_text}
 					onChange={val=>{
 						set_button_1_text(val)
@@ -274,14 +285,16 @@ const MainForm = () => {
 				/>
 				{button_1_text ? (
 					<React.Fragment>
-						<Input placeholder="Button URL" label="Button URL"
+						<Input placeholder={Tt("bottom_button_url_input_placeholder")}
+							label={<T>bottom_button_url_input_label</T>}
 							name="button_1_url" value={button_1_url}
 							onChange={set_button_1_url}
 						/>
 
 						<Hr/>
 
-						<Input placeholder="Button text" label="Button text"
+						<Input placeholder={Tt("bottom_button_input_placeholder")}
+							label={<T>bottom_button_input_label</T>}
 							name="button_2_text" value={button_2_text}
 							onChange={val=>{
 								set_button_2_text(val)
@@ -292,7 +305,8 @@ const MainForm = () => {
 						/>
 
 						{button_2_text ? (
-							<Input placeholder="Button URL" label="Button URL"
+							<Input placeholder={Tt("bottom_button_url_input_placeholder")}
+								label={<T>bottom_button_url_input_label</T>}
 								name="button_2_url" value={button_2_url}
 								onChange={set_button_2_url}
 							/>

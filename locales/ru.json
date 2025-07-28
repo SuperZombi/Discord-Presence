@@ -1,5 +1,6 @@
 {
 	"default_appName": "Приложение",
+	"main_apply_button": "Применить",
 
 	"actType_select_label": "Активность",
 	"actType_select_playing": "Играет",
@@ -9,6 +10,40 @@
 	"timestamp_select_label": "Метка времени",
 	"timestamp_select_label_normal": "Обычная",
 	"timestamp_select_label_local_time": "Местное время",
+
+	"details_input_label": "Описание",
+	"details_input_placeholder": "Описание",
+
+	"details_url_input_label": "Ссылка описания",
+	"details_url_input_placeholder": "https://",
+
+	"state_input_label": "Статус",
+	"state_input_placeholder": "Статус",
+
+	"state_url_input_label": "Ссылка статуса",
+	"state_url_input_placeholder": "https://",
+
+	"party_input_label": "Группа",
+
+	"media_current_input_label": "Текущее",
+	"media_duration_input_label": "Длительность",
+
+	"large_image_input_label": "Основная иконка",
+	"large_image_input_placeholder": "https://",
+
+	"small_image_input_label": "Маленькая иконка",
+	"small_image_input_placeholder": "https://",
+
+	"large_image_tooltip_input_label": "Подсказка иконки",
+	"large_image_tooltip_input_placeholder": "Подсказка иконки",
+
+	"small_image_tooltip_input_label": "Подсказка иконки",
+	"small_image_tooltip_input_placeholder": "Подсказка иконки",
+
+	"bottom_button_input_label": "Текст кнопки",
+	"bottom_button_input_placeholder": "Текст кнопки",
+	"bottom_button_url_input_label": "Ссылка кнопки",
+	"bottom_button_url_input_placeholder": "https://",
 
 	"Presence_actType_Playing": "Играет в",
 	"Presence_actType_Listening": "Слушает",

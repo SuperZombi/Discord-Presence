@@ -1,5 +1,6 @@
 {
 	"default_appName": "App Name",
+	"main_apply_button": "Apply",
 
 	"actType_select_label": "Activity",
 	"actType_select_playing": "Playing",
@@ -9,6 +10,40 @@
 	"timestamp_select_label": "Timestamp",
 	"timestamp_select_label_normal": "Normal",
 	"timestamp_select_label_local_time": "Local time",
+
+	"details_input_label": "Details",
+	"details_input_placeholder": "Details",
+
+	"details_url_input_label": "Details URL",
+	"details_url_input_placeholder": "https://",
+
+	"state_input_label": "State",
+	"state_input_placeholder": "State",
+
+	"state_url_input_label": "State URL",
+	"state_url_input_placeholder": "https://",
+
+	"party_input_label": "Party",
+
+	"media_current_input_label": "Current",
+	"media_duration_input_label": "Duration",
+
+	"large_image_input_label": "Large Image",
+	"large_image_input_placeholder": "https://",
+
+	"small_image_input_label": "Small Image",
+	"small_image_input_placeholder": "https://",
+
+	"large_image_tooltip_input_label": "Image Tooltip",
+	"large_image_tooltip_input_placeholder": "Image Tooltip",
+
+	"small_image_tooltip_input_label": "Image Tooltip",
+	"small_image_tooltip_input_placeholder": "Image Tooltip",
+
+	"bottom_button_input_label": "Button text",
+	"bottom_button_input_placeholder": "Button text",
+	"bottom_button_url_input_label": "Button URL",
+	"bottom_button_url_input_placeholder": "https://",
 
 	"Presence_actType_Playing": "Playing",
 	"Presence_actType_Listening": "Listening to",
