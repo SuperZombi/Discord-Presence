@@ -50,16 +50,37 @@ const MainForm = () => {
 	const [button_2_text, set_button_2_text] = React.useState()
 	const [button_2_url, set_button_2_url] = React.useState()
 	const [buttons, set_buttons] = React.useState([])
+	const [buttons_preview, set_buttons_preview] = React.useState([])
 
 	React.useEffect(() => {
-		const buttons = [];
+		if (buttons[0]){
+			set_button_1_text(buttons[0].label)
+			set_button_1_url(buttons[0].url)
+		}
+		if (buttons[1]){
+			set_button_2_text(buttons[1].label)
+			set_button_2_url(buttons[1].url)
+		}
+	}, [buttons])
+
+	React.useEffect(() => {
+		const new_buttons = []
+		const new_buttons_preview = []
+
 		if (button_1_text && button_1_url) {
-			buttons.push({ label: button_1_text, url: button_1_url })
+			new_buttons_preview.push({ label: button_1_text, url: button_1_url })
+			if (button_1_url?.startsWith('http')){
+				new_buttons.push({ label: button_1_text, url: button_1_url })
+			}
 		}
 		if (button_2_text && button_2_url) {
-			buttons.push({ label: button_2_text, url: button_2_url })
+			new_buttons_preview.push({ label: button_2_text, url: button_2_url })
+			if (button_2_url?.startsWith('http')){
+				new_buttons.push({ label: button_2_text, url: button_2_url })
+			}
 		}
-		set_buttons(buttons);
+		set_buttons_preview(new_buttons_preview)
+		set_buttons(new_buttons)
 	}, [button_1_text, button_1_url, button_2_text, button_2_url])
 
 	const handleTimestamp = val=>{
@@ -71,7 +92,7 @@ const MainForm = () => {
 			set_ts_end(null)
 		}
 		else {
-			set_ts_start(currentTimestamp())
+			set_ts_start(null)
 			set_ts_end(null)
 		}
 	}
@@ -80,7 +101,23 @@ const MainForm = () => {
 	}, [timestamp])
 
 	const handleMainClick = () => {
-		console.log("here")
+		const obj = {
+			act_type: actType,
+			details: details,
+			details_url: details_url,
+			state: state,
+			state_url: state_url,
+			timestamp: timestamp,
+			ts_start: ts_start,
+			ts_end: ts_end,
+			large_image: large_image,
+			large_text: large_text,
+			small_image: small_image,
+			small_text: small_text,
+			party_size: party_size,
+			buttons: buttons,
+		}
+		console.log(cleanObject(obj))
 	}
 
 	return (
@@ -92,7 +129,7 @@ const MainForm = () => {
 					large_text={large_text} small_text={small_text}
 					state_url={state_url} details_url={details_url}
 					party_size={party_size}
-					buttons={buttons}
+					buttons={buttons_preview}
 				/>
 				<Button className="w-full mt-3" onClick={handleMainClick}>Apply</Button>
 			</Sticky>
@@ -109,6 +146,8 @@ const MainForm = () => {
 					{ value: "normal", label: "Normal" },
 					{ value: "local_time", label: "Local time" },
 				]} onChange={handleTimestamp}/>
+
+				<Hr/>
 
 				<Input placeholder="Details" label="Details"
 					value={details} name="details"
@@ -267,6 +306,16 @@ const Loader = ({show=true}) => {
 		`}>
 			<video src="assets/loading.webm" autoPlay muted loop></video>
 		</div>
+	)
+}
+
+function cleanObject(obj) {
+	return Object.fromEntries(
+		Object.entries(obj).filter(([_, v]) => {
+			if (v == null) return false
+			if (Array.isArray(v) && v.length === 0) return false
+			return true
+		})
 	)
 }
 

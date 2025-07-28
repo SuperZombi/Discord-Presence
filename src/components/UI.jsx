@@ -107,7 +107,6 @@ const Button = ({
 	disabled=false,
 	onClick=null, ...props
 }) => {
-
 	const clickHandle = _=>{
 		if (disabled) return
 		url ? window.open(url, '_blank') : onClick ? onClick() : null

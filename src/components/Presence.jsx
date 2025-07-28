@@ -9,8 +9,8 @@ const Presence = ({
 	small_image="",
 	large_text="",
 	small_text="",
-	ts_start=Math.floor(Date.now() / 1000),
-	ts_end="",
+	ts_start=null,
+	ts_end=null,
 	party_size=[],
 	buttons=[]
 }) => {
@@ -162,15 +162,15 @@ const ActivityInfo = ({
 			{(details && ["listening", "watching"].includes(actType)) ? 
 			(
 				<div className={`font-bold overflow-hidden text-ellipsis
-					${details_url ? "hover:underline cursor-pointer" : ""}`}
-					onClick={details_url ? _=>openUrl(details_url) : null}
+					${details_url?.startsWith('http') ? "hover:underline cursor-pointer" : ""}`}
+					onClick={details_url?.startsWith('http') ? _=>openUrl(details_url) : null}
 				>
 					{details}
 				</div>
 			) : (
 				<div className={`text-sm overflow-hidden text-ellipsis
-					${details_url ? "hover:underline cursor-pointer" : ""}`}
-					onClick={details_url ? _=>openUrl(details_url) : null}
+					${details_url?.startsWith('http') ? "hover:underline cursor-pointer" : ""}`}
+					onClick={details_url?.startsWith('http') ? _=>openUrl(details_url) : null}
 				>
 					{details}
 				</div>
@@ -178,8 +178,8 @@ const ActivityInfo = ({
 
 			{state && party_size.length > 0 && actType === "playing" ? null : state ? (
 				<div className={`text-sm overflow-hidden text-ellipsis
-					${state_url ? "hover:underline cursor-pointer" : ""}`}
-					onClick={state_url ? _=>openUrl(state_url) : null}
+					${state_url?.startsWith('http') ? "hover:underline cursor-pointer" : ""}`}
+					onClick={state_url?.startsWith('http') ? _=>openUrl(state_url) : null}
 				>
 					{state}
 				</div>
@@ -195,7 +195,7 @@ const Bottom = ({
 		<div className="flex gap-2.5">
 			{buttons.slice(0, 2).map((item, index) => (
 				<Button key={index} className="w-full" url={item.url}
-					disabled={!item.url.startsWith('http')}
+					disabled={!item?.url.startsWith('http')}
 				>
 					{item.label}
 				</Button>
@@ -246,8 +246,8 @@ const Timer = ({
 
 	React.useEffect(() => {
 		const unixTime = Math.floor(Date.now() / 1000);
-		setSeconds(unixTime - ts_start);
-	}, [ts_start]);
+		ts_start ? setSeconds(unixTime - ts_start) : setSeconds(0);
+	}, [ts_start])
 
 	React.useEffect(() => {
 		const interval = setInterval(() => {
