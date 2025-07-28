@@ -36,6 +36,7 @@ const MainForm = () => {
 	const [party_current, set_party_current] = React.useState(0)
 	const [party_total, set_party_total] = React.useState(0)
 	const [party_size, set_party_size] = React.useState([])
+
 	React.useEffect(() => {
 		if (party_total === 0){
 			set_party_size([])
@@ -43,6 +44,23 @@ const MainForm = () => {
 			set_party_size([party_current, party_total])
 		}
 	}, [party_current, party_total])
+
+	const [button_1_text, set_button_1_text] = React.useState()
+	const [button_1_url, set_button_1_url] = React.useState()
+	const [button_2_text, set_button_2_text] = React.useState()
+	const [button_2_url, set_button_2_url] = React.useState()
+	const [buttons, set_buttons] = React.useState([])
+
+	React.useEffect(() => {
+		const buttons = [];
+		if (button_1_text && button_1_url) {
+			buttons.push({ label: button_1_text, url: button_1_url })
+		}
+		if (button_2_text && button_2_url) {
+			buttons.push({ label: button_2_text, url: button_2_url })
+		}
+		set_buttons(buttons);
+	}, [button_1_text, button_1_url, button_2_text, button_2_url])
 
 	const handleTimestamp = val=>{
 		if (val === "local_time"){
@@ -74,10 +92,7 @@ const MainForm = () => {
 					large_text={large_text} small_text={small_text}
 					state_url={state_url} details_url={details_url}
 					party_size={party_size}
-					// buttons = {[
-					// 	{"label": "Ask to join", "url": "https://www.google.com/"},
-					// 	{"label": "Ask to join", "url": "https://www.google.com/"},
-					// ]}
+					buttons={buttons}
 				/>
 				<Button className="w-full mt-3" onClick={handleMainClick}>Apply</Button>
 			</Sticky>
@@ -88,7 +103,7 @@ const MainForm = () => {
 					{ value: "playing", label: "Playing" },
 					{ value: "listening", label: "Listening" },
 					{ value: "watching", label: "Watching" },
-				]} onChange={val => setActType(val)}/>
+				]} onChange={setActType}/>
 
 				<Select label="Timestamp" selected={timestamp} options={[
 					{ value: "normal", label: "Normal" },
@@ -96,8 +111,7 @@ const MainForm = () => {
 				]} onChange={handleTimestamp}/>
 
 				<Input placeholder="Details" label="Details"
-					value={details}
-					name="details"
+					value={details} name="details"
 					onChange={val => {
 						setDetails(val)
 						if (val === ""){
@@ -109,8 +123,8 @@ const MainForm = () => {
 				{details ? (
 					<React.Fragment>
 						<Input placeholder="Details URL" label="Details URL"
-							value={details_url}
-							name="details_url" onChange={val => set_details_url(val) }
+							value={details_url} name="details_url"
+							onChange={set_details_url}
 						/>
 						<Hr/>
 					</React.Fragment>
@@ -129,8 +143,8 @@ const MainForm = () => {
 				{(state && party_size.length === 0) ? (
 					<React.Fragment>
 						<Input placeholder="State URL" label="State URL"
-							value={state_url}
-							name="state_url" onChange={val => set_state_url(val) }
+							value={state_url} name="state_url"
+							onChange={set_state_url}
 						/>
 						<Hr/>
 					</React.Fragment>
@@ -138,7 +152,7 @@ const MainForm = () => {
 
 				<InputGroup label="Party">
 					<Input type="number" name="party_current" max={party_total}
-						onChange={val => set_party_current(val)}
+						onChange={set_party_current}
 						value={party_current}
 					/>
 					<Input type="number" name="party_total"
@@ -166,8 +180,8 @@ const MainForm = () => {
 				{large_image ? (
 					<React.Fragment>
 						<Input placeholder="Large Image Tooltip" label="Large Image Tooltip"
-							value={large_text}
-							name="large_text" onChange={val => set_large_text(val) }
+							value={large_text} name="large_text"
+							onChange={set_large_text}
 						/>
 						<Hr/>
 					</React.Fragment>
@@ -183,15 +197,50 @@ const MainForm = () => {
 					}}
 				/>
 				{small_image ? (
-					<React.Fragment>
-						<Input placeholder="Small Image Tooltip" label="Small Image Tooltip"
-							value={small_text}
-							name="small_text" onChange={val => set_small_text(val) }
-						/>
-					</React.Fragment>
+					<Input placeholder="Small Image Tooltip" label="Small Image Tooltip"
+						value={small_text} name="small_text"
+						onChange={set_small_text}
+					/>
 				) : null}
 
 				<Hr/>
+
+				<Input placeholder="Button text" label="Button text"
+					name="button_1_text" value={button_1_text}
+					onChange={val=>{
+						set_button_1_text(val)
+						if (val === ""){
+							set_button_1_url("")
+						}
+					}}
+				/>
+				{button_1_text ? (
+					<React.Fragment>
+						<Input placeholder="Button URL" label="Button URL"
+							name="button_1_url" value={button_1_url}
+							onChange={set_button_1_url}
+						/>
+
+						<Hr/>
+
+						<Input placeholder="Button text" label="Button text"
+							name="button_2_text" value={button_2_text}
+							onChange={val=>{
+								set_button_2_text(val)
+								if (val === ""){
+									set_button_2_url("")
+								}
+							}}
+						/>
+
+						{button_2_text ? (
+							<Input placeholder="Button URL" label="Button URL"
+								name="button_2_url" value={button_2_url}
+								onChange={set_button_2_url}
+							/>
+						) : null}
+					</React.Fragment>
+				) : null}
 
 			</Card>
 		</Container>

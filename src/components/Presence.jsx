@@ -194,7 +194,9 @@ const Bottom = ({
 	return (
 		<div className="flex gap-2.5">
 			{buttons.slice(0, 2).map((item, index) => (
-				<Button key={index} className="w-full" url={item.url}>
+				<Button key={index} className="w-full" url={item.url}
+					disabled={!item.url.startsWith('http')}
+				>
 					{item.label}
 				</Button>
 			))}

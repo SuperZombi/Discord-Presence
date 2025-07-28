@@ -107,8 +107,10 @@ const Button = ({
 	disabled=false,
 	onClick=null, ...props
 }) => {
+
 	const clickHandle = _=>{
-		url ? window.open(url, '_blank') : (onClick && !disabled) ? onClick() : null
+		if (disabled) return
+		url ? window.open(url, '_blank') : onClick ? onClick() : null
 	}
 	return (
 		<button
@@ -241,7 +243,7 @@ const Select = ({
 							key={option.value}
 							onClick={() => {
 								setSelectedOption(option)
-								onChange ? onChange(option.value) : null
+								onChange?.(option.value)
 								setIsOpen(false)
 							}}
 							className={`p-3 py-2 cursor-pointer hover:bg-[#4b4d58] ${
