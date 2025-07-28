@@ -49,5 +49,13 @@
 	"Presence_actType_Listening": "Слушает",
 	"Presence_actType_Listening_app": "Слушает {appName}",
 	"Presence_actType_Watching": "Смотрит",
-	"Presence_actType_Watching_app": "Смотрит {appName}"
+	"Presence_actType_Watching_app": "Смотрит {appName}",
+
+	"login_wellcome_header": "Добро пожаловать в Discord Presence!",
+	"login_wellcome_paragraph": "Чтобы начать, введите{br}{highlight_text}:",
+	"login_wellcome_paragraph_highlight_text": "ID Приложения Discord",
+	"login_app_id_input_placeholder": "Введите ID приложения",
+	"login_app_id_hint": "Вы можете найти его в {link}.",
+	"login_app_id_hint_link": "Панели разработчика Discord",
+	"login_action_button": "Продолжить"
 }

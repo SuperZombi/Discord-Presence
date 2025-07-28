@@ -49,5 +49,13 @@
 	"Presence_actType_Listening": "Listening to",
 	"Presence_actType_Listening_app": "Listening to {appName}",
 	"Presence_actType_Watching": "Watching",
-	"Presence_actType_Watching_app": "Watching {appName}"
+	"Presence_actType_Watching_app": "Watching {appName}",
+
+	"login_wellcome_header": "Welcome to Discord Presence!",
+	"login_wellcome_paragraph": "To get started, please enter your{br}{highlight_text}:",
+	"login_wellcome_paragraph_highlight_text": "Discord Application ID",
+	"login_app_id_input_placeholder": "Enter your Application ID",
+	"login_app_id_hint": "You can find this in the {link}.",
+	"login_app_id_hint_link": "Discord Developer Portal",
+	"login_action_button": "Continue"
 }

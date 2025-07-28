@@ -288,12 +288,13 @@ const Card = ({ children, className="" }) => {
 	)
 }
 
-const Container = ({children}) => {
+const Container = ({children, className=""}) => {
 	return (
-		<div className="
+		<div className={`
 			flex flex-wrap flex-row-reverse
 			justify-center gap-x-5 gap-y-3 p-3
-		">
+			${className}
+		`}>
 			{children}
 		</div>
 	)
