@@ -1,0 +1,18 @@
+{
+	"default_appName": "Приложение",
+
+	"actType_select_label": "Активность",
+	"actType_select_playing": "Играет",
+	"actType_select_listening": "Слушает",
+	"actType_select_watching": "Смотрит",
+
+	"timestamp_select_label": "Метка времени",
+	"timestamp_select_label_normal": "Обычная",
+	"timestamp_select_label_local_time": "Местное время",
+
+	"Presence_actType_Playing": "Играет в",
+	"Presence_actType_Listening": "Слушает",
+	"Presence_actType_Listening_app": "Слушает {appName}",
+	"Presence_actType_Watching": "Смотрит",
+	"Presence_actType_Watching_app": "Смотрит {appName}"
+}
