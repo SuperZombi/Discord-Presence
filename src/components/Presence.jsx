@@ -36,13 +36,21 @@ const Header = ({
 }) => {
 	function renderAction(){
 		if (actType === "playing"){
-			return "Playing"
+			return <T>Presence_actType_Playing</T>
 		}
 		else if (actType === "listening"){
-			return details ? `Listening to ${appName}` : "Listening to"
+			return details ? (
+				<T vars={{appName: appName}}>
+					Presence_actType_Listening_app
+				</T>
+			) : <T>Presence_actType_Listening</T>
 		}
 		else if (actType === "watching"){
-			return details ? `Watching ${appName}` : "Watching"
+			return details ? (
+				<T vars={{appName: appName}}>
+					Presence_actType_Watching_app
+				</T>
+			) : <T>Presence_actType_Watching</T>
 		}
 	}
 	return (

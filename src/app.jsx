@@ -1,11 +1,17 @@
 const App = () => {
 	const [showLoader, setShowLoader] = React.useState(true)
+	const [loaded, setLoaded] = React.useState(false)
+
 	React.useEffect(() => {
-		setTimeout(_=>{
-			setShowLoader(false)
-		}, 100)
+		init_lang().then(_=>{
+			setLoaded(true)
+			setTimeout(_=>{setShowLoader(false)}, 1000)
+		})
 	}, [])
 
+	if (!loaded) {
+		return <Loader show={showLoader}/>
+	}
 	return (
 		<div>
 			<MainForm/>

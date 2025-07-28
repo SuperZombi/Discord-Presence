@@ -1,0 +1,18 @@
+{
+	"default_appName": "App Name",
+
+	"actType_select_label": "Activity",
+	"actType_select_playing": "Playing",
+	"actType_select_listening": "Listening",
+	"actType_select_watching": "Watching",
+
+	"timestamp_select_label": "Timestamp",
+	"timestamp_select_label_normal": "Normal",
+	"timestamp_select_label_local_time": "Local time",
+
+	"Presence_actType_Playing": "Playing",
+	"Presence_actType_Listening": "Listening to",
+	"Presence_actType_Listening_app": "Listening to {appName}",
+	"Presence_actType_Watching": "Watching",
+	"Presence_actType_Watching_app": "Watching {appName}"
+}

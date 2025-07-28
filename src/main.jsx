@@ -123,7 +123,8 @@ const MainForm = () => {
 	return (
 		<Container>
 			<Sticky className="w-96" classNameChild="top-3">
-				<Presence actType={actType} state={state} details={details}
+				<Presence actType={actType} appName={Tt("default_appName")}
+					state={state} details={details}
 					ts_start={ts_start} ts_end={ts_end}
 					large_image={large_image} small_image={small_image}
 					large_text={large_text} small_text={small_text}
@@ -136,15 +137,15 @@ const MainForm = () => {
 			
 			<Card className="items-center w-96">
 
-				<Select label="Activity" selected={actType} options={[
-					{ value: "playing", label: "Playing" },
-					{ value: "listening", label: "Listening" },
-					{ value: "watching", label: "Watching" },
+				<Select label={<T>actType_select_label</T>} selected={actType} options={[
+					{ value: "playing", label: <T>actType_select_playing</T> },
+					{ value: "listening", label: <T>actType_select_listening</T> },
+					{ value: "watching", label: <T>actType_select_watching</T> },
 				]} onChange={setActType}/>
 
-				<Select label="Timestamp" selected={timestamp} options={[
-					{ value: "normal", label: "Normal" },
-					{ value: "local_time", label: "Local time" },
+				<Select label={<T>timestamp_select_label</T>} selected={timestamp} options={[
+					{ value: "normal", label: <T>timestamp_select_label_normal</T> },
+					{ value: "local_time", label: <T>timestamp_select_label_local_time</T> },
 				]} onChange={handleTimestamp}/>
 
 				<Hr/>
