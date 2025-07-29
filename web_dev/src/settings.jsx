@@ -40,6 +40,11 @@ const Settings = ({
 							checked={values.auto_apply}
 							onChange={new_val=>onChange("auto_apply", new_val)}
 						/>
+						<SwitchGroup
+							label={<T>settings_remember_presence_label</T>}
+							checked={values.remember_presence || true}
+							onChange={new_val=>onChange("remember_presence", new_val)}
+						/>
 					</div>
 				</Card>
 			</div>

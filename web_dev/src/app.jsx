@@ -19,6 +19,11 @@ const App = () => {
 		if (key === "lang"){
 			window.location.reload()
 		}
+		else if (key === "remember_presence"){
+			if (!val){
+				await eel.update_settings("presence", {})()
+			}
+		}
 	}
 
 	React.useEffect(() => {

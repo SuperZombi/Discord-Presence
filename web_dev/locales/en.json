@@ -65,5 +65,6 @@
 
 	"settings_header_label": "Settings",
 	"settings_language_select_label": "Language",
-	"settings_auto_apply_label": "Apply Presence on Start"
+	"settings_auto_apply_label": "Apply Presence on Start",
+	"settings_remember_presence_label": "Remember Presence"
 }

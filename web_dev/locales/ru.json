@@ -65,5 +65,6 @@
 
 	"settings_header_label": "Настройки",
 	"settings_language_select_label": "Язык",
-	"settings_auto_apply_label": "Применять Активность при запуске"
+	"settings_auto_apply_label": "Применять Активность при запуске",
+	"settings_remember_presence_label": "Запоминать Активность"
 }

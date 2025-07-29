@@ -93,7 +93,8 @@ def set_activity(data):
 		print(data)
 		print(final)
 	res = rpc.set_activity(**final)
-	if res: update_settings("presence", data)
+	if res and SETTINGS.get("remember_presence", True):
+		update_settings("presence", data)
 	return res
 
 def on_open(icon, item):
