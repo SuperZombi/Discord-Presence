@@ -1,4 +1,4 @@
-const supported_langs = ["en", "ru"]
+const supported_langs = ["en", "ru", "uk"]
 var _LOCALE = {}
 const T = ({children, vars=null}) => {
 	const rawText = _get_locale(children)

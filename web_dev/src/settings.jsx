@@ -29,7 +29,8 @@ const Settings = ({
 					<div className="w-100 max-w-full flex flex-col gap-3">
 						<Select options={[
 								{"value": "en", "label": "English"},
-								{"value": "ru", "label": "Russian"},
+								{"value": "ru", "label": "Русский"},
+								{"value": "uk", "label": "Українська"},
 							]} name="lang"
 							label={<T>settings_language_select_label</T>}
 							selected={values.lang || "en"}
@@ -42,7 +43,7 @@ const Settings = ({
 						/>
 						<SwitchGroup
 							label={<T>settings_remember_presence_label</T>}
-							checked={values.remember_presence || true}
+							checked={values.remember_presence ?? true}
 							onChange={new_val=>onChange("remember_presence", new_val)}
 						/>
 					</div>

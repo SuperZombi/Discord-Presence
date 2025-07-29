@@ -1,0 +1,70 @@
+{
+	"default_appName": "Додаток",
+	"main_apply_button": "Застосувати",
+	"main_disconnect_button": "Вимкнути",
+
+	"header_user_default_name": "Користувач",
+	"header_user_default_username": "username",
+
+	"actType_select_label": "Активність",
+	"actType_select_playing": "Грає",
+	"actType_select_listening": "Слухає",
+	"actType_select_watching": "Дивиться",
+
+	"timestamp_select_label": "Позначка часу",
+	"timestamp_select_label_normal": "Звичайна",
+	"timestamp_select_label_local_time": "Місцевий час",
+
+	"details_input_label": "Опис",
+	"details_input_placeholder": "Опис",
+
+	"details_url_input_label": "Посилання опису",
+	"details_url_input_placeholder": "https://",
+
+	"state_input_label": "Статус",
+	"state_input_placeholder": "Статус",
+
+	"state_url_input_label": "Посилання статусу",
+	"state_url_input_placeholder": "https://",
+
+	"party_input_label": "Група",
+
+	"media_current_input_label": "Поточний",
+	"media_duration_input_label": "Тривалість",
+
+	"large_image_input_label": "Основна іконка",
+	"large_image_input_placeholder": "https://",
+
+	"small_image_input_label": "Маленька іконка",
+	"small_image_input_placeholder": "https://",
+
+	"large_image_tooltip_input_label": "Підказка іконки",
+	"large_image_tooltip_input_placeholder": "Підказка іконки",
+
+	"small_image_tooltip_input_label": "Підказка іконки",
+	"small_image_tooltip_input_placeholder": "Підказка іконки",
+
+	"bottom_button_input_label": "Текст кнопки",
+	"bottom_button_input_placeholder": "Текст кнопки",
+	"bottom_button_url_input_label": "Посилання кнопки",
+	"bottom_button_url_input_placeholder": "https://",
+
+	"Presence_actType_Playing": "Грає",
+	"Presence_actType_Listening": "Слухає",
+	"Presence_actType_Listening_app": "Слухає {appName}",
+	"Presence_actType_Watching": "Дивиться",
+	"Presence_actType_Watching_app": "Дивиться {appName}",
+
+	"login_wellcome_header": "Ласкаво просимо до Discord Presence!",
+	"login_wellcome_paragraph": "Щоб продовжити, введіть {br}{highlight_text}:",
+	"login_wellcome_paragraph_highlight_text": "ID Додатку Discord",
+	"login_app_id_input_placeholder": "Введіть ID додатку",
+	"login_app_id_hint": "Ви можете знайти його в {link}.",
+	"login_app_id_hint_link": "Панелі розробника Discord",
+	"login_action_button": "Продовжити",
+
+	"settings_header_label": "Налаштування",
+	"settings_language_select_label": "Мова",
+	"settings_auto_apply_label": "Застосовувати Активність при запуску",
+	"settings_remember_presence_label": "Запам'ятовувати Активність"
+}
