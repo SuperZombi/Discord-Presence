@@ -7,7 +7,7 @@ from pystray import Icon, Menu, MenuItem
 from PIL import Image, ImageDraw
 import threading
 
-DEV_MOD = False
+DEV_MOD = os.path.exists("web_dev")
 SETTINGS = {}
 
 def resource_path(relative_path=""):
