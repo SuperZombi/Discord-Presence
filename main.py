@@ -4,7 +4,7 @@ import json
 import discordrpc
 from discordrpc import Activity, Progressbar, use_local_time
 
-DEV_MOD = False
+DEV_MOD = True
 SETTINGS = {}
 
 def resource_path(relative_path=""):
