@@ -1,10 +1,12 @@
 name: Build App
 
 on:
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
-  build:
+  build-react:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,17 +23,26 @@ jobs:
       - name: Build React app
         run: npm run build
 
-      - name: Upload compiled files
+      - name: Create ZIP archive
+        run: |
+          zip -r linux.zip web main.py
+
+      - name: Upload to Release
+        uses: xresloader/upload-to-github-release@v1
+        with:
+          file: linux.zip
+          overwrite: true
+          update_latest_release: true
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app
-          path: |
-            web
-            main.py
+          name: web
+          path: web
 
   build-windows:
     runs-on: windows-latest
-    needs: build
+    needs: build-react
     steps:
     - name: Checkout the repo
       uses: actions/checkout@v4
@@ -39,8 +50,8 @@ jobs:
     - name: Download artifact from Linux build
       uses: actions/download-artifact@v4
       with:
-        name: app
-        path: app
+        name: web
+        path: .
 
     - name: Set up Python 3.12
       uses: actions/setup-python@v5
@@ -53,10 +64,11 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build
-      run: pyinstaller --noconfirm --onefile --noconsole --name "Discord Presence" --add-data="app\\web\\;.\\web" main.py
+      run: pyinstaller --noconfirm --onefile --noconsole --name "Discord Presence" --add-data="web\\;.\\web" main.py
     
-    - name: Upload compiled exe
-      uses: actions/upload-artifact@v4
+    - name: Upload to Release
+      uses: xresloader/upload-to-github-release@v1
       with:
-        name: "Discord Presence"
-        path: "dist/Discord Presence.exe"
+        file: "Discord Presence.exe"
+        overwrite: true
+        update_latest_release: true
