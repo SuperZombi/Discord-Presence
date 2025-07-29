@@ -22,8 +22,13 @@ jobs:
       - name: Build React app
         run: npm run build
 
+      - name: Create archive
+        run: |
+          mkdir output
+          zip -r output/archive.zip web main.py
+
       - name: Upload compiled files
         uses: actions/upload-artifact@v4
         with:
-          name: web
-          path: web
+          name: app
+          path: output/archive.zip
