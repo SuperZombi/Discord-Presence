@@ -61,7 +61,7 @@ const Input = ({
 					focus:outline-none focus:border-[#5865f2]
 					bg-[#2b2c32]
 					border-2 border-[#42434a]
-					p-3 py-2 rounded-xl
+					p-3 py-2.5 rounded-xl
 					duration-200 ease-out
 					hover:border-[#646570]
 					text-[#dcdddf] placeholder:text-[#82838a]
@@ -129,7 +129,7 @@ const Button = ({
 				duration-200 ease-out
 				text-white text-center
 				w-fit
-				px-6 py-2
+				px-6 py-2.5
 				rounded-xl
 				select-none
 				${className}
@@ -212,7 +212,7 @@ const Select = ({
 					border-2 border-[#42434a]
 					bg-[#2b2c32]
 					hover:border-[#646570]
-					rounded-lg p-3 py-2
+					rounded-lg p-3 py-2.5
 					cursor-pointer
 					flex justify-between items-center
 					duration-200 ease-out
@@ -246,7 +246,7 @@ const Select = ({
 								onChange?.(option.value)
 								setIsOpen(false)
 							}}
-							className={`p-3 py-2 cursor-pointer hover:bg-[#4b4d58] ${
+							className={`p-3 py-2.5 cursor-pointer hover:bg-[#4b4d58] ${
 								selectedOption?.value === option.value ? "bg-[#6b6e7e] font-semibold" : ""
 							}`}
 						>
