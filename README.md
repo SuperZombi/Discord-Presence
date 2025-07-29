@@ -15,6 +15,11 @@ Perfect for developers, gamers, and creators who want to personalize their Disco
 	<img src="github/images/example2.png" width="640px">
 </details>
 
+### Install:
+1. Download app from [Releases](https://github.com/SuperZombi/Discord-Presence/releases/).
+2. Create new application on [Discord Developer Portal](https://discord.com/developers/applications).
+3. Copy the Application ID.
+
 ### Supported options:
 - Activity:
   - Playing
