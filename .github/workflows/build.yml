@@ -40,7 +40,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: app
-        path: web
+        path: app
 
     - name: Set up Python 3.12
       uses: actions/setup-python@v5
@@ -53,7 +53,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build
-      run: pyinstaller --noconfirm --onefile --noconsole --name "Discord Presence" --add-data="web\\;.\\web" main.py
+      run: pyinstaller --noconfirm --onefile --noconsole --name "Discord Presence" --add-data="app\\web\\;.\\web" main.py
     
     - name: Upload compiled exe
       uses: actions/upload-artifact@v4
