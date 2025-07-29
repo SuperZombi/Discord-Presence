@@ -3,6 +3,9 @@ import sys, os
 import json
 import discordrpc
 from discordrpc import Activity, Progressbar, use_local_time
+from pystray import Icon, Menu, MenuItem
+from PIL import Image, ImageDraw
+import threading
 
 DEV_MOD = True
 SETTINGS = {}
@@ -92,15 +95,35 @@ def set_activity(data):
 	if res: update_settings("presence", data)
 	return res
 
+def on_open(icon, item):
+	eel.show("dev.html" if DEV_MOD else "index.html")
+
+def on_exit(icon, item):
+	os._exit(0)
 
 eel.init(resource_path("web_dev" if DEV_MOD else "web"))
+
+icon_image = Image.open(
+	os.path.join(
+		resource_path("web_dev" if DEV_MOD else "web"),
+		"assets", "logo.png"
+	)
+)
+menu = Menu(
+	MenuItem('Open', on_open),
+	MenuItem('Exit', on_exit)
+)
+icon = Icon("Discord Presence", icon_image, "Discord Presence", menu)
+threading.Thread(target=icon.run, daemon=True).start()
 
 browsers = ['chrome', 'default']
 for browser in browsers:
 	try:
 		eel.start("dev.html" if DEV_MOD else "index.html",
 			size=(1000, 800), mode=browser, port=0,
+			close_callback=lambda a, b: None
 		)
+		icon.stop()
 		break
 	except Exception:
 		print(f"Failed to launch the app using {browser.title()} browser")

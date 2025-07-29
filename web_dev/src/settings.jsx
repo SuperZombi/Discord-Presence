@@ -25,7 +25,7 @@ const Settings = ({
 						<path d="M320 576c141.4 0 256-114.6 256-256S461.4 64 320 64 64 178.6 64 320s114.6 256 256 256zm-89-345a23.9 23.9 0 0 1 33.9 0l55 55 55-55a23.9 23.9 0 0 1 33.9 0c9.3 9.4 9.4 24.6 0 33.9l-55 55 55 55a23.9 23.9 0 0 1 0 33.9c-9.4 9.3-24.6 9.4-33.9 0l-55-55-55 55a23.9 23.9 0 0 1-33.9 0c-9.3-9.4-9.4-24.6 0-33.9l55-55-55-55a23.9 23.9 0 0 1 0-33.9z"/>
 					</svg>
 				</Card>
-				<Card className="mt-3 w-226 max-w-full">
+				<Card className="mt-3 w-226 max-w-full items-center">
 					<div className="w-100 max-w-full flex flex-col gap-3">
 						<Select options={[
 								{"value": "en", "label": "English"},
