@@ -2,13 +2,10 @@
   "name": "discord-presence",
   "version": "1.0.0",
   "scripts": {
-    "build": "babel src --out-dir dist --minified"
+    "build": "node build.js"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.0",
-    "@babel/core": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
-    "@babel/preset-react": "^7.27.1",
-    "babel-minify": "^0.5.2"
+    "esbuild": "^0.25.8",
+    "glob": "^11.0.3"
   }
 }
