@@ -1,5 +1,5 @@
 const MainForm = ({
-	values, onApply
+	values, onApply, onDisconnect
 }) => {
 	const currentTimestamp = () => Math.floor(Date.now() / 1000)
 	const [actType, setActType] = React.useState(values.act_type || "playing")
@@ -134,7 +134,7 @@ const MainForm = ({
 
 	return (
 		<Container>
-			<Sticky className="w-96" classNameChild="top-3">
+			<Sticky className="w-110" classNameChild="top-3">
 				<Presence actType={actType} appName={Tt("default_appName")}
 					state={state} details={details}
 					ts_start={ts_start} ts_end={ts_end}
@@ -147,9 +147,14 @@ const MainForm = ({
 				<Button className="w-full mt-3 font-bold" onClick={handleMainClick}>
 					<T>main_apply_button</T>
 				</Button>
+				<Button className="w-full mt-3 font-bold" danger={true}
+					onClick={onDisconnect}
+				>
+					<T>main_disconnect_button</T>
+				</Button>
 			</Sticky>
 			
-			<Card className="items-center w-96">
+			<Card className="items-center w-110">
 
 				<Select label={<T>actType_select_label</T>} selected={actType} options={[
 					{ value: "playing", label: <T>actType_select_playing</T> },

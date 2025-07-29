@@ -105,7 +105,7 @@ const InputButton = ({children, className="", onClick}) => {
 
 const Button = ({
 	children, className="", url="",
-	disabled=false,
+	disabled=false, danger=false,
 	onClick=null, ...props
 }) => {
 	const clickHandle = _=>{
@@ -118,17 +118,25 @@ const Button = ({
 			onClick={clickHandle}
 			className={`
 				${disabled ? (
-					"bg-[#323339] cursor-not-allowed"
+					`
+						bg-[#484951] cursor-not-allowed
+						text-gray-400
+					`
+				) : danger ? (
+					`
+					bg-[#484951] hover:bg-[#5e5f6b]
+					text-red-400 hover:text-red-500
+					cursor-pointer
+					`
 				) : (
 					`
 						bg-[#5865f2] hover:bg-[#4752c4]
 						active:bg-[#3a48a3]
-						cursor-pointer
+						cursor-pointer text-white
 					`
 				)}
 				duration-200 ease-out
-				text-white text-center
-				w-fit
+				text-center w-fit
 				px-6 py-2.5
 				rounded-xl
 				select-none

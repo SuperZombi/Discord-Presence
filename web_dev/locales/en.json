@@ -1,6 +1,10 @@
 {
 	"default_appName": "App Name",
 	"main_apply_button": "Apply",
+	"main_disconnect_button": "Disconnect",
+
+	"header_user_default_name": "User",
+	"header_user_default_username": "username",
 
 	"actType_select_label": "Activity",
 	"actType_select_playing": "Playing",

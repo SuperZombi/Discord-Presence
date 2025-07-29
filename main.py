@@ -38,18 +38,29 @@ def connectRPC(app_id):
 	global rpc
 	if not rpc:
 		try:
-			rpc = discordrpc.RPC(app_id)
+			rpc = discordrpc.RPC(app_id, exit_if_discord_close=False, exit_on_disconnect=False)
 			update_settings("app_id", app_id)
 			return {
 				"success": True,
-				"app_id": app_id
+				"app_id": rpc.app_id,
+				"user": vars(rpc.User)
 			}
 		except Exception as e:
 			return {
 				"error": str(e)
 			}
 	else:
-		print("rpc alreay connected")
+		return {
+			"success": True,
+			"app_id": rpc.app_id,
+			"user": vars(rpc.User)
+		}
+
+@eel.expose
+def disconnect():
+	global rpc
+	rpc.disconnect()
+	rpc = None
 
 @eel.expose
 def set_activity(data):
@@ -86,7 +97,9 @@ eel.init(resource_path("web_dev" if DEV_MOD else "web"))
 browsers = ['chrome', 'default']
 for browser in browsers:
 	try:
-		eel.start("dev.html" if DEV_MOD else "index.html", size=(900, 800), mode=browser, port=0)
+		eel.start("dev.html" if DEV_MOD else "index.html",
+			size=(1000, 800), mode=browser, port=0,
+		)
 		break
 	except Exception:
 		print(f"Failed to launch the app using {browser.title()} browser")

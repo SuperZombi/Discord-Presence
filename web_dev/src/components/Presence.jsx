@@ -16,8 +16,8 @@ const Presence = ({
 }) => {
 	return (
 		<Card className="select-none">
-			<Header actType={actType} appName={appName} details={details}/>
-			<Body
+			<PresenceHeader actType={actType} appName={appName} details={details}/>
+			<PresenceBody
 				large_image={large_image} small_image={small_image}
 				actType={actType} appName={appName}
 				state={state} details={details}
@@ -31,7 +31,7 @@ const Presence = ({
 	)
 }
 
-const Header = ({
+const PresenceHeader = ({
 	actType, appName, details
 }) => {
 	function renderAction(){
@@ -60,7 +60,7 @@ const Header = ({
 	)
 }
 
-const Body = ({
+const PresenceBody = ({
 	actType,
 	large_image, small_image,
 	appName, state, details,

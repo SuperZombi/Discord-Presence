@@ -1,6 +1,10 @@
 {
 	"default_appName": "Приложение",
 	"main_apply_button": "Применить",
+	"main_disconnect_button": "Отключить",
+
+	"header_user_default_name": "Пользователь",
+	"header_user_default_username": "username",
 
 	"actType_select_label": "Активность",
 	"actType_select_playing": "Играет",
