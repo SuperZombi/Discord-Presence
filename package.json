@@ -2,10 +2,14 @@
   "name": "discord-presence",
   "version": "1.0.0",
   "scripts": {
-    "build": "node build.js"
+    "build:js": "node build.js",
+    "build:css": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./dist/tailwind.css --minify",
+    "build": "npm run build:js && npm run build:css"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.1.11",
     "esbuild": "^0.25.8",
-    "glob": "^11.0.3"
+    "glob": "^11.0.3",
+    "tailwindcss": "^4.1.11"
   }
 }
