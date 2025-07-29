@@ -15,6 +15,7 @@ def save_settings():
 	with open(os.path.join(os.getcwd(), "settings.json"), 'w', encoding='utf-8') as file:
 		file.write(json.dumps(SETTINGS, indent=4, ensure_ascii=False))
 
+@eel.expose
 def update_settings(key, value):
 	global SETTINGS
 	SETTINGS[key] = value

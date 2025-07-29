@@ -61,5 +61,9 @@
 	"login_app_id_input_placeholder": "Введите ID приложения",
 	"login_app_id_hint": "Вы можете найти его в {link}.",
 	"login_app_id_hint_link": "Панели разработчика Discord",
-	"login_action_button": "Продолжить"
+	"login_action_button": "Продолжить",
+
+	"settings_header_label": "Настройки",
+	"settings_language_select_label": "Язык",
+	"settings_auto_apply_label": "Применять Активность при запуске"
 }

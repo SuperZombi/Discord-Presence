@@ -1,6 +1,7 @@
 const MainForm = ({
 	values, onApply, onDisconnect,
-	showSettings, hideSetting
+	showSettings, hideSetting,
+	settingsValues, settingsOnChange
 }) => {
 	const currentTimestamp = () => Math.floor(Date.now() / 1000)
 	const [actType, setActType] = React.useState(values.act_type || "playing")
@@ -135,7 +136,9 @@ const MainForm = ({
 
 	return (
 		<Container>
-			<Settings show={showSettings} hide={hideSetting}/>
+			<Settings show={showSettings} hide={hideSetting}
+				values={settingsValues} onChange={settingsOnChange}
+			/>
 			<Sticky className="w-110" classNameChild="top-3">
 				<Presence actType={actType} appName={Tt("default_appName")}
 					state={state} details={details}

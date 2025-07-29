@@ -52,6 +52,7 @@ const init_lang = async (lang=null) => {
 		const response = await fetch(`/locales/${lang_to_load}.json`)
 		const data = await response.json()
 		_LOCALE = {..._LOCALE, ...data};
+		return lang_to_load
 	} catch (e) {
 		console.error(`Failed to load lang '${lang_to_load}':\n\n`, e)
 		if (lang_to_load !== "en"){

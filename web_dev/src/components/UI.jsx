@@ -266,6 +266,42 @@ const Select = ({
 		</div>
 	)
 }
+const Switch = ({
+	checked=false, onChange
+}) => {
+	const [enabled, setEnabled] = React.useState(checked);
+	const toggle = () => {
+		setEnabled(prev => !prev);
+		onChange?.(!enabled);
+	}
+	return (
+		<div className={`
+			relative inline-flex h-6 w-11 items-center
+			rounded-full duration-200 cursor-pointer
+			${enabled ? "bg-[#5865f2]" : "bg-[#4e5058]"}
+		`} onClick={toggle}>
+			<span className={`
+				inline-block h-4 w-4 rounded-full bg-white duration-200
+				${enabled ? "translate-x-6" : "translate-x-1"}
+			`}/>
+		</div>
+	)
+}
+SwitchGroup = ({
+	label="", checked=false,
+	onChange=null, className=""
+}) => {
+	return (
+		<div className={`
+			flex justify-between items-center
+			px-1 py-3
+			${className}
+		`}>
+			<span className="ms-1 font-semibold">{label}</span>
+			<Switch checked={checked} onChange={onChange}/>
+		</div>
+	)
+}
 
 const InputGroup = ({children, label=""}) => {
 	return (

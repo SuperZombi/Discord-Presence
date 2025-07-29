@@ -9,14 +9,23 @@ const App = () => {
 	const [username, set_username] = React.useState()
 	const [user_avatar, set_user_avatar] = React.useState()
 	const [showSettings, setShowSettings] = React.useState(false)
+	const [settingsValues, setsettingsValues] = React.useState({})
 
 	const load_settings = async _=>{
 		return await eel.get_settings()()
 	}
+	const onSettingsChange = async (key, val)=>{
+		await eel.update_settings(key, val)()
+		if (key === "lang"){
+			window.location.reload()
+		}
+	}
 
 	React.useEffect(() => {
 		load_settings().then(async settings=>{
-			await init_lang(settings.lang)
+			const current_lang = await init_lang(settings.lang)
+			settings.lang = current_lang
+			setsettingsValues(settings)
 			if (settings.app_id){
 				await connectRPC(settings.app_id)
 				if (settings.presence && settings.auto_apply){
@@ -84,6 +93,7 @@ const App = () => {
 					<MainForm values={presenceData}
 						onApply={main_apply} onDisconnect={main_disconnect}
 						showSettings={showSettings} hideSetting={_=>setShowSettings(false)}
+						settingsValues={settingsValues} settingsOnChange={onSettingsChange}
 					/>
 				</React.Fragment>
 			) : (

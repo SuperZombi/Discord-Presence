@@ -61,5 +61,9 @@
 	"login_app_id_input_placeholder": "Enter your Application ID",
 	"login_app_id_hint": "You can find this in the {link}.",
 	"login_app_id_hint_link": "Discord Developer Portal",
-	"login_action_button": "Continue"
+	"login_action_button": "Continue",
+
+	"settings_header_label": "Settings",
+	"settings_language_select_label": "Language",
+	"settings_auto_apply_label": "Apply Presence on Start"
 }
