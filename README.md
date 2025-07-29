@@ -36,7 +36,7 @@ Perfect for developers, gamers, and creators who want to personalize their Disco
 - Buttons
 
 > [!WARNING]
-> Discord does not display buttons to the user who set them.
+> Discord does not display buttons to the user who set them.<br>
 > However, your friends will be able to see them normally.
 
 ## 💲Donate
