@@ -7,7 +7,7 @@ from pystray import Icon, Menu, MenuItem
 from PIL import Image, ImageDraw
 import threading
 
-DEV_MOD = True
+DEV_MOD = False
 SETTINGS = {}
 
 def resource_path(relative_path=""):
@@ -89,8 +89,9 @@ def set_activity(data):
 	if "media_current" in data.keys() and "media_duration" in data.keys():
 		final.update(Progressbar(data["media_current"], data["media_duration"]))
 
-	print(data)
-	print(final)
+	if DEV_MOD:
+		print(data)
+		print(final)
 	res = rpc.set_activity(**final)
 	if res: update_settings("presence", data)
 	return res
