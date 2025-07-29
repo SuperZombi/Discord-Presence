@@ -1,4 +1,5 @@
 git+https://github.com/SuperZombi/Discord-RPC.git
+pyinstaller
 pystray
 pillow
 eel
