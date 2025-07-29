@@ -49,9 +49,6 @@ jobs:
 
     - name: Download artifact from Linux build
       uses: actions/download-artifact@v4
-      with:
-        name: web
-        path: .
 
     - name: Set up Python 3.12
       uses: actions/setup-python@v5
