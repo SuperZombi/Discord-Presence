@@ -3,10 +3,8 @@ import sys, os
 import json
 import discordrpc
 from discordrpc import Activity, Progressbar, use_local_time
-# import time
-# from discordrpc.utils import timestamp
 
-DEV_MOD = True
+DEV_MOD = False
 SETTINGS = {}
 
 def resource_path(relative_path=""):

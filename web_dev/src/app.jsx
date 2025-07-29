@@ -15,6 +15,9 @@ const App = () => {
 			}
 			if (settings.presence){
 				setPresenceData(settings.presence)
+				if (settings.auto_apply){
+					main_apply(settings.presence)
+				}
 			}
 			setLoaded(true)
 		})
