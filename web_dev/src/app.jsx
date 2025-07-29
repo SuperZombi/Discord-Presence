@@ -7,28 +7,36 @@ const App = () => {
 
 	React.useEffect(() => {
 		init_lang().then(async _=>{
-			const data = await get_settings()
-			if (data.app_id){
-				set_app_id(data.app_id)
-				if (data.presence) setPresenceData(data.presence)
+			const settings = await eel.get_settings()()
+			if (settings.app_id){
+				connectRPC(settings.app_id)
+			} else {
+				setTimeout(_=>{setShowLoader(false)}, 1000)
+			}
+			if (settings.presence){
+				setPresenceData(settings.presence)
 			}
 			setLoaded(true)
-			setTimeout(_=>{setShowLoader(false)}, 1000)
 		})
 	}, [])
 
 	const connectRPC = async (app_id) => {
-		console.log(app_id)
 		setShowLoader(true)
+		let result = await eel.connectRPC(app_id)()
+		if (result.success){
+			set_app_id(result.app_id)
+		}
+		else if (result.error){
+			set_login_errors([{"text": result.error}])
+		}
 		setTimeout(_=>{
-			set_app_id(app_id)
-			// set_login_errors([{"text": "Failed to Connect RPC"}])
 			setTimeout(_=>{setShowLoader(false)}, 1000)
 		}, 1000)
 	}
 
-	const main_apply = (data) => {
-		console.log(data)
+	const main_apply = async (data) => {
+		let result = await eel.set_activity(data)()
+		console.log(result)
 	}
 
 	if (!loaded) {
@@ -42,25 +50,6 @@ const App = () => {
 			<Loader show={showLoader}/>
 		</div>
 	)
-}
-
-async function get_settings() {
-	const logined_data = {
-		app_id: 1397914682659963050,
-		presence: {
-			act_type: "listening",
-			details: "My details",
-			state: "My state",
-			timestamp: "local_time",
-		}
-	}
-	const not_logined_data = {}
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(not_logined_data)
-			resolve(logined_data)
-		}, 0)
-	})
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />)

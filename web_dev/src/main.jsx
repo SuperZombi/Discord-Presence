@@ -334,7 +334,7 @@ const MainForm = ({
 function cleanObject(obj) {
 	return Object.fromEntries(
 		Object.entries(obj).filter(([_, v]) => {
-			if (v == null) return false
+			if (v == null || v == "") return false
 			if (Array.isArray(v) && v.length === 0) return false
 			return true
 		})
