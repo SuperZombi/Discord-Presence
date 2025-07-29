@@ -223,7 +223,7 @@ const Progressbar = ({
 	React.useEffect(() => {
 		const unixTime = Math.floor(Date.now() / 1000)
 		setCurrent(unixTime - ts_start)
-		setTotal(unixTime - ts_end)
+		setTotal(ts_end - ts_start)
 	}, [ts_start, ts_end])
 
 	React.useEffect(() => {
@@ -239,7 +239,7 @@ const Progressbar = ({
 		return () => clearInterval(interval);
 	}, [current, total])
 
-	const percent = (current / total) * 100;
+	const percent = Math.min(100, (current / total) * 100)
 
 	return (
 		<div className="flex items-center gap-2.5">

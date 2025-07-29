@@ -45,7 +45,7 @@ const MainForm = ({
 	React.useEffect(() => {
 		if (media_current === 0 && media_duration === 0) return
 		const t_start = currentTimestamp() - Number(media_current)
-		const t_end = t_start - Number(media_duration)
+		const t_end = t_start + Number(media_duration)
 		set_ts_start(t_start)
 		set_ts_end(t_end)
 	}, [media_current, media_duration])
