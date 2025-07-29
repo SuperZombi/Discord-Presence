@@ -8,20 +8,25 @@ const App = () => {
 	const [user, set_user] = React.useState()
 	const [username, set_username] = React.useState()
 	const [user_avatar, set_user_avatar] = React.useState()
+	const [showSettings, setShowSettings] = React.useState(false)
+
+	const load_settings = async _=>{
+		return await eel.get_settings()()
+	}
 
 	React.useEffect(() => {
-		init_lang().then(async _=>{
-			const settings = await eel.get_settings()()
+		load_settings().then(async settings=>{
+			await init_lang(settings.lang)
 			if (settings.app_id){
 				await connectRPC(settings.app_id)
+				if (settings.presence && settings.auto_apply){
+					main_apply(settings.presence)
+				}
 			} else {
 				setTimeout(_=>{setShowLoader(false)}, 1000)
 			}
 			if (settings.presence){
 				setPresenceData(settings.presence)
-				if (settings.auto_apply){
-					main_apply(settings.presence)
-				}
 			}
 			setLoaded(true)
 		})
@@ -54,8 +59,7 @@ const App = () => {
 	}
 
 	const main_apply = async (data) => {
-		let result = await eel.set_activity(data)()
-		console.log(result)
+		await eel.set_activity(data)()
 	}
 	const main_disconnect = async _=>{
 		setShowLoader(true)
@@ -75,9 +79,11 @@ const App = () => {
 				<React.Fragment>
 					<Header user={user} username={username}
 						user_avatar={user_avatar}
+						openSettings={_=>setShowSettings(true)}
 					/>
 					<MainForm values={presenceData}
 						onApply={main_apply} onDisconnect={main_disconnect}
+						showSettings={showSettings} hideSetting={_=>setShowSettings(false)}
 					/>
 				</React.Fragment>
 			) : (
