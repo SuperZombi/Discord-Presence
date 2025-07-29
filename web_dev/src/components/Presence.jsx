@@ -110,11 +110,13 @@ const LeftBody = ({
 			{small_image ? (
 				<div className="
 					absolute group -bottom-1 -right-1
-					h-[32px] w-[32px]
+					h-[32px] w-[32px] rounded-full
+					outline-4 outline-[#3f4048]
+					bg-[#3f4048]
 				">
 					{small_text ? <Tooltip>{small_text}</Tooltip> : null}
 					<img className="
-						rounded-full outline-4 outline-[#3f4048] select-none
+						rounded-full  select-none
 						w-full h-full object-cover
 					"
 						draggable={false}
