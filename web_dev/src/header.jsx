@@ -3,7 +3,7 @@ const Header = ({
 	openSettings
 }) => {
 	return (
-		<div className="px-3">
+		<div className="px-3 pb-3 sticky top-0 z-2 bg-[#323339]">
 			<div className="
 				h-12.5 w-226 max-w-full
 				bg-[#3f4048] text-[#dfe0e2]

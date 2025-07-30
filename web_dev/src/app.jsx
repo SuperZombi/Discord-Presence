@@ -88,7 +88,7 @@ const App = () => {
 		return <Loader show={showLoader}/>
 	}
 	return (
-		<div>
+		<React.Fragment>
 			{connected ? (
 				<React.Fragment>
 					<Header user={user} username={username}
@@ -105,7 +105,7 @@ const App = () => {
 				<Login tryConnect={connectRPC} errors={login_errors}/>
 			)}
 			<Loader show={showLoader}/>
-		</div>
+		</React.Fragment>
 	)
 }
 

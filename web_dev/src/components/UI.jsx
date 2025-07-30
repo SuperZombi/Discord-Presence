@@ -297,7 +297,7 @@ SwitchGroup = ({
 			px-1 py-3
 			${className}
 		`}>
-			<span className="ms-1 font-semibold">{label}</span>
+			<span className="ms-1 font-semibold select-none">{label}</span>
 			<Switch checked={checked} onChange={onChange}/>
 		</div>
 	)
@@ -340,16 +340,6 @@ const Container = ({children, className=""}) => {
 			${className}
 		`}>
 			{children}
-		</div>
-	)
-}
-
-const Sticky = ({children, className="", classNameChild=""}) => {
-	return (
-		<div className={`relative ${className}`}>
-			<div className={`sticky ${classNameChild}`}>
-				{children}
-			</div>
 		</div>
 	)
 }

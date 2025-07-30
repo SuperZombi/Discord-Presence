@@ -135,29 +135,31 @@ const MainForm = ({
 	}
 
 	return (
-		<Container>
+		<Container className="pt-0">
 			<Settings show={showSettings} hide={hideSetting}
 				values={settingsValues} onChange={settingsOnChange}
 			/>
-			<Sticky className="w-110" classNameChild="top-3">
-				<Presence actType={actType} appName={Tt("default_appName")}
-					state={state} details={details}
-					ts_start={ts_start} ts_end={ts_end}
-					large_image={large_image} small_image={small_image}
-					large_text={large_text} small_text={small_text}
-					state_url={state_url} details_url={details_url}
-					party_size={party_size}
-					buttons={buttons_preview}
-				/>
-				<Button className="w-full mt-3 font-bold" onClick={handleMainClick}>
-					<T>main_apply_button</T>
-				</Button>
-				<Button className="w-full mt-3 font-bold" danger={true}
-					onClick={onDisconnect}
-				>
-					<T>main_disconnect_button</T>
-				</Button>
-			</Sticky>
+			<div className="relative">
+				<div className="sticky top-15.5 w-110 h-fit">
+					<Presence actType={actType} appName={Tt("default_appName")}
+						state={state} details={details}
+						ts_start={ts_start} ts_end={ts_end}
+						large_image={large_image} small_image={small_image}
+						large_text={large_text} small_text={small_text}
+						state_url={state_url} details_url={details_url}
+						party_size={party_size}
+						buttons={buttons_preview}
+					/>
+					<Button className="w-full mt-3 font-bold" onClick={handleMainClick}>
+						<T>main_apply_button</T>
+					</Button>
+					<Button className="w-full mt-3 font-bold" danger={true}
+						onClick={onDisconnect}
+					>
+						<T>main_disconnect_button</T>
+					</Button>
+				</div>
+			</div>
 			
 			<Card className="items-center w-110">
 
