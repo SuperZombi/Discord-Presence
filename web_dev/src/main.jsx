@@ -176,23 +176,21 @@ const MainForm = ({
 
 				<Hr/>
 
-				{
-					(["listening", "watching"].includes(actType) && timestamp === "normal") ? (
-						<React.Fragment>
-							<InputGroup>
-								<Input label={<T>media_current_input_label</T>} type="number"
-									name="media_current" value={media_current}
-									onChange={set_media_current}
-								/>
-								<Input label={<T>media_duration_input_label</T>} type="number"
-									name="media_total" value={media_duration}
-									onChange={set_media_duration}
-								/>
-							</InputGroup>
-							<Hr/>
-						</React.Fragment>
-					) : null
-				}
+				<Collapse isOpen={(["listening", "watching"].includes(actType) && timestamp === "normal")}
+					className="gap-3" classOnHidden="-mb-3"
+				>
+					<InputGroup>
+						<Input label={<T>media_current_input_label</T>} type="number"
+							name="media_current" value={media_current}
+							onChange={set_media_current}
+						/>
+						<Input label={<T>media_duration_input_label</T>} type="number"
+							name="media_total" value={media_duration}
+							onChange={set_media_duration}
+						/>
+					</InputGroup>
+					<Hr/>
+				</Collapse>
 
 				<Input placeholder={Tt("details_input_placeholder")}
 					label={<T>details_input_label</T>}
@@ -205,16 +203,14 @@ const MainForm = ({
 					}}
 				/>
 
-				{details ? (
-					<React.Fragment>
-						<Input placeholder={Tt("details_url_input_placeholder")}
-							label={<T>details_url_input_label</T>}
-							value={details_url} name="details_url"
-							onChange={set_details_url}
-						/>
-						<Hr/>
-					</React.Fragment>
-				) : null}
+				<Collapse isOpen={details} className="gap-3" classOnHidden="-mb-3">
+					<Input placeholder={Tt("details_url_input_placeholder")}
+						label={<T>details_url_input_label</T>}
+						value={details_url} name="details_url"
+						onChange={set_details_url}
+					/>
+					<Hr/>
+				</Collapse>
 
 				<Input placeholder={Tt("state_input_placeholder")}
 					label={<T>state_input_label</T>}
@@ -227,32 +223,36 @@ const MainForm = ({
 					}}
 				/>
 
-				{(state && party_size.length === 0) ? (
-					<React.Fragment>
-						<Input placeholder={Tt("state_url_input_placeholder")}
-							label={<T>state_url_input_label</T>}
-							value={state_url} name="state_url"
-							onChange={set_state_url}
-						/>
-						<Hr/>
-					</React.Fragment>
-				) : null}
+				<Collapse isOpen={(state && party_size.length === 0)}
+					className="gap-3" classOnHidden="-mb-3"
+				>
+					<Input placeholder={Tt("state_url_input_placeholder")}
+						label={<T>state_url_input_label</T>}
+						value={state_url} name="state_url"
+						onChange={set_state_url}
+					/>
+					<Hr/>
+				</Collapse>
 
-				<InputGroup label={<T>party_input_label</T>}>
-					<Input type="number" name="party_current" max={party_total}
-						onChange={set_party_current}
-						value={party_current}
-					/>
-					<Input type="number" name="party_total"
-						onChange={val => {
-							set_party_total(val)
-							if (val > 0){
-								set_state_url("")
-							}
-						}}
-						value={party_total}
-					/>
-				</InputGroup>
+				<Collapse isOpen={(actType === "playing")}
+					className="gap-3" classOnHidden="-mb-3"
+				>
+					<InputGroup label={<T>party_input_label</T>}>
+						<Input type="number" name="party_current" max={party_total}
+							onChange={set_party_current}
+							value={party_current}
+						/>
+						<Input type="number" name="party_total"
+							onChange={val => {
+								set_party_total(val)
+								if (val > 0){
+									set_state_url("")
+								}
+							}}
+							value={party_total}
+						/>
+					</InputGroup>
+				</Collapse>
 
 				<Hr/>
 
@@ -266,16 +266,14 @@ const MainForm = ({
 						}
 					}}
 				/>
-				{large_image ? (
-					<React.Fragment>
-						<Input placeholder={Tt("large_image_tooltip_input_placeholder")}
-							label={<T>large_image_tooltip_input_label</T>}
-							value={large_text} name="large_text"
-							onChange={set_large_text}
-						/>
-						<Hr/>
-					</React.Fragment>
-				) : null}
+				<Collapse isOpen={large_image} className="gap-3" classOnHidden="-mb-3">
+					<Input placeholder={Tt("large_image_tooltip_input_placeholder")}
+						label={<T>large_image_tooltip_input_label</T>}
+						value={large_text} name="large_text"
+						onChange={set_large_text}
+					/>
+					<Hr/>
+				</Collapse>
 
 				<Input placeholder={Tt("small_image_input_placeholder")}
 					label={<T>small_image_input_label</T>}
@@ -287,13 +285,13 @@ const MainForm = ({
 						}
 					}}
 				/>
-				{small_image ? (
+				<Collapse isOpen={small_image} className="gap-3" classOnHidden="-mb-3">
 					<Input placeholder={Tt("small_image_tooltip_input_placeholder")}
 						label={<T>small_image_tooltip_input_label</T>}
 						value={small_text} name="small_text"
 						onChange={set_small_text}
 					/>
-				) : null}
+				</Collapse>
 
 				<Hr/>
 
@@ -307,37 +305,35 @@ const MainForm = ({
 						}
 					}}
 				/>
-				{button_1_text ? (
-					<React.Fragment>
+
+				<Collapse isOpen={button_1_text} className="gap-3" classOnHidden="-mb-3">
+					<Input placeholder={Tt("bottom_button_url_input_placeholder")}
+						label={<T>bottom_button_url_input_label</T>}
+						name="button_1_url" value={button_1_url}
+						onChange={set_button_1_url}
+					/>
+
+					<Hr/>
+
+					<Input placeholder={Tt("bottom_button_input_placeholder")}
+						label={<T>bottom_button_input_label</T>}
+						name="button_2_text" value={button_2_text}
+						onChange={val=>{
+							set_button_2_text(val)
+							if (val === ""){
+								set_button_2_url("")
+							}
+						}}
+					/>
+
+					<Collapse isOpen={button_2_text} className="gap-3" classOnHidden="-mb-3">
 						<Input placeholder={Tt("bottom_button_url_input_placeholder")}
 							label={<T>bottom_button_url_input_label</T>}
-							name="button_1_url" value={button_1_url}
-							onChange={set_button_1_url}
+							name="button_2_url" value={button_2_url}
+							onChange={set_button_2_url}
 						/>
-
-						<Hr/>
-
-						<Input placeholder={Tt("bottom_button_input_placeholder")}
-							label={<T>bottom_button_input_label</T>}
-							name="button_2_text" value={button_2_text}
-							onChange={val=>{
-								set_button_2_text(val)
-								if (val === ""){
-									set_button_2_url("")
-								}
-							}}
-						/>
-
-						{button_2_text ? (
-							<Input placeholder={Tt("bottom_button_url_input_placeholder")}
-								label={<T>bottom_button_url_input_label</T>}
-								name="button_2_url" value={button_2_url}
-								onChange={set_button_2_url}
-							/>
-						) : null}
-					</React.Fragment>
-				) : null}
-
+					</Collapse>
+				</Collapse>
 			</Card>
 		</Container>
 	)

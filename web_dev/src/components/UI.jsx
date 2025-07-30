@@ -344,6 +344,19 @@ const Container = ({children, className=""}) => {
 	)
 }
 
+const Collapse = ({children, isOpen, className="", classOnHidden=""}) => {
+	return (
+		<div
+			className={`grid duration-500 w-full
+			${isOpen ? 'grid-rows-[1fr]' : `grid-rows-[0fr] ${classOnHidden}`}`
+		}>
+			<div className={`overflow-hidden min-h-0 flex flex-col items-center ${className}`}>
+				{children}
+			</div>
+		</div>
+	)
+}
+
 const Hr = () => {
 	return (
 		<hr className="text-gray-500 m-2 w-full"/>
