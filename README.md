@@ -44,6 +44,9 @@ Perfect for developers, gamers, and creators who want to personalize their Disco
 > Discord does not display buttons to the user who set them.<br>
 > However, your friends will be able to see them normally.
 
+### See also:
+- [Discord Music Status](https://github.com/SuperZombi/Discord-Music-Status)
+
 ## 💲Donate
 <table>
   <tr>
