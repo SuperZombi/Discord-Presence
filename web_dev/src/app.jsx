@@ -8,6 +8,8 @@ const App = () => {
 	const [user, set_user] = React.useState()
 	const [username, set_username] = React.useState()
 	const [user_avatar, set_user_avatar] = React.useState()
+	const [appname, set_appname] = React.useState()
+	const [appicon, set_appicon] = React.useState()
 	const [showSettings, setShowSettings] = React.useState(false)
 	const [settingsValues, setsettingsValues] = React.useState({})
 
@@ -50,7 +52,7 @@ const App = () => {
 		setShowLoader(true)
 		return new Promise((resolve)=>{
 			setTimeout(async _=>{
-				let result = await eel.connectRPC(app_id)()
+				const result = await eel.connectRPC(app_id)()
 				if (result.success){
 					setConnected(true)
 					set_login_errors([])
@@ -60,6 +62,8 @@ const App = () => {
 						set_username(result.user.username)
 						set_user_avatar(result.user.avatar)
 					}
+					set_appname(result.app_name)
+					set_appicon(result.app_icon)
 				}
 				else if (result.error){
 					set_login_errors([{"text": result.error}])
@@ -100,6 +104,7 @@ const App = () => {
 						showSettings={showSettings} hideSetting={_=>setShowSettings(false)}
 						settingsValues={settingsValues} settingsOnChange={onSettingsChange}
 						user={user} user_avatar={user_avatar}
+						appName={appname} appIcon={appicon}
 					/>
 				</React.Fragment>
 			) : (

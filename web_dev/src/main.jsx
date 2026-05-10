@@ -2,7 +2,7 @@ const MainForm = ({
 	values, onApply, onDisconnect,
 	showSettings, hideSetting,
 	settingsValues, settingsOnChange,
-	user, user_avatar,
+	user, user_avatar, appName, appIcon,
 }) => {
 	const [applyButDisabled, setApplyButDisabled] = React.useState(false)
 	const currentTimestamp = () => Math.floor(Date.now() / 1000)
@@ -171,17 +171,21 @@ const MainForm = ({
 			/>
 			<div className="relative">
 				<div className="sticky top-15.5 w-110 h-fit flex gap-3 flex-col">
-					<Presence actType={actType} appName={Tt("default_appName")}
+					<Presence
+						actType={actType}
+						appName={appName || Tt("default_appName")}
 						state={state} details={details}
 						ts_start={ts_start} ts_end={ts_end}
-						large_image={large_image} small_image={small_image}
+						large_image={large_image || appIcon}
+						small_image={small_image}
 						large_text={large_text} small_text={small_text}
 						state_url={state_url} details_url={details_url}
 						party_size={party_size}
 						buttons={buttons_preview}
 					/>
-					<StatusPreview user={user} user_avatar={user_avatar}
-						actType={actType} appName={Tt("default_appName")}
+					<StatusPreview
+						user={user} user_avatar={user_avatar}
+						actType={actType} appName={appName || Tt("default_appName")}
 						state={state} details={details}
 						status_type={statusDisplay}
 					/>

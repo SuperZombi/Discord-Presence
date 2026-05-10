@@ -7,6 +7,7 @@ from discordrpc.utils import ProgressBar, use_local_time
 from pystray import Icon, Menu, MenuItem
 from PIL import Image, ImageDraw
 import threading
+import requests
 
 DEV_MOD = os.path.exists("web_dev")
 SETTINGS = {}
@@ -37,18 +38,22 @@ load_settings()
 def get_settings(): return SETTINGS
 
 rpc = None
+app_info = None
 
 @eel.expose
 def connectRPC(app_id):
-	global rpc
+	global rpc, app_info
 	if not rpc:
 		try:
 			rpc = discordrpc.RPC(app_id, exit_if_discord_close=False, exit_on_disconnect=False)
+			app_info = get_app_info(app_id)
 			update_settings("app_id", app_id)
 			return {
 				"success": True,
+				"user": vars(rpc.User),
 				"app_id": rpc.app_id,
-				"user": vars(rpc.User)
+				"app_name": app_info.get("name"),
+				"app_icon": app_info.get("icon")
 			}
 		except Exception as e:
 			return {
@@ -57,16 +62,19 @@ def connectRPC(app_id):
 	else:
 		return {
 			"success": True,
+			"user": vars(rpc.User),
 			"app_id": rpc.app_id,
-			"user": vars(rpc.User)
+			"app_name": app_info.get("name"),
+			"app_icon": app_info.get("icon")
 		}
 
 @eel.expose
 def disconnect():
-	global rpc
+	global rpc, app_info
 	rpc.clear()
 	rpc.disconnect()
 	rpc = None
+	app_info = None
 
 @eel.expose
 def set_activity(data):
@@ -110,6 +118,19 @@ def set_activity(data):
 	if res and SETTINGS.get("remember_presence", True):
 		update_settings("presence", data)
 	return res
+
+def get_app_info(app_id):
+	try:
+		r = requests.get(f"https://discord.com/api/v10/applications/{app_id}/rpc")
+		if r.ok:
+			data = r.json()
+			return {
+				"name": data.get("name"),
+				"icon": f"https://cdn.discordapp.com/app-icons/{app_id}/{data.get('icon')}.png"
+			}
+	except Exception as e:
+		print(e)
+	return {}
 
 def on_open(icon, item):
 	eel.show("dev.html" if DEV_MOD else "index.html")
