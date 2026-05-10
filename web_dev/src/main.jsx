@@ -208,10 +208,10 @@ const MainForm = ({
 					{ value: "watching", label: <T>actType_select_watching</T> },
 				]} onChange={setActType}/>
 
-				<Select label={"Status Display"} selected={statusDisplay} options={[
-					{ value: "name", label: "App name" },
-					{ value: "state", label: "State" },
-					{ value: "details", label: "Details" },
+				<Select label={<T>statusDisplay_select_label</T>} selected={statusDisplay} options={[
+					{ value: "name", label: <T>statusDisplay_select_appname</T> },
+					{ value: "state", label: <T>statusDisplay_select_state</T> },
+					{ value: "details", label: <T>statusDisplay_select_details</T> },
 				]} onChange={setStatusDisplay}/>
 
 				<Select label={<T>timestamp_select_label</T>} selected={timestamp} options={[

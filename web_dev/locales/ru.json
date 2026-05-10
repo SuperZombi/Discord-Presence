@@ -12,6 +12,11 @@
 	"actType_select_listening": "Слушает",
 	"actType_select_watching": "Смотрит",
 
+	"statusDisplay_select_label": "Отображать",
+	"statusDisplay_select_appname": "Название приложения",
+	"statusDisplay_select_state": "Статус",
+	"statusDisplay_select_details": "Описание",
+
 	"timestamp_select_label": "Метка времени",
 	"timestamp_select_label_normal": "Обычная",
 	"timestamp_select_label_local_time": "Местное время",

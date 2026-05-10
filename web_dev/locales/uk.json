@@ -12,6 +12,11 @@
 	"actType_select_listening": "Слухає",
 	"actType_select_watching": "Дивиться",
 
+	"statusDisplay_select_label": "Відображати",
+	"statusDisplay_select_appname": "Назву додатку",
+	"statusDisplay_select_state": "Статус",
+	"statusDisplay_select_details": "Опис",
+
 	"timestamp_select_label": "Позначка часу",
 	"timestamp_select_label_normal": "Звичайна",
 	"timestamp_select_label_local_time": "Місцевий час",

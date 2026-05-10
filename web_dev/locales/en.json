@@ -12,6 +12,11 @@
 	"actType_select_listening": "Listening",
 	"actType_select_watching": "Watching",
 
+	"statusDisplay_select_label": "Status Display",
+	"statusDisplay_select_appname": "App name",
+	"statusDisplay_select_state": "State",
+	"statusDisplay_select_details": "Details",
+
 	"timestamp_select_label": "Timestamp",
 	"timestamp_select_label_normal": "Normal",
 	"timestamp_select_label_local_time": "Local time",
