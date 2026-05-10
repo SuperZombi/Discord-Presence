@@ -2,7 +2,8 @@ import eel
 import sys, os
 import json
 import discordrpc
-from discordrpc import Activity, Progressbar, use_local_time
+from discordrpc.types import Activity
+from discordrpc.utils import ProgressBar, use_local_time
 from pystray import Icon, Menu, MenuItem
 from PIL import Image, ImageDraw
 import threading
@@ -93,7 +94,7 @@ def set_activity(data):
 	if data.get("timestamp") == "local_time":
 		final.update(use_local_time())
 	if "media_current" in data.keys() and "media_duration" in data.keys():
-		final.update(Progressbar(data["media_current"], data["media_duration"]))
+		final.update(ProgressBar(data["media_current"], data["media_duration"]))
 
 	if DEV_MOD:
 		print(data)
