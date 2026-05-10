@@ -2,7 +2,7 @@ import eel
 import sys, os
 import json
 import discordrpc
-from discordrpc.types import Activity
+from discordrpc.types import Activity, StatusDisplay
 from discordrpc.utils import ProgressBar, use_local_time
 from pystray import Icon, Menu, MenuItem
 from PIL import Image, ImageDraw
@@ -89,8 +89,15 @@ def set_activity(data):
 		"listening": Activity.Listening,
 		"watching": Activity.Watching,
 	}
+	statusTypeMap = {
+		"name": StatusDisplay.Name,
+		"state": StatusDisplay.State,
+		"details": StatusDisplay.Details,
+	}
 	if "act_type" in data.keys():
 		final["act_type"] = actTypeMap[data["act_type"]]
+	if "status_type" in data.keys():
+		final["status_type"] = statusTypeMap[data["status_type"]]
 	if data.get("timestamp") == "local_time":
 		final.update(use_local_time())
 	if "media_current" in data.keys() and "media_duration" in data.keys():

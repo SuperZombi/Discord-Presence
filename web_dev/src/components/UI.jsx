@@ -105,7 +105,7 @@ const InputButton = ({children, className="", onClick}) => {
 
 const Button = ({
 	children, className="", url="",
-	disabled=false, danger=false,
+	disabled=false, danger=false, loader=false,
 	onClick=null, ...props
 }) => {
 	const clickHandle = _=>{
@@ -121,6 +121,7 @@ const Button = ({
 					`
 						bg-[#484951] cursor-not-allowed
 						text-gray-400
+						fill-gray-400
 					`
 				) : danger ? (
 					`
@@ -133,6 +134,7 @@ const Button = ({
 						bg-[#5865f2] hover:bg-[#4752c4]
 						active:bg-[#3a48a3]
 						cursor-pointer text-white
+						fill-white
 					`
 				)}
 				duration-200 ease-out
@@ -143,7 +145,9 @@ const Button = ({
 				${className}
 			`}
 		>
-			{children}
+			{loader ? (
+				<svg className="m-auto" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="12" r="3" opacity="1"><animate id="spinner_qYjJ" begin="0;spinner_t4KZ.end-0.25s" attributeName="opacity" dur="0.75s" values="1;.2" fill="freeze"/></circle><circle cx="12" cy="12" r="3" opacity=".4"><animate begin="spinner_qYjJ.begin+0.15s" attributeName="opacity" dur="0.75s" values="1;.2" fill="freeze"/></circle><circle cx="20" cy="12" r="3" opacity=".3"><animate id="spinner_t4KZ" begin="spinner_qYjJ.begin+0.3s" attributeName="opacity" dur="0.75s" values="1;.2" fill="freeze"/></circle></svg>
+			) : children}
 		</button>
 	)
 }

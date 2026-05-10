@@ -1,10 +1,13 @@
 const MainForm = ({
 	values, onApply, onDisconnect,
 	showSettings, hideSetting,
-	settingsValues, settingsOnChange
+	settingsValues, settingsOnChange,
+	user, user_avatar,
 }) => {
+	const [applyButDisabled, setApplyButDisabled] = React.useState(false)
 	const currentTimestamp = () => Math.floor(Date.now() / 1000)
 	const [actType, setActType] = React.useState(values.act_type || "playing")
+	const [statusDisplay, setStatusDisplay] = React.useState(values.status_type || "name")
 	const [details, setDetails] = React.useState(values.details)
 	const [state, setState] = React.useState(values.state)
 	const [state_url, set_state_url] = React.useState(values.state_url)
@@ -65,7 +68,7 @@ const MainForm = ({
 			set_party_current(party_size[0])
 			set_party_total(party_size[1])
 		}
-	}, [party_size])
+	}, [])
 	React.useEffect(() => {
 		if (party_total === 0){
 			set_party_size([])
@@ -112,9 +115,10 @@ const MainForm = ({
 		set_buttons(new_buttons)
 	}, [button_1_text, button_1_url, button_2_text, button_2_url])
 
-	const handleMainClick = () => {
+	const handleMainClick = async () => {
 		const obj = {
 			act_type: actType,
+			status_type: statusDisplay,
 			details: details,
 			details_url: details_url,
 			state: state,
@@ -131,10 +135,15 @@ const MainForm = ({
 			party_size: party_size,
 			buttons: buttons,
 		}
-		onApply(cleanObject(obj))
+		setApplyButDisabled(true)
+		await onApply(cleanObject(obj))
+		setTimeout(_=>{
+			setApplyButDisabled(false)
+		}, 500)
 	}
 	const handleClearClick = () => {
 		setActType("playing")
+		setStatusDisplay("name")
 		setDetails("")
 		setState("")
 		set_state_url("")
@@ -161,7 +170,7 @@ const MainForm = ({
 				values={settingsValues} onChange={settingsOnChange}
 			/>
 			<div className="relative">
-				<div className="sticky top-15.5 w-110 h-fit">
+				<div className="sticky top-15.5 w-110 h-fit flex gap-3 flex-col">
 					<Presence actType={actType} appName={Tt("default_appName")}
 						state={state} details={details}
 						ts_start={ts_start} ts_end={ts_end}
@@ -171,13 +180,19 @@ const MainForm = ({
 						party_size={party_size}
 						buttons={buttons_preview}
 					/>
-					<Button className="w-full mt-3 font-bold" onClick={handleMainClick}>
+					<StatusPreview user={user} user_avatar={user_avatar}
+						actType={actType} appName={Tt("default_appName")}
+						state={state} details={details}
+						status_type={statusDisplay}
+					/>
+					<Button className="w-full font-bold" onClick={handleMainClick}
+						disabled={applyButDisabled} loader={applyButDisabled}>
 						<T>main_apply_button</T>
 					</Button>
-					<Button className="w-full mt-3 font-bold" danger={true} onClick={handleClearClick}>
+					<Button className="w-full font-bold" danger={true} onClick={handleClearClick}>
 						<T>main_clear_button</T>
 					</Button>
-					<Button className="w-full mt-3 font-bold" danger={true}
+					<Button className="w-full font-bold" danger={true}
 						onClick={onDisconnect}
 					>
 						<T>main_disconnect_button</T>
@@ -193,6 +208,12 @@ const MainForm = ({
 					{ value: "watching", label: <T>actType_select_watching</T> },
 				]} onChange={setActType}/>
 
+				<Select label={"Status Display"} selected={statusDisplay} options={[
+					{ value: "name", label: "App name" },
+					{ value: "state", label: "State" },
+					{ value: "details", label: "Details" },
+				]} onChange={setStatusDisplay}/>
+
 				<Select label={<T>timestamp_select_label</T>} selected={timestamp} options={[
 					{ value: "normal", label: <T>timestamp_select_label_normal</T> },
 					{ value: "local_time", label: <T>timestamp_select_label_local_time</T> },
@@ -205,7 +226,7 @@ const MainForm = ({
 				>
 					<InputGroup>
 						<Input label={<T>media_current_input_label</T>} type="number"
-							name="media_current" value={media_current}
+							name="media_current" value={media_current} max={media_duration}
 							onChange={set_media_current}
 						/>
 						<Input label={<T>media_duration_input_label</T>} type="number"

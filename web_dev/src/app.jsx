@@ -99,6 +99,7 @@ const App = () => {
 						onApply={main_apply} onDisconnect={main_disconnect}
 						showSettings={showSettings} hideSetting={_=>setShowSettings(false)}
 						settingsValues={settingsValues} settingsOnChange={onSettingsChange}
+						user={user} user_avatar={user_avatar}
 					/>
 				</React.Fragment>
 			) : (
