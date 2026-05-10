@@ -1,7 +1,8 @@
 {
 	"default_appName": "Приложение",
 	"main_apply_button": "Применить",
-	"main_disconnect_button": "Отключить",
+	"main_disconnect_button": "Выйти",
+	"main_clear_button": "Очистить",
 
 	"header_user_default_name": "Пользователь",
 	"header_user_default_username": "username",

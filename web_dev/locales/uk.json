@@ -1,7 +1,8 @@
 {
 	"default_appName": "Додаток",
 	"main_apply_button": "Застосувати",
-	"main_disconnect_button": "Вимкнути",
+	"main_disconnect_button": "Вийти",
+	"main_clear_button": "Очистити",
 
 	"header_user_default_name": "Користувач",
 	"header_user_default_username": "username",

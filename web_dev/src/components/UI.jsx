@@ -195,6 +195,9 @@ const Select = ({
 		options.find(obj => obj.value === selected)
 	)
 	const selectRef = React.useRef(null)
+	React.useEffect(_=>{
+		setSelectedOption(options.find(obj => obj.value === selected))
+	}, [selected])
 
 	const handleClickOutside = (e) => {
 		if (selectRef.current && !selectRef.current.contains(e.target)) {

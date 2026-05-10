@@ -63,17 +63,23 @@ def connectRPC(app_id):
 @eel.expose
 def disconnect():
 	global rpc
+	rpc.clear()
 	rpc.disconnect()
 	rpc = None
 
 @eel.expose
 def set_activity(data):
+	if data.get("clear"):
+		rpc.clear()
+		if SETTINGS.get("remember_presence", True):
+			update_settings("presence", {})
+		return
 	allowed_keys = [
-		"state", "details", 
-        "state_url", "details_url",
-        "large_image", "large_text",
-        "small_image", "small_text",
-        "party_size", "buttons"
+		"state", "details",
+		"state_url", "details_url",
+		"large_image", "large_text",
+		"small_image", "small_text",
+		"party_size", "buttons"
 	]
 	final = {k: v for k, v in data.items() if k in allowed_keys}
 

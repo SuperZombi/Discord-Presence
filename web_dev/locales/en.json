@@ -2,6 +2,7 @@
 	"default_appName": "App Name",
 	"main_apply_button": "Apply",
 	"main_disconnect_button": "Disconnect",
+	"main_clear_button": "Clear",
 
 	"header_user_default_name": "User",
 	"header_user_default_username": "username",

@@ -133,6 +133,27 @@ const MainForm = ({
 		}
 		onApply(cleanObject(obj))
 	}
+	const handleClearClick = () => {
+		setActType("playing")
+		setDetails("")
+		setState("")
+		set_state_url("")
+		set_details_url("")
+		setTimestamp("normal")
+		set_media_current(0)
+		set_media_duration(0)
+		set_large_image("")
+		set_small_image("")
+		set_large_text("")
+		set_small_text("")
+		set_party_current(0)
+		set_party_total(0)
+		set_button_1_text("")
+		set_button_1_url("")
+		set_button_2_text("")
+		set_button_2_url("")
+		onApply({clear: true})
+	}
 
 	return (
 		<Container className="pt-0">
@@ -152,6 +173,9 @@ const MainForm = ({
 					/>
 					<Button className="w-full mt-3 font-bold" onClick={handleMainClick}>
 						<T>main_apply_button</T>
+					</Button>
+					<Button className="w-full mt-3 font-bold" danger={true} onClick={handleClearClick}>
+						<T>main_clear_button</T>
 					</Button>
 					<Button className="w-full mt-3 font-bold" danger={true}
 						onClick={onDisconnect}
