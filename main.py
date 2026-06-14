@@ -3,11 +3,10 @@ import sys, os
 import json
 import discordrpc
 from discordrpc.types import Activity, StatusDisplay
-from discordrpc.utils import ProgressBar, use_local_time
+from discordrpc.utils import progress_bar, use_local_time
 from pystray import Icon, Menu, MenuItem
-from PIL import Image, ImageDraw
+from PIL import Image
 import threading
-import requests
 
 DEV_MOD = os.path.exists("web_dev")
 SETTINGS = {}
@@ -38,22 +37,21 @@ load_settings()
 def get_settings(): return SETTINGS
 
 rpc = None
-app_info = None
 
 @eel.expose
 def connectRPC(app_id):
-	global rpc, app_info
+	global rpc
 	if not rpc:
 		try:
 			rpc = discordrpc.RPC(app_id, exit_if_discord_close=False, exit_on_disconnect=False)
-			app_info = get_app_info(app_id)
+			rpc.get_app_info()
 			update_settings("app_id", app_id)
 			return {
 				"success": True,
 				"user": vars(rpc.User),
 				"app_id": rpc.app_id,
-				"app_name": app_info.get("name"),
-				"app_icon": app_info.get("icon")
+				"app_name": rpc.App.name,
+				"app_icon": rpc.App.icon
 			}
 		except Exception as e:
 			return {
@@ -64,17 +62,16 @@ def connectRPC(app_id):
 			"success": True,
 			"user": vars(rpc.User),
 			"app_id": rpc.app_id,
-			"app_name": app_info.get("name"),
-			"app_icon": app_info.get("icon")
+			"app_name": rpc.App.name,
+			"app_icon": rpc.App.icon
 		}
 
 @eel.expose
 def disconnect():
-	global rpc, app_info
+	global rpc
 	rpc.clear()
 	rpc.disconnect()
 	rpc = None
-	app_info = None
 
 @eel.expose
 def set_activity(data):
@@ -109,7 +106,7 @@ def set_activity(data):
 	if data.get("timestamp") == "local_time":
 		final.update(use_local_time())
 	if "media_current" in data.keys() and "media_duration" in data.keys():
-		final.update(ProgressBar(data["media_current"], data["media_duration"]))
+		final.update(progress_bar(data["media_current"], data["media_duration"]))
 
 	if DEV_MOD:
 		print(data)
@@ -118,19 +115,6 @@ def set_activity(data):
 	if res and SETTINGS.get("remember_presence", True):
 		update_settings("presence", data)
 	return res
-
-def get_app_info(app_id):
-	try:
-		r = requests.get(f"https://discord.com/api/v10/applications/{app_id}/rpc")
-		if r.ok:
-			data = r.json()
-			return {
-				"name": data.get("name"),
-				"icon": f"https://cdn.discordapp.com/app-icons/{app_id}/{data.get('icon')}.png"
-			}
-	except Exception as e:
-		print(e)
-	return {}
 
 def on_open(icon, item):
 	eel.show("dev.html" if DEV_MOD else "index.html")

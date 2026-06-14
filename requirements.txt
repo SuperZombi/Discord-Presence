@@ -2,4 +2,3 @@ discord-rpc
 pystray
 pillow
 eel
-requests
