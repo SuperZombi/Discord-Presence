@@ -5,8 +5,8 @@ const Settings = ({
 	return (
 		<Container className={`
 			z-10 fixed inset-0 bg-[#323339]
-			duration-300 ease-out
-			${show ? 'opacity-100' : 'opacity-0 scale-x-0 invisible'}
+			duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)]
+			${show ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-85 invisible'}
 		`}>
 			<div className="flex flex-col items-center w-full">
 				<Card className="w-226 max-w-full relative py-3">
