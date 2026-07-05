@@ -1,4 +1,4 @@
-# Discord Presence
+# Discord Custom Presence
 
 ### Customize your Discord Activity as you wish
 
