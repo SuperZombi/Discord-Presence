@@ -1,18 +1,3 @@
-const {
-	useState,
-	useEffect
-} = React;
-
-const {
-	HashRouter,
-	Switch,
-	Route,
-	Link,
-	useHistory,
-	useLocation,
-	useParams
-} = ReactRouterDOM;
-
 const Home = () => {
 	return (
 		<>
@@ -23,32 +8,41 @@ const Home = () => {
 	)
 }
 
-const Test = () => {
-	const history = useHistory()
+const Header = () => {
+	const {
+		Link,
+	} = ReactRouterDOM;
 
 	return (
-		<div>
-			<h2>Test</h2>
-			<button onClick={() => history.push("/")}>
-				Go home
-			</button>
-		</div>
+		<header className="sticky top-0 bg-slate-800/50 backdrop-blur-md h-16">
+			<div className="max-w-6xl h-full m-auto px-8 py-2 flex items-center">
+				<nav>
+					<Link to="/">Home</Link>
+				</nav>
+			</div>
+		</header>
 	)
 }
 
 const App = () => {
-	return (
-		<HashRouter>
-			<nav>
-				<Link to="/">Home</Link>
-				<Link to="/test">Test</Link>
-			</nav>
+	const {
+		HashRouter,
+		Switch,
+		Route,
+		Link,
+	} = ReactRouterDOM;
 
-			<Switch>
-				<Route exact path="/" component={Home} />
-				<Route exact path="/test" component={Test} />
-			</Switch>
-		</HashRouter>
+	return (
+		<div className="bg-slate-900 min-h-dvh text-gray-100">
+			<HashRouter>
+				<Header/>
+				<div className="max-w-6xl m-auto">
+					<Switch>
+						<Route exact path="/" component={Home} />
+					</Switch>
+				</div>
+			</HashRouter>
+		</div>
 	)
 }
 
