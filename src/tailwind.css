@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer base {
+	* {
+		scroll-behavior: smooth;
+	}
+}
+
 @layer components {
 	.section-card {
 		background:

@@ -30,10 +30,9 @@ const Step = ({number, title, children}) => (
 const Home = () => {
 	return (
 		<div className="space-y-8 py-6">
-			<Section className="grid min-h-[calc(100dvh-6rem)] items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+			<Section className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
 				<div>
-					<Badge icon="fa-brands fa-discord">Rich Presence для твоего профиля</Badge>
-					<h1 className="mt-8 max-w-3xl text-5xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
+					<h1 className="max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
 						Покажи, чем ты занят, красиво и без лишней сложности.
 					</h1>
 					<p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
@@ -82,7 +81,7 @@ const Section = ({children, className = "", id}) => {
 	return (
 		<section id={id} className={`
 			section-card
-			min-h-[calc(100dvh-(--spacing(16)))]
+			min-h-[calc(100dvh-(--spacing(28)))]
 			relative overflow-hidden p-6 sm:p-8 lg:p-10
 			border border-white/10 rounded-3xl backdrop-blur-xl
 			${className}
