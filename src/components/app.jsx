@@ -48,27 +48,6 @@ const Home = () => {
 						</a>
 					</div>
 				</div>
-
-				<div className="relative mx-auto w-full max-w-md">
-					<div className="absolute -inset-6 rounded-[2.5rem] bg-indigo-500/20 blur-3xl"></div>
-					<div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/60 p-5 shadow-2xl shadow-slate-950/60 ring-1 ring-inset ring-white/10">
-						<div className="flex items-center gap-4">
-							<img className="h-20 w-20 rounded-3xl object-cover ring-2 ring-indigo-300/40" src="images/picture.png" alt="Превью профиля"/>
-							<div>
-								<p className="text-sm uppercase tracking-[0.3em] text-indigo-200/80">Now playing</p>
-								<h2 className="mt-1 text-2xl font-bold text-white">Custom Presence</h2>
-								<p className="text-slate-400">Designing a better status</p>
-							</div>
-						</div>
-						<div className="mt-6 space-y-3">
-							<div className="h-3 rounded-full bg-white/10"><div className="h-full w-3/4 rounded-full bg-gradient-to-r from-indigo-300 to-fuchsia-300"></div></div>
-							<div className="grid grid-cols-2 gap-3">
-								<button className="rounded-xl bg-indigo-400/90 py-3 font-semibold text-slate-950">GitHub</button>
-								<button className="rounded-xl bg-white/10 py-3 font-semibold text-white">Invite</button>
-							</div>
-						</div>
-					</div>
-				</div>
 			</Section>
 
 			<Section id="features">
@@ -101,7 +80,13 @@ const Home = () => {
 
 const Section = ({children, className = "", id}) => {
 	return (
-		<section id={id} className={`section-card relative overflow-hidden p-6 sm:p-8 lg:p-10 ${className}`}>
+		<section id={id} className={`
+			section-card
+			min-h-[calc(100dvh-(--spacing(16)))]
+			relative overflow-hidden p-6 sm:p-8 lg:p-10
+			border border-white/10 rounded-3xl backdrop-blur-xl
+			${className}
+		`}>
 			{children}
 		</section>
 	)
@@ -140,7 +125,7 @@ const App = () => {
 				<Header/>
 				<main className="max-w-6xl m-auto px-4">
 					<Switch>
-						<Route exact path="/" component={Home} />
+						<Route path="/" component={Home} />
 					</Switch>
 				</main>
 			</HashRouter>

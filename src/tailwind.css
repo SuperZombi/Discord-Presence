@@ -1,21 +1,7 @@
 @import "tailwindcss";
 
-@layer base {
-	* {
-		scroll-behavior: smooth;
-	}
-
-	body {
-		margin: 0;
-		background: #020617;
-	}
-}
-
 @layer components {
 	.section-card {
-		isolation: isolate;
-		border: 1px solid rgb(255 255 255 / 0.1);
-		border-radius: 2rem;
 		background:
 			radial-gradient(circle at 18% 14%, rgb(129 140 248 / 0.24), transparent 17rem),
 			radial-gradient(circle at 86% 20%, rgb(217 70 239 / 0.18), transparent 15rem),
@@ -25,9 +11,7 @@
 			inset 0 0 0 1px rgb(255 255 255 / 0.04),
 			inset 0 -120px 140px rgb(2 6 23 / 0.42),
 			0 26px 80px rgb(2 6 23 / 0.46);
-		backdrop-filter: blur(18px);
 	}
-
 	.section-card::before,
 	.section-card::after {
 		content: "";
@@ -37,7 +21,6 @@
 		filter: blur(46px);
 		opacity: 0.72;
 	}
-
 	.section-card::before {
 		width: 14rem;
 		height: 14rem;
@@ -45,7 +28,6 @@
 		top: -4rem;
 		background: rgb(99 102 241 / 0.42);
 	}
-
 	.section-card::after {
 		width: 18rem;
 		height: 18rem;
