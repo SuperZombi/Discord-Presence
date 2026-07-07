@@ -137,7 +137,7 @@ const DownloadOption = ({icon, title, subtitle, badge, primaryLabel, primaryHref
 						{primaryLabel}
 					</a>
 					{(secondaryHref && secondaryLabel) && (
-						<a href={secondaryHref} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-5 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
+						<a href={secondaryHref} target="_blank" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-5 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
 							<i className="fa-solid fa-arrow-up-right-from-square"></i>
 							{secondaryLabel}
 						</a>
@@ -160,7 +160,7 @@ const DownloadsPage = () => {
 					subtitle="Download the desktop build, launch it, and start customizing your Discord activity without manual setup."
 					badge="Recommended"
 					primaryLabel="Download for Windows"
-					primaryHref="#windows-download"
+					primaryHref="https://github.com/SuperZombi/Discord-Presence/releases/latest/download/Discord.Presence.exe"
 					features={["Ready-to-use package", "Best choice for everyday users", "Designed for quick setup"]}
 				/>
 				<DownloadOption
@@ -170,9 +170,9 @@ const DownloadsPage = () => {
 					subtitle="Clone the project on Linux, review the source, and build the client with your preferred developer workflow."
 					badge="Linux"
 					primaryLabel="Download source"
-					primaryHref="#source-code"
-					secondaryLabel="View repository"
-					secondaryHref="#repository"
+					primaryHref="https://github.com/SuperZombi/Discord-Presence/releases/latest/download/linux.zip"
+					secondaryLabel="GitHub repository"
+					secondaryHref="https://github.com/SuperZombi/Discord-Presence"
 					features={["Full source code access", "Build and tweak locally", "Great for Linux users"]}
 				/>
 			</section>
