@@ -93,10 +93,115 @@ const Home = () => {
 	)
 }
 
+
+const DownloadOption = ({icon, title, subtitle, badge, primaryLabel, primaryHref, secondaryLabel, secondaryHref, features, accent = "sky"}) => {
+	const tone = accent === "emerald" ? {
+		cardHover: "hover:border-emerald-300/40",
+		glow: "bg-emerald-400/20",
+		icon: "bg-emerald-400/15 text-emerald-100",
+		check: "bg-emerald-400/15 text-emerald-100",
+		button: "bg-emerald-400 shadow-emerald-500/25 hover:bg-emerald-300",
+	} : {
+		cardHover: "hover:border-sky-300/40",
+		glow: "bg-sky-400/20",
+		icon: "bg-sky-400/15 text-sky-100",
+		check: "bg-sky-400/15 text-sky-100",
+		button: "bg-sky-400 shadow-sky-500/25 hover:bg-sky-300",
+	}
+
+	return (
+		<div className={`group relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/45 p-6 shadow-2xl shadow-slate-950/30 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07] ${tone.cardHover}`}>
+			<div className={`absolute -right-16 -top-16 h-44 w-44 rounded-full blur-3xl transition group-hover:scale-125 ${tone.glow}`}></div>
+			<div className="relative">
+				<div className="flex items-start justify-between gap-4">
+					<div className={`flex h-16 w-16 items-center justify-center rounded-3xl text-3xl ring-1 ring-inset ring-white/15 ${tone.icon}`}>
+						<i className={icon}></i>
+					</div>
+					<span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-200">{badge}</span>
+				</div>
+				<h3 className="mt-7 text-3xl font-bold text-white">{title}</h3>
+				<p className="mt-3 min-h-16 leading-7 text-slate-300">{subtitle}</p>
+				<ul className="mt-6 space-y-3">
+					{features.map((feature) => (
+						<li key={feature} className="flex items-center gap-3 text-sm text-slate-200">
+							<span className={`flex h-6 w-6 items-center justify-center rounded-full text-xs ${tone.check}`}>
+								<i className="fa-solid fa-check"></i>
+							</span>
+							{feature}
+						</li>
+					))}
+				</ul>
+				<div className="mt-8 flex flex-col gap-3 sm:flex-row">
+					<a href={primaryHref} className={`inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 font-semibold text-white shadow-xl transition hover:-translate-y-0.5 ${tone.button}`}>
+						<i className="fa-solid fa-download"></i>
+						{primaryLabel}
+					</a>
+					<a href={secondaryHref} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-5 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
+						<i className="fa-solid fa-arrow-up-right-from-square"></i>
+						{secondaryLabel}
+					</a>
+				</div>
+			</div>
+		</div>
+	)
+}
+
 const DownloadsPage = () => {
 	return (
-		<div>
-			<h3>Download</h3>
+		<div className="space-y-8 py-6">
+			<Section className="min-h-0 overflow-hidden">
+				<div className="relative z-10 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+					<div>
+						<Badge icon="fa-solid fa-cloud-arrow-down">Downloads</Badge>
+						<h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
+							Get Discord Presence for your setup.
+						</h1>
+						<p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+							Choose a ready Windows build or grab the Linux source code and run it your way. Both options keep the same clean Presence experience.
+						</p>
+						<div className="mt-8 flex flex-wrap gap-3 text-sm text-slate-300">
+							<span className="rounded-full border border-white/10 bg-white/10 px-4 py-2"><i className="fa-solid fa-shield-halved mr-2 text-emerald-200"></i>Safe install flow</span>
+							<span className="rounded-full border border-white/10 bg-white/10 px-4 py-2"><i className="fa-solid fa-code-branch mr-2 text-sky-200"></i>Open source friendly</span>
+						</div>
+					</div>
+					<div className="relative rounded-[2rem] border border-white/10 bg-black/20 p-4 shadow-2xl shadow-indigo-950/30">
+						<div className="absolute inset-x-8 -top-3 h-6 rounded-full bg-indigo-400/30 blur-2xl"></div>
+						<Presence
+							appName="Discord Presence"
+							details="Downloads page is ready"
+							state="Windows • Linux source code"
+							buttons={[{label: "Download", url: "https://github.com/"}, {label: "Source", url: "https://github.com/"}]}
+						/>
+					</div>
+				</div>
+			</Section>
+
+			<section className="grid gap-5 lg:grid-cols-2">
+				<DownloadOption
+					accent="sky"
+					icon="fa-brands fa-windows"
+					title="Windows"
+					subtitle="Download the desktop build, launch it, and start customizing your Discord activity without manual setup."
+					badge="Recommended"
+					primaryLabel="Download for Windows"
+					primaryHref="#windows-download"
+					secondaryLabel="Install guide"
+					secondaryHref="#windows-guide"
+					features={["Ready-to-use package", "Best choice for everyday users", "Designed for quick setup"]}
+				/>
+				<DownloadOption
+					accent="emerald"
+					icon="fa-brands fa-linux"
+					title="Source code (Linux)"
+					subtitle="Clone the project on Linux, review the source, and build the client with your preferred developer workflow."
+					badge="Linux"
+					primaryLabel="Download source"
+					primaryHref="#source-code"
+					secondaryLabel="View repository"
+					secondaryHref="#repository"
+					features={["Full source code access", "Build and tweak locally", "Great for Linux users"]}
+				/>
+			</section>
 		</div>
 	)
 }
