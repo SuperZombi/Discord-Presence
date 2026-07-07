@@ -28,24 +28,40 @@ const Step = ({number, title, children}) => (
 )
 
 const Home = () => {
+	const {
+		Link,
+	} = ReactRouterDOM;
+
 	return (
 		<div className="space-y-8 py-6">
 			<Section className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
 				<div>
 					<h1 className="max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-						Покажи, чем ты занят, красиво и без лишней сложности.
+						Customize your<br/><span className="text-sky-500">Discord Activity</span><br/>as you wish
 					</h1>
 					<p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-						Discord Presence помогает оформить активность в Discord: статус, обложку, кнопки и детали можно собрать в аккуратную карточку, которая выглядит как часть твоего бренда.
+						<span className="text-sky-500">Discord Presence</span> helps you customize your Discord activity: your status, cover photo, buttons, and details can be neatly organized into a card.
 					</p>
 					<div className="mt-8 flex flex-wrap gap-4">
-						<a href="#features" className="rounded-2xl bg-indigo-400 px-6 py-3 font-semibold text-slate-950 shadow-xl shadow-indigo-500/25 transition hover:-translate-y-0.5 hover:bg-indigo-300">
-							Посмотреть возможности
-						</a>
+						<Link to="/download" className="flex gap-2 items-center
+							rounded-2xl bg-indigo-400 px-6 py-3
+							font-semibold text-white
+							shadow-xl shadow-indigo-500/25
+							transition hover:-translate-y-0.5 hover:bg-indigo-300
+						">
+							<i className="fa-solid fa-download"></i>
+							<span>Download</span>
+						</Link>
 						<a href="#setup" className="rounded-2xl border border-white/10 bg-white/10 px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
 							Как начать
 						</a>
 					</div>
+				</div>
+				<div className="max-w-xl zoom-75 md:zoom-100">
+					<Presence
+						appName="Discord Custom Presence"
+						details="Customize your activity status"
+					/>
 				</div>
 			</Section>
 
@@ -73,6 +89,14 @@ const Home = () => {
 					<Step number="03" title="Покажи друзьям">Запусти Presence и позволь профилю говорить за тебя, пока ты занимаешься важным.</Step>
 				</div>
 			</Section>
+		</div>
+	)
+}
+
+const DownloadsPage = () => {
+	return (
+		<div>
+			<h3>Download</h3>
 		</div>
 	)
 }
@@ -124,7 +148,9 @@ const App = () => {
 				<Header/>
 				<main className="max-w-6xl m-auto px-4">
 					<Switch>
-						<Route path="/" component={Home} />
+						<Route path="/" exact component={Home} />
+						<Route path="/download" exact component={DownloadsPage} />
+						<Route path="*" component={Home} />
 					</Switch>
 				</main>
 			</HashRouter>
