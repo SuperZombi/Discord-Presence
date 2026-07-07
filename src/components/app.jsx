@@ -149,33 +149,6 @@ const DownloadOption = ({icon, title, subtitle, badge, primaryLabel, primaryHref
 const DownloadsPage = () => {
 	return (
 		<div className="space-y-8 py-6">
-			<Section className="min-h-0 overflow-hidden">
-				<div className="relative z-10 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-					<div>
-						<Badge icon="fa-solid fa-cloud-arrow-down">Downloads</Badge>
-						<h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
-							Get Discord Presence for your setup.
-						</h1>
-						<p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-							Choose a ready Windows build or grab the Linux source code and run it your way. Both options keep the same clean Presence experience.
-						</p>
-						<div className="mt-8 flex flex-wrap gap-3 text-sm text-slate-300">
-							<span className="rounded-full border border-white/10 bg-white/10 px-4 py-2"><i className="fa-solid fa-shield-halved mr-2 text-emerald-200"></i>Safe install flow</span>
-							<span className="rounded-full border border-white/10 bg-white/10 px-4 py-2"><i className="fa-solid fa-code-branch mr-2 text-sky-200"></i>Open source friendly</span>
-						</div>
-					</div>
-					<div className="relative rounded-[2rem] border border-white/10 bg-black/20 p-4 shadow-2xl shadow-indigo-950/30">
-						<div className="absolute inset-x-8 -top-3 h-6 rounded-full bg-indigo-400/30 blur-2xl"></div>
-						<Presence
-							appName="Discord Presence"
-							details="Downloads page is ready"
-							state="Windows • Linux source code"
-							buttons={[{label: "Download", url: "https://github.com/"}, {label: "Source", url: "https://github.com/"}]}
-						/>
-					</div>
-				</div>
-			</Section>
-
 			<section className="grid gap-5 lg:grid-cols-2">
 				<DownloadOption
 					accent="sky"

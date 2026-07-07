@@ -16,9 +16,8 @@ const Presence = ({
 }) => {
 	return (
 		<div className="flex flex-col gap-3
-			h-fit p-4
-			rounded-xl
-			bg-[#3f4048] text-[#dfe0e2]
+			h-fit p-4 rounded-xl text-[#dfe0e2]
+			border border-white/10 bg-black/20 shadow-2xl shadow-indigo-950/30
 			select-none
 		">
 			<PresenceHeader actType={actType} appName={appName} details={details}/>
@@ -207,6 +206,53 @@ const Bottom = ({
 				</Button>
 			))}
 		</div>
+	)
+}
+
+const Button = ({
+	children, className="", url="",
+	disabled=false, danger=false,
+	onClick=null, ...props
+}) => {
+	const clickHandle = _=>{
+		if (disabled) return
+		url ? window.open(url, '_blank') : onClick ? onClick() : null
+	}
+	return (
+		<button
+			{...props}
+			onClick={clickHandle}
+			className={`
+				${disabled ? (
+					`
+						bg-[#484951] cursor-not-allowed
+						text-gray-400
+						fill-gray-400
+					`
+				) : danger ? (
+					`
+					bg-[#484951] hover:bg-[#5e5f6b]
+					text-red-400 hover:text-red-500
+					cursor-pointer
+					`
+				) : (
+					`
+						bg-[#5865f2] hover:bg-[#4752c4]
+						active:bg-[#3a48a3]
+						cursor-pointer text-white
+						fill-white
+					`
+				)}
+				duration-200 ease-out
+				text-center w-fit
+				px-6 py-2.5
+				rounded-xl
+				select-none
+				${className}
+			`}
+		>
+			children
+		</button>
 	)
 }
 
