@@ -136,10 +136,13 @@ const DownloadOption = ({icon, title, subtitle, badge, primaryLabel, primaryHref
 						<i className="fa-solid fa-download"></i>
 						{primaryLabel}
 					</a>
-					<a href={secondaryHref} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-5 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
-						<i className="fa-solid fa-arrow-up-right-from-square"></i>
-						{secondaryLabel}
-					</a>
+					{(secondaryHref && secondaryLabel) && (
+						<a href={secondaryHref} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-5 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
+							<i className="fa-solid fa-arrow-up-right-from-square"></i>
+							{secondaryLabel}
+						</a>
+					)}
+					
 				</div>
 			</div>
 		</div>
@@ -158,8 +161,6 @@ const DownloadsPage = () => {
 					badge="Recommended"
 					primaryLabel="Download for Windows"
 					primaryHref="#windows-download"
-					secondaryLabel="Install guide"
-					secondaryHref="#windows-guide"
 					features={["Ready-to-use package", "Best choice for everyday users", "Designed for quick setup"]}
 				/>
 				<DownloadOption
