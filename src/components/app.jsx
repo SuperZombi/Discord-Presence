@@ -39,8 +39,8 @@ const Home = () => {
 					<h1 className="max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
 						Customize your<br/><span className="text-sky-500">Discord Activity</span><br/>as you wish
 					</h1>
-					<p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-						<span className="text-sky-500">Discord Presence</span> helps you customize your Discord activity: your status, cover photo, buttons, and details can be neatly organized into a card.
+					<p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 text-balance">
+						<span className="text-sky-500">Discord Presence</span> helps you customize your Discord activity:<br/>your status, cover photo, buttons, and details can be neatly organized into a card.
 					</p>
 					<div className="mt-8 flex flex-wrap gap-4">
 						<Link to="/download" className="flex gap-2 items-center
