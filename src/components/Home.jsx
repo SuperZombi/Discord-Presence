@@ -40,9 +40,10 @@ const Home = () => {
 					<p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 text-balance">
 						<span className="text-sky-500">Discord Presence</span> helps you customize your Discord activity:<br/>your status, cover photo, buttons, and details can be neatly organized into a card.
 					</p>
-					<div className="mt-8 flex flex-wrap gap-4">
-						<Link to="/download" className="flex gap-2 items-center
-							rounded-2xl bg-indigo-400 px-6 py-3
+					<div className="mt-8 flex gap-3 sm:gap-4 flex-nowrap whitespace-nowrap">
+						<Link to="/download" className="
+							flex gap-2 items-center
+							rounded-2xl bg-indigo-400 px-4 py-3 sm:px-6
 							font-semibold text-white
 							shadow-xl shadow-indigo-500/25
 							transition hover:-translate-y-0.5 hover:bg-indigo-300
@@ -50,13 +51,17 @@ const Home = () => {
 							<i className="fa-solid fa-download"></i>
 							<span>Download</span>
 						</Link>
-						<a href="#setup" className="flex gap-2 items-center rounded-2xl border border-white/10 bg-white/10 px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
+						<a href="#setup" className="
+							flex gap-2 items-center rounded-2xl
+							border border-white/10 bg-white/10 px-4 py-3 sm:px-6
+							font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15
+						">
 							<i className="fa-solid fa-rocket"></i>
 							<span>Get Started</span>
 						</a>
 					</div>
 				</div>
-				<div className="max-w-xl zoom-75 md:zoom-100">
+				<div className="max-w-xl zoom-85 md:zoom-100">
 					<Presence {...presences[currentPresence]}/>
 				</div>
 			</Section>
