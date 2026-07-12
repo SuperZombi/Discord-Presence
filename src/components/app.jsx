@@ -32,6 +32,33 @@ const Home = () => {
 		Link,
 	} = ReactRouterDOM;
 
+	const presences = [
+		{
+			appName: "Discord Custom Presence",
+			details: "Customize your activity status",
+			ts_start: Math.floor(Date.now() / 1000) - 15,
+			buttons: [{label: "Start now", url: "https://github.com/SuperZombi/Discord-Presence/"}]
+		},
+		{
+			appName: "YouTube Music",
+			large_image: "images/yt_music.png",
+			actType: "listening",
+			state: "Tame Impala",
+			details: "Dracula (JENNIE Remix)",
+			ts_start: Math.floor(Date.now() / 1000) - 86,
+			ts_end: Math.floor(Date.now() / 1000) + 210,
+			buttons: [{label: "Listen", url: "https://music.youtube.com/"}]
+		}
+	]
+	const [currentPresence, setCurrentPresence] = React.useState(0)
+	React.useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentPresence(prev => (prev + 1) % presences.length)
+		}, 10000)
+
+		return () => clearInterval(interval)
+	}, [])
+
 	return (
 		<div className="space-y-8 py-6">
 			<Section className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
@@ -58,10 +85,7 @@ const Home = () => {
 					</div>
 				</div>
 				<div className="max-w-xl zoom-75 md:zoom-100">
-					<Presence
-						appName="Discord Custom Presence"
-						details="Customize your activity status"
-					/>
+					<Presence {...presences[currentPresence]}/>
 				</div>
 			</Section>
 

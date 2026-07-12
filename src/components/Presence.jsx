@@ -251,7 +251,7 @@ const Button = ({
 				${className}
 			`}
 		>
-			children
+			{children}
 		</button>
 	)
 }
