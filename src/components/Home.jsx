@@ -7,7 +7,7 @@ const Home = () => {
 		{
 			appName: "Discord Custom Presence",
 			details: "Customize your activity status",
-			ts_start: Math.floor(Date.now() / 1000) - 15,
+			ts_start: Math.floor(Date.now() / 1000) - 10,
 			buttons: [{label: "Start now", url: "https://github.com/SuperZombi/Discord-Presence/"}]
 		},
 		{
@@ -17,7 +17,7 @@ const Home = () => {
 			state: "Tame Impala",
 			details: "Dracula (JENNIE Remix)",
 			ts_start: Math.floor(Date.now() / 1000) - 86,
-			ts_end: Math.floor(Date.now() / 1000) + 210,
+			ts_end: Math.floor(Date.now() / 1000) + 124,
 			buttons: [{label: "Listen", url: "https://music.youtube.com/"}]
 		}
 	]

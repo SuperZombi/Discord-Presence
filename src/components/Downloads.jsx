@@ -24,7 +24,7 @@ const DownloadOption = ({icon, title, subtitle, badge, primaryLabel, primaryHref
 					<span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-200">{badge}</span>
 				</div>
 				<h3 className="mt-7 text-3xl font-bold text-white">{title}</h3>
-				<p className="mt-3 min-h-16 leading-7 text-slate-300">{subtitle}</p>
+				<p className="mt-3 leading-7 text-slate-300">{subtitle}</p>
 				<ul className="mt-6 space-y-3">
 					{features.map((feature) => (
 						<li key={feature} className="flex items-center gap-3 text-sm text-slate-200">
@@ -35,7 +35,7 @@ const DownloadOption = ({icon, title, subtitle, badge, primaryLabel, primaryHref
 						</li>
 					))}
 				</ul>
-				<div className="mt-8 flex flex-col gap-3 sm:flex-row">
+				<div className="mt-8 flex flex-col justify-between gap-3 sm:flex-row">
 					<a href={primaryHref} className={`inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 font-semibold text-white shadow-xl transition hover:-translate-y-0.5 ${tone.button}`}>
 						<i className="fa-solid fa-download"></i>
 						{primaryLabel}
@@ -46,7 +46,6 @@ const DownloadOption = ({icon, title, subtitle, badge, primaryLabel, primaryHref
 							{secondaryLabel}
 						</a>
 					)}
-					
 				</div>
 			</div>
 		</div>
@@ -61,23 +60,23 @@ const DownloadsPage = () => {
 					accent="sky"
 					icon="fa-brands fa-windows"
 					title="Windows"
-					subtitle="Download the desktop build, launch it, and start customizing your Discord activity without manual setup."
+					subtitle="Standalone desktop build with all dependencies included."
 					badge="Recommended"
-					primaryLabel="Download for Windows"
+					primaryLabel="Download"
 					primaryHref="https://github.com/SuperZombi/Discord-Presence/releases/latest/download/Discord.Presence.exe"
-					features={["Ready-to-use package", "Best choice for everyday users", "Designed for quick setup"]}
+					features={["Recommended for most users", "No installation required", "Standalone executable"]}
 				/>
 				<DownloadOption
 					accent="emerald"
 					icon="fa-brands fa-linux"
-					title="Source code (Linux)"
-					subtitle="Clone the project on Linux, review the source, and build the client with your preferred developer workflow."
+					title="Linux"
+					subtitle="Python package with a bundled web interface."
 					badge="Linux"
-					primaryLabel="Download source"
+					primaryLabel="Download"
 					primaryHref="https://github.com/SuperZombi/Discord-Presence/releases/latest/download/linux.zip"
-					secondaryLabel="GitHub repository"
+					secondaryLabel="GitHub"
 					secondaryHref="https://github.com/SuperZombi/Discord-Presence"
-					features={["Full source code access", "Build and tweak locally", "Great for Linux users"]}
+					features={["Great for Linux users", "Python 3 required", "Bundled web interface"]}
 				/>
 			</section>
 		</div>
