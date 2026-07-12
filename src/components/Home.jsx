@@ -32,15 +32,15 @@ const Home = () => {
 
 	return (
 		<div className="space-y-8 py-6">
-			<Section className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+			<Section className="grid items-center justify-items-center sm:justify-items-start gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr]">
 				<div>
-					<h1 className="max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-						Customize your<br/><span className="text-sky-500">Discord Activity</span><br/>as you wish
+					<h1 className="max-w-3xl text-4xl text-center sm:text-left font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+						Customize your <span className="text-sky-500">Discord Activity</span> as you wish
 					</h1>
 					<p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 text-balance">
 						<span className="text-sky-500">Discord Presence</span> helps you customize your Discord activity:<br/>your status, cover photo, buttons, and details can be neatly organized into a card.
 					</p>
-					<div className="mt-8 flex gap-3 sm:gap-4 flex-nowrap whitespace-nowrap">
+					<div className="mt-8 flex gap-3 sm:gap-4 justify-center sm:justify-start flex-nowrap whitespace-nowrap">
 						<Link to="/download" className="
 							flex gap-2 items-center
 							rounded-2xl bg-indigo-400 px-4 py-3 sm:px-6
@@ -61,7 +61,7 @@ const Home = () => {
 						</a>
 					</div>
 				</div>
-				<div className="max-w-xl zoom-85 md:zoom-100">
+				<div className="max-w-xl zoom-85 md:zoom-100 w-full">
 					<Presence {...presences[currentPresence]}/>
 				</div>
 			</Section>
