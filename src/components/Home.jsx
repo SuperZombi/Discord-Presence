@@ -110,20 +110,20 @@ const Home = () => {
 					</h2>
 
 					<p className="mt-4 leading-7 text-slate-300">
-						No complicated configuration. Just create a Discord application,
+						No complicated configuration.<br/>Just create a Discord application,
 						paste its ID, and start customizing your Rich Presence.
 					</p>
 				</div>
 
 				<div className="space-y-4">
-					<Step number="01"
+					<Step number="1"
 						title="Download the app"
 						to="/download"
 					>
 						Download the latest release and launch the application.
 					</Step>
 
-					<Step number="02"
+					<Step number="2"
 						title="Create a Discord application"
 						to="https://discord.com/developers/applications"
 					>
@@ -131,7 +131,7 @@ const Home = () => {
 						your Application ID.
 					</Step>
 
-					<Step number="03"
+					<Step number="3"
 						title="Customize & launch"
 					>
 						Choose an activity, add images, buttons, timestamps, and details,
@@ -218,7 +218,7 @@ const Step = ({ number, title, children, to }) => {
 		Link,
 	} = ReactRouterDOM;
 
-	const StepLink = () => (
+	const StepLinkIcon = () => (
 		<i
 			className="
 				fa-solid fa-arrow-right
@@ -227,21 +227,40 @@ const Step = ({ number, title, children, to }) => {
 			"
 		/>
 	)
-	const linkClassName = `
-		group/arrow flex h-12 w-12 shrink-0 items-center justify-center
-		rounded-2xl border border-white/10
-		bg-white/5 text-slate-300
-		transition-all duration-300
-		hover:scale-110
-		hover:bg-sky-500
-		hover:text-white
-		hover:shadow-lg hover:shadow-sky-500/30
-	`
+
+	const StepLink = ({header=false}) => {
+		const linkClassName = `
+			group/arrow h-12 w-12 shrink-0 items-center justify-center
+			rounded-2xl border border-white/10
+			bg-white/5 text-slate-300
+			transition-all duration-300
+			hover:scale-110
+			hover:bg-sky-500
+			hover:text-white
+			hover:shadow-lg hover:shadow-sky-500/30
+			${header ? "hidden sm:flex" : "flex sm:hidden"}
+		`
+
+		return to.startsWith("http") ? (
+			<a href={to} target="_blank"
+				className={`${linkClassName} ${header ? "ml-auto" : ""}`}
+			>
+				<StepLinkIcon/>
+			</a>
+		) : (
+			<Link
+				to={to}
+				className={`${linkClassName} ${header ? "ml-auto" : ""}`}
+			>
+				<StepLinkIcon/>
+			</Link>
+		)
+	}
 
 	return (
 		<div
 			className="
-				group relative flex items-center gap-5
+				group relative flex flex-col gap-4
 				rounded-3xl border border-white/10
 				bg-white/4 p-5
 				transition-all duration-300
@@ -250,34 +269,21 @@ const Step = ({ number, title, children, to }) => {
 				hover:bg-white/6
 			"
 		>
-			<div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-fuchsia-400/15 font-bold text-fuchsia-100 ring-1 ring-inset ring-fuchsia-200/20">
-				{number}
-			</div>
-
-			<div className="flex-1">
+			<div className="flex gap-3 items-center">
+				<div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-fuchsia-400/15 font-bold text-fuchsia-100 ring-1 ring-inset ring-fuchsia-200/20">
+					{number}
+				</div>
 				<h3 className="text-lg font-semibold text-white">
 					{title}
 				</h3>
-
-				<p className="mt-2 leading-7 text-slate-300">
+				{to && <StepLink header={true}/>}
+			</div>
+			<div className="flex gap-3 items-end justify-between">
+				<p className="leading-7 text-slate-300">
 					{children}
 				</p>
+				{to && <StepLink/>}
 			</div>
-
-			{to && (
-				to.startsWith("http") ? (
-					<a href={to} target="_blank" className={linkClassName}>
-						<StepLink/>
-					</a>
-			) : (
-					<Link
-						to={to}
-						className={linkClassName}
-					>
-						<StepLink/>
-					</Link>
-				)
-			)}
 		</div>
 	)
 }
