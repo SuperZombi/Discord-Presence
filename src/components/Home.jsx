@@ -50,8 +50,9 @@ const Home = () => {
 							<i className="fa-solid fa-download"></i>
 							<span>Download</span>
 						</Link>
-						<a href="#setup" className="rounded-2xl border border-white/10 bg-white/10 px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
-							Как начать
+						<a href="#setup" className="flex gap-2 items-center rounded-2xl border border-white/10 bg-white/10 px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
+							<i className="fa-solid fa-rocket"></i>
+							<span>Get Started</span>
 						</a>
 					</div>
 				</div>
@@ -60,29 +61,105 @@ const Home = () => {
 				</div>
 			</Section>
 
-			<Section id="features">
+			<Section id="customization">
 				<div className="mb-10 max-w-2xl">
-					<Badge icon="fa-solid fa-wand-magic-sparkles">Дизайн секций</Badge>
-					<h2 className="mt-5 text-4xl font-bold text-white">Карточки с глубиной, свечением и мягкой виньеткой.</h2>
+					<Badge icon="fa-solid fa-wand-magic-sparkles">Customization</Badge>
+					<h2 className="mt-5 text-4xl font-bold text-white">
+						Create a unique Presence
+					</h2>
+					<p className="mt-4 leading-7 text-slate-300">
+						Show what you're playing, listening to, or watching.<br/>Personalize every part of your activity with custom images, buttons, timestamps, and details.
+					</p>
 				</div>
+
 				<div className="grid gap-5 md:grid-cols-3">
-					<FeatureCard icon="fa-solid fa-palette" title="Гибкая визуальная подача">Секции используют размытые градиентные пятна, стеклянный фон и inset-виньетку, чтобы контент выглядел объемно даже на темной теме.</FeatureCard>
-					<FeatureCard icon="fa-solid fa-bolt" title="Быстрый старт">Главная страница уже содержит готовую структуру: hero-блок, преимущества, шаги подключения и финальный призыв к действию.</FeatureCard>
-					<FeatureCard icon="fa-solid fa-shield-heart" title="Аккуратный фокус">Контрастные кнопки, читаемые тексты и спокойные анимации помогают направлять пользователя без визуального шума.</FeatureCard>
+					<FeatureCard
+						icon="fa-solid fa-palette"
+						title="Fully customizable"
+					>
+						Edit activity type, state, details, timestamps, images, tooltips, party size, and more.
+					</FeatureCard>
+
+					<FeatureCard
+						icon="fa-solid fa-images"
+						title="Custom images"
+					>
+						Use large and small images with custom tooltips to give your activity more personality.
+					</FeatureCard>
+
+					<FeatureCard
+						icon="fa-solid fa-link"
+						title="Interactive buttons"
+					>
+						Add up to two custom buttons linking to your website, portfolio, stream, or any other page your friends can visit.
+					</FeatureCard>
 				</div>
 			</Section>
 
 			<Section id="setup" className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
 				<div>
-					<Badge icon="fa-solid fa-route">3 простых шага</Badge>
-					<h2 className="mt-5 text-4xl font-bold text-white">Собери Presence под себя.</h2>
-					<p className="mt-4 leading-7 text-slate-300">Добавь название активности, описание, изображение и ссылки — страница подскажет, как лучше презентовать твой статус.</p>
+					<Badge icon="fa-solid fa-rocket">Getting started</Badge>
+
+					<h2 className="mt-5 text-4xl font-bold text-white">
+						Set up your Presence in minutes.
+					</h2>
+
+					<p className="mt-4 leading-7 text-slate-300">
+						No complicated configuration. Just create a Discord application,
+						paste its ID, and start customizing your Rich Presence.
+					</p>
 				</div>
+
 				<div className="space-y-4">
-					<Step number="01" title="Выбери настроение">Определи стиль карточки: игра, разработка, музыка, стрим или личный бренд.</Step>
-					<Step number="02" title="Добавь детали">Заполни название, вторую строку, таймер, большую картинку и полезные кнопки.</Step>
-					<Step number="03" title="Покажи друзьям">Запусти Presence и позволь профилю говорить за тебя, пока ты занимаешься важным.</Step>
+					<Step number="01" title="Download the app">
+						Download the latest release and launch the application.
+					</Step>
+
+					<Step number="02" title="Create a Discord application">
+						Create a new application in the Discord Developer Portal and copy
+						your Application ID.
+					</Step>
+
+					<Step number="03" title="Customize & launch">
+						Choose an activity, add images, buttons, timestamps, and details,
+						then start your custom Rich Presence instantly.
+					</Step>
 				</div>
+			</Section>
+
+			<Section id="features">
+				<Badge icon="fa-solid fa-circle-check">Features</Badge>
+
+				<div className="mt-6 grid gap-6 md:grid-cols-2">
+					<FeatureCard
+						title="Activity types"
+					>
+						Playing, Listening, Watching
+					</FeatureCard>
+
+					<FeatureCard
+						title="Timestamps"
+					>
+						Elapsed time, progress bar, or local time.
+					</FeatureCard>
+
+					<FeatureCard
+						title="Media"
+					>
+						Large & small images with custom hover tooltips.
+					</FeatureCard>
+
+					<FeatureCard
+						title="More"
+					>
+						Party size, custom URLs, and interactive buttons.
+					</FeatureCard>
+				</div>
+
+				<p className="mt-6 text-sm text-slate-400 rounded-3xl border border-white/10 bg-white/5 p-6">
+					Note: Discord does not display custom buttons to the account that created them,
+					but they are fully visible to everyone else.
+				</p>
 			</Section>
 		</div>
 	)
@@ -111,10 +188,14 @@ const Badge = ({icon, children}) => (
 
 const FeatureCard = ({icon, title, children}) => (
 	<div className="group rounded-3xl border border-white/10 bg-slate-950/35 p-6 shadow-2xl shadow-slate-950/30 transition duration-300 hover:-translate-y-1 hover:border-indigo-300/35 hover:bg-white/[0.07]">
-		<div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-400/15 text-xl text-indigo-200 ring-1 ring-inset ring-indigo-200/20 transition group-hover:scale-110 group-hover:bg-indigo-400/25">
-			<i className={icon}></i>
+		<div className="flex gap-3 items-center mb-3">
+			{icon && (
+				<div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-400/15 text-xl text-indigo-200 ring-1 ring-inset ring-indigo-200/20 transition group-hover:scale-110 group-hover:bg-indigo-400/25">
+					<i className={icon}></i>
+				</div>
+			)}
+			<h3 className="text-xl font-semibold text-white">{title}</h3>
 		</div>
-		<h3 className="mb-3 text-xl font-semibold text-white">{title}</h3>
 		<p className="leading-7 text-slate-300">{children}</p>
 	</div>
 )

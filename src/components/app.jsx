@@ -24,7 +24,14 @@ const Header = () => {
 							<span className="text-lg font-semibold">Discord Presence</span>
 						</Link>
 					</nav>
-					<a href="#setup" className="hidden rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:bg-white/15 sm:block">Начать</a>
+					<Link to="/download" className="
+						hidden rounded-full border border-white/10 bg-white/10
+						px-4 py-2 text-sm font-semibold text-slate-100 transition
+						hover:bg-white/15 sm:flex gap-2 items-center
+					">
+						<i className="fa-solid fa-download"></i>
+						<span>Download</span>
+					</Link>
 				</div>
 			</header>
 		</>
