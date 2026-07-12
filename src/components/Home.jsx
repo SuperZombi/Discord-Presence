@@ -111,16 +111,24 @@ const Home = () => {
 				</div>
 
 				<div className="space-y-4">
-					<Step number="01" title="Download the app">
+					<Step number="01"
+						title="Download the app"
+						to="/download"
+					>
 						Download the latest release and launch the application.
 					</Step>
 
-					<Step number="02" title="Create a Discord application">
+					<Step number="02"
+						title="Create a Discord application"
+						to="https://discord.com/developers/applications"
+					>
 						Create a new application in the Discord Developer Portal and copy
 						your Application ID.
 					</Step>
 
-					<Step number="03" title="Customize & launch">
+					<Step number="03"
+						title="Customize & launch"
+					>
 						Choose an activity, add images, buttons, timestamps, and details,
 						then start your custom Rich Presence instantly.
 					</Step>
@@ -200,14 +208,71 @@ const FeatureCard = ({icon, title, children}) => (
 	</div>
 )
 
-const Step = ({number, title, children}) => (
-	<div className="flex gap-5 rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-		<div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-fuchsia-400/15 font-bold text-fuchsia-100 ring-1 ring-inset ring-fuchsia-200/20">
-			{number}
+const Step = ({ number, title, children, to }) => {
+	const {
+		Link,
+	} = ReactRouterDOM;
+
+	const StepLink = () => (
+		<i
+			className="
+				fa-solid fa-arrow-right
+				transition-transform duration-300
+				group-hover/arrow:translate-x-1
+			"
+		/>
+	)
+	const linkClassName = `
+		group/arrow flex h-12 w-12 shrink-0 items-center justify-center
+		rounded-2xl border border-white/10
+		bg-white/5 text-slate-300
+		transition-all duration-300
+		hover:scale-110
+		hover:bg-sky-500
+		hover:text-white
+		hover:shadow-lg hover:shadow-sky-500/30
+	`
+
+	return (
+		<div
+			className="
+				group relative flex items-center gap-5
+				rounded-3xl border border-white/10
+				bg-white/4 p-5
+				transition-all duration-300
+				hover:-translate-y-1
+				hover:border-sky-400/20
+				hover:bg-white/6
+			"
+		>
+			<div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-fuchsia-400/15 font-bold text-fuchsia-100 ring-1 ring-inset ring-fuchsia-200/20">
+				{number}
+			</div>
+
+			<div className="flex-1">
+				<h3 className="text-lg font-semibold text-white">
+					{title}
+				</h3>
+
+				<p className="mt-2 leading-7 text-slate-300">
+					{children}
+				</p>
+			</div>
+
+			{to && (
+				to.startsWith("http") ? (
+					<a href={to} target="_blank" className={linkClassName}>
+						<StepLink/>
+					</a>
+			) : (
+					<Link
+						to={to}
+						className={linkClassName}
+					>
+						<StepLink/>
+					</Link>
+				)
+			)}
 		</div>
-		<div>
-			<h3 className="text-lg font-semibold text-white">{title}</h3>
-			<p className="mt-2 leading-7 text-slate-300">{children}</p>
-		</div>
-	</div>
-)
+	)
+}
