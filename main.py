@@ -44,7 +44,6 @@ def connectRPC(app_id):
 	if not rpc:
 		try:
 			rpc = discordrpc.RPC(app_id, exit_if_discord_close=False, exit_on_disconnect=False)
-			rpc.get_app_info()
 			update_settings("app_id", app_id)
 			return {
 				"success": True,
@@ -81,7 +80,7 @@ def set_activity(data):
 			update_settings("presence", {})
 		return
 	allowed_keys = [
-		"state", "details",
+		"name", "state", "details",
 		"state_url", "details_url",
 		"large_image", "large_text",
 		"small_image", "small_text",

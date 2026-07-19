@@ -21,6 +21,9 @@
 	"timestamp_select_label_normal": "Звичайна",
 	"timestamp_select_label_local_time": "Місцевий час",
 
+	"appname_input_label": "Назву додатку",
+	"appname_input_placeholder": "Назву додатку",
+	
 	"details_input_label": "Опис",
 	"details_input_placeholder": "Опис",
 

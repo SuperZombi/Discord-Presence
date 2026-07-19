@@ -8,6 +8,7 @@ const MainForm = ({
 	const currentTimestamp = () => Math.floor(Date.now() / 1000)
 	const [actType, setActType] = React.useState(values.act_type || "playing")
 	const [statusDisplay, setStatusDisplay] = React.useState(values.status_type || "name")
+	const [name, setName] = React.useState(values.name)
 	const [details, setDetails] = React.useState(values.details)
 	const [state, setState] = React.useState(values.state)
 	const [state_url, set_state_url] = React.useState(values.state_url)
@@ -119,6 +120,7 @@ const MainForm = ({
 		const obj = {
 			act_type: actType,
 			status_type: statusDisplay,
+			name: name,
 			details: details,
 			details_url: details_url,
 			state: state,
@@ -146,6 +148,7 @@ const MainForm = ({
 		setStatusDisplay("name")
 		setDetails("")
 		setState("")
+		setName("")
 		set_state_url("")
 		set_details_url("")
 		setTimestamp("normal")
@@ -173,7 +176,7 @@ const MainForm = ({
 				<div className="sticky top-15.5 w-110 h-fit flex gap-3 flex-col">
 					<Presence
 						actType={actType}
-						appName={appName || Tt("default_appName")}
+						appName={name || appName || Tt("default_appName")}
 						state={state} details={details}
 						ts_start={ts_start} ts_end={ts_end}
 						large_image={large_image || appIcon}
@@ -185,7 +188,7 @@ const MainForm = ({
 					/>
 					<StatusPreview
 						user={user} user_avatar={user_avatar}
-						actType={actType} appName={appName || Tt("default_appName")}
+						actType={actType} appName={name || appName || Tt("default_appName")}
 						state={state} details={details}
 						status_type={statusDisplay}
 					/>
@@ -240,6 +243,12 @@ const MainForm = ({
 					</InputGroup>
 					<Hr/>
 				</Collapse>
+
+				<Input placeholder={Tt("appname_input_placeholder")}
+					label={<T>appname_input_label</T>}
+					value={name} name="name"
+					onChange={setName}
+				/>
 
 				<Input placeholder={Tt("details_input_placeholder")}
 					label={<T>details_input_label</T>}

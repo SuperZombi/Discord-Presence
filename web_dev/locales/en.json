@@ -21,6 +21,9 @@
 	"timestamp_select_label_normal": "Normal",
 	"timestamp_select_label_local_time": "Local time",
 
+	"appname_input_label": "App name",
+	"appname_input_placeholder": "App name",
+
 	"details_input_label": "Details",
 	"details_input_placeholder": "Details",
 
