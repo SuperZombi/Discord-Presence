@@ -195,14 +195,9 @@ const Select = ({
 	placeholder="", label=null
 }) => {
 	const [isOpen, setIsOpen] = React.useState(false)
-	const [selectedOption, setSelectedOption] = React.useState(
-		options.find(obj => obj.value === selected)
-	)
+	const selectedOption = options.find(obj => obj.value === selected)
 	const selectRef = React.useRef(null)
-	React.useEffect(_=>{
-		setSelectedOption(options.find(obj => obj.value === selected))
-	}, [selected])
-
+	
 	const handleClickOutside = (e) => {
 		if (selectRef.current && !selectRef.current.contains(e.target)) {
 			setIsOpen(false)
@@ -257,7 +252,6 @@ const Select = ({
 						<div
 							key={option.value}
 							onClick={() => {
-								setSelectedOption(option)
 								onChange?.(option.value)
 								setIsOpen(false)
 							}}

@@ -19,7 +19,8 @@ const App = () => {
 	const onSettingsChange = async (key, val)=>{
 		await eel.update_settings(key, val)()
 		if (key === "lang"){
-			window.location.reload()
+			const applied_lang = await init_lang(val)
+			setsettingsValues(prev => ({...prev, lang: applied_lang}))
 		}
 		else if (key === "remember_presence"){
 			if (!val){
