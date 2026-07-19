@@ -228,16 +228,10 @@ const Progressbar = ({
 
 	React.useEffect(() => {
 		const interval = setInterval(() => {
-			setCurrent((prev) => {
-				if (prev >= total) {
-					clearInterval(interval);
-					return prev;
-				}
-				return prev + 1;
-			})
+			setCurrent((prev) => (prev >= total ? prev : prev + 1))
 		}, 1000)
 		return () => clearInterval(interval);
-	}, [current, total])
+	}, [total])
 
 	const percent = Math.min(100, (current / total) * 100)
 

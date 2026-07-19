@@ -19,14 +19,14 @@ const App = () => {
 	const onSettingsChange = async (key, val)=>{
 		await eel.update_settings(key, val)()
 		if (key === "lang"){
-			const applied_lang = await init_lang(val)
-			setsettingsValues(prev => ({...prev, lang: applied_lang}))
+			await init_lang(val)
 		}
 		else if (key === "remember_presence"){
 			if (!val){
 				await eel.update_settings("presence", {})()
 			}
 		}
+		setsettingsValues(prev => ({...prev, [key]: val}))
 	}
 
 	React.useEffect(() => {

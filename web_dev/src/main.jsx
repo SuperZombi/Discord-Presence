@@ -34,14 +34,6 @@ const MainForm = ({
 			set_ts_end(null)
 		}
 	}
-	React.useEffect(() => {
-		handleTimestamp(timestamp)
-	}, [timestamp])
-	React.useEffect(() => {
-		if (timestamp === "normal"){
-			set_ts_start(ts_start)
-		}
-	}, [ts_start])
 
 	const [media_current, set_media_current] = React.useState(values.media_current || 0)
 	const [media_duration, set_media_duration] = React.useState(values.media_duration || 0)
@@ -60,16 +52,10 @@ const MainForm = ({
 	const [large_text, set_large_text] = React.useState(values.large_text)
 	const [small_text, set_small_text] = React.useState(values.small_text)
 
-	const [party_current, set_party_current] = React.useState(0)
-	const [party_total, set_party_total] = React.useState(0)
+	const [party_current, set_party_current] = React.useState(values.party_size?.[0] || 0)
+	const [party_total, set_party_total] = React.useState(values.party_size?.[1] || 0)
 	const [party_size, set_party_size] = React.useState(values.party_size || [])
 
-	React.useEffect(() => {
-		if (party_size.length > 0){
-			set_party_current(party_size[0])
-			set_party_total(party_size[1])
-		}
-	}, [])
 	React.useEffect(() => {
 		if (party_total === 0){
 			set_party_size([])
