@@ -1,4 +1,5 @@
 import eel
+import time
 import sys, os
 import json
 import discordrpc
@@ -41,19 +42,26 @@ rpc = None
 @eel.expose
 def connectRPC(app_id):
 	global rpc
-	if not rpc:
+	if not rpc or not rpc.ipc.connected:
 		try:
 			rpc = discordrpc.RPC(app_id, exit_if_discord_close=False, exit_on_disconnect=False)
 			update_settings("app_id", app_id)
+			if rpc.ipc.connected:
+				threading.Thread(target=rpc.run, daemon=True).start()
+				return {
+					"success": True,
+					"user": vars(rpc.User),
+					"app_id": rpc.app_id,
+					"app_name": rpc.App.name,
+					"app_icon": rpc.App.icon
+				}
 			return {
-				"success": True,
-				"user": vars(rpc.User),
-				"app_id": rpc.app_id,
-				"app_name": rpc.App.name,
-				"app_icon": rpc.App.icon
+				"success": False,
+				"error": "Discord is closed"
 			}
 		except Exception as e:
 			return {
+				"success": False,
 				"error": str(e)
 			}
 	else:
@@ -71,6 +79,7 @@ def disconnect():
 	rpc.clear()
 	rpc.disconnect()
 	rpc = None
+	update_settings("app_id", None)
 
 @eel.expose
 def set_activity(data):
@@ -115,6 +124,15 @@ def set_activity(data):
 		update_settings("presence", data)
 	return res
 
+def service_worker():
+	while True:
+		if SETTINGS.get("app_id"):
+			if not rpc or not rpc.ipc.connected:
+				res = connectRPC(SETTINGS.get("app_id"))
+				if res.get("success") and SETTINGS.get("auto_apply") and SETTINGS.get("presence"):
+					set_activity(SETTINGS.get("presence"))
+		time.sleep(15)
+
 def on_open(icon, item):
 	eel.show("dev.html" if DEV_MOD else "index.html")
 
@@ -135,6 +153,7 @@ menu = Menu(
 )
 icon = Icon("Discord Presence", icon_image, "Discord Presence", menu)
 threading.Thread(target=icon.run, daemon=True).start()
+threading.Thread(target=service_worker, daemon=True).start()
 
 browsers = ['chrome', 'default']
 for browser in browsers:

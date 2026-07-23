@@ -36,9 +36,6 @@ const App = () => {
 			setsettingsValues(settings)
 			if (settings.app_id){
 				await connectRPC(settings.app_id)
-				if (settings.presence && settings.auto_apply){
-					main_apply(settings.presence)
-				}
 			} else {
 				setTimeout(_=>{setShowLoader(false)}, 1000)
 			}
@@ -48,6 +45,13 @@ const App = () => {
 			setLoaded(true)
 		})
 	}, [])
+	React.useEffect(() => {
+		if (connected){
+			if (settingsValues.presence && settingsValues.auto_apply){
+				main_apply(settingsValues.presence)
+			}
+		}
+	}, [connected])
 
 	const connectRPC = async (app_id) => {
 		setShowLoader(true)
