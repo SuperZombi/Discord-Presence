@@ -301,6 +301,12 @@ const MainForm = ({
 
 				<Hr/>
 
+				<datalist id="assets-suggestions">
+					{assets.map((s, i) => (
+						<option key={i} value={s.name} />
+					))}
+				</datalist>
+
 				<Input placeholder={Tt("large_image_input_placeholder")}
 					label={<T>large_image_input_label</T>}
 					name="large_image" value={large_image}
@@ -310,6 +316,8 @@ const MainForm = ({
 							set_large_text("")
 						}
 					}}
+					autoComplete="off"
+					list="assets-suggestions"
 				/>
 				<Collapse isOpen={large_image} className="gap-3" classOnHidden="-mb-3">
 					<Input placeholder={Tt("large_image_tooltip_input_placeholder")}
@@ -329,6 +337,8 @@ const MainForm = ({
 							set_small_text("")
 						}
 					}}
+					autoComplete="off"
+					list="assets-suggestions"
 				/>
 				<Collapse isOpen={small_image} className="gap-3" classOnHidden="-mb-3">
 					<Input placeholder={Tt("small_image_tooltip_input_placeholder")}
