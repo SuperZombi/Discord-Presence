@@ -42,18 +42,19 @@ rpc = None
 @eel.expose
 def connectRPC(app_id):
 	global rpc
-	if not rpc or not rpc.ipc.connected:
+	if not rpc or not rpc.connected:
 		try:
 			rpc = discordrpc.RPC(app_id, exit_if_discord_close=False, exit_on_disconnect=False)
 			update_settings("app_id", app_id)
-			if rpc.ipc.connected:
+			if rpc.connected:
 				threading.Thread(target=rpc.run, daemon=True).start()
 				return {
 					"success": True,
 					"user": vars(rpc.User),
 					"app_id": rpc.app_id,
 					"app_name": rpc.App.name,
-					"app_icon": rpc.App.icon
+					"app_icon": rpc.App.icon,
+					"assets": list(map(lambda x: vars(x), rpc.assets)),
 				}
 			return {
 				"success": False,
@@ -70,7 +71,8 @@ def connectRPC(app_id):
 			"user": vars(rpc.User),
 			"app_id": rpc.app_id,
 			"app_name": rpc.App.name,
-			"app_icon": rpc.App.icon
+			"app_icon": rpc.App.icon,
+			"assets": list(map(lambda x: vars(x), rpc.assets)),
 		}
 
 @eel.expose
@@ -127,7 +129,7 @@ def set_activity(data):
 def service_worker():
 	while True:
 		if SETTINGS.get("app_id"):
-			if not rpc or not rpc.ipc.connected:
+			if not rpc or not rpc.connected:
 				res = connectRPC(SETTINGS.get("app_id"))
 				if res.get("success") and SETTINGS.get("auto_apply") and SETTINGS.get("presence"):
 					set_activity(SETTINGS.get("presence"))

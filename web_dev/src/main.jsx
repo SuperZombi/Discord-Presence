@@ -2,7 +2,7 @@ const MainForm = ({
 	values, onApply, onDisconnect,
 	showSettings, hideSetting,
 	settingsValues, settingsOnChange,
-	user, user_avatar, appName, appIcon,
+	user, user_avatar, appName, appIcon, assets
 }) => {
 	const [applyButDisabled, setApplyButDisabled] = React.useState(false)
 	const currentTimestamp = () => Math.floor(Date.now() / 1000)
@@ -171,6 +171,7 @@ const MainForm = ({
 						state_url={state_url} details_url={details_url}
 						party_size={party_size}
 						buttons={buttons_preview}
+						assets={assets}
 					/>
 					<StatusPreview
 						user={user} user_avatar={user_avatar}

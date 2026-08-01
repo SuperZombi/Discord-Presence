@@ -10,6 +10,7 @@ const App = () => {
 	const [user_avatar, set_user_avatar] = React.useState()
 	const [appname, set_appname] = React.useState()
 	const [appicon, set_appicon] = React.useState()
+	const [assets, set_assets] = React.useState([])
 	const [showSettings, setShowSettings] = React.useState(false)
 	const [settingsValues, setsettingsValues] = React.useState({})
 
@@ -69,6 +70,7 @@ const App = () => {
 					}
 					set_appname(result.app_name)
 					set_appicon(result.app_icon)
+					set_assets(result.assets)
 				}
 				else if (result.error){
 					set_login_errors([{"text": result.error}])
@@ -110,6 +112,7 @@ const App = () => {
 						settingsValues={settingsValues} settingsOnChange={onSettingsChange}
 						user={user} user_avatar={user_avatar}
 						appName={appname} appIcon={appicon}
+						assets={assets}
 					/>
 				</React.Fragment>
 			) : (

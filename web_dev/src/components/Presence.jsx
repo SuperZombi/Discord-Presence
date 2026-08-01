@@ -12,14 +12,15 @@ const Presence = ({
 	ts_start=null,
 	ts_end=null,
 	party_size=[],
-	buttons=[]
+	buttons=[],
+	assets=[],
 }) => {
 	return (
 		<Card className="select-none">
 			<PresenceHeader actType={actType} appName={appName} details={details}/>
 			<PresenceBody
 				large_image={large_image} small_image={small_image}
-				actType={actType} appName={appName}
+				actType={actType} appName={appName} assets={assets}
 				state={state} details={details}
 				state_url={state_url} details_url={details_url}
 				ts_start={ts_start} ts_end={ts_end}
@@ -61,7 +62,7 @@ const PresenceHeader = ({
 }
 
 const PresenceBody = ({
-	actType,
+	actType, assets,
 	large_image, small_image,
 	appName, state, details,
 	state_url, details_url,
@@ -74,6 +75,7 @@ const PresenceBody = ({
 			<LeftBody
 				large_image={large_image} small_image={small_image}
 				large_text={large_text} small_text={small_text}
+				assets={assets}
 			/>
 			<RightBody
 				actType={actType} appName={appName}
@@ -88,7 +90,8 @@ const PresenceBody = ({
 
 const LeftBody = ({
 	large_image, small_image,
-	large_text, small_text
+	large_text, small_text,
+	assets
 }) => {
 	return (
 		<div className="relative shrink-0">
@@ -100,7 +103,9 @@ const LeftBody = ({
 					object-cover
 				"
 					draggable={false}
-					src={large_image}
+					src={
+						assets.find(item => item.name === large_image)?.url || large_image
+					}
 					onError={({ currentTarget }) => {
 						currentTarget.src = "assets/avatar.png";
 					}}
@@ -120,7 +125,10 @@ const LeftBody = ({
 						w-full h-full object-cover
 					"
 						draggable={false}
-						src={small_image} onError={({ currentTarget }) => {
+						src={
+							assets.find(item => item.name === small_image)?.url || small_image
+						}
+						onError={({ currentTarget }) => {
 							currentTarget.src = "assets/avatar.png";
 						}}
 					/>
