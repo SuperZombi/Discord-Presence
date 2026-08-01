@@ -1,5 +1,5 @@
 const Header = ({
-	user, username, user_avatar,
+	user, username, user_avatar, avatar_decoration="",
 	openSettings
 }) => {
 	return (
@@ -10,15 +10,22 @@ const Header = ({
 				m-auto rounded-b-xl
 				flex items-center px-2 gap-2
 			">
-				<img className="
-					h-9 w-9 object-cover rounded-full
-					select-none
-				"   draggable={false}
-					src={user_avatar || "assets/avatar-blue.png"}
-					onError={({ currentTarget }) => {
-						currentTarget.src = "assets/avatar-blue.png";
-					}}
-				/>
+				<div className="relative select-none">
+					<img className="h-9 w-9 object-cover rounded-full"
+						draggable={false}
+						src={user_avatar || "assets/avatar-blue.png"}
+						onError={({ currentTarget }) => {
+							currentTarget.src = "assets/avatar-blue.png";
+						}}
+					/>
+					<img className="h-9 w-9 absolute inset-0"
+						src={avatar_decoration}
+						draggable={false}
+						onError={({ currentTarget }) => {
+							currentTarget.style.display = "none"
+						}}
+					/>
+				</div>
 				<div className="flex flex-col select-none">
 					<span>{user || <T>header_user_default_name</T>}</span>
 					<span className="font-mono text-xs text-gray-400 tracking-wider">

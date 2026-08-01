@@ -8,6 +8,7 @@ const App = () => {
 	const [user, set_user] = React.useState()
 	const [username, set_username] = React.useState()
 	const [user_avatar, set_user_avatar] = React.useState()
+	const [avatar_decoration, set_avatar_decoration] = React.useState()
 	const [appname, set_appname] = React.useState()
 	const [appicon, set_appicon] = React.useState()
 	const [assets, set_assets] = React.useState([])
@@ -67,6 +68,7 @@ const App = () => {
 						set_user(result.user.name)
 						set_username(result.user.username)
 						set_user_avatar(result.user.avatar)
+						set_avatar_decoration(result.user.avatar_decoration)
 					}
 					set_appname(result.app_name)
 					set_appicon(result.app_icon)
@@ -104,6 +106,7 @@ const App = () => {
 				<React.Fragment>
 					<Header user={user} username={username}
 						user_avatar={user_avatar}
+						avatar_decoration={avatar_decoration}
 						openSettings={_=>setShowSettings(true)}
 					/>
 					<MainForm values={presenceData}
